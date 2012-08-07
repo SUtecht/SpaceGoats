@@ -1,0 +1,22 @@
+h1
+{
+	color:#3355BB;
+	font-size:14pt;
+}
+
+.box
+{
+	padding:10px;
+	border:2.5px solid gray;
+	margin:10px;
+	float:left;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color:white
+}
+
+#w
+{
+	width:650px;
+	float:left;
+}

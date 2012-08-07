@@ -1,0 +1,104 @@
+<head>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}demo_index.css" />
+<link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
+<script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
+<script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script>
+
+<script>
+$(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+	//full calander is an opensource project from http://arshaw.com/fullcalendar/
+		dayClick: function(date) {
+				showPos(event);
+		}
+    });
+	
+	$('.fc-button-next').click(function(){
+		loadEvents();
+	});
+	$('.fc-button-prev').click(function(){
+		loadEvents();
+	});
+	
+	loadEvents();
+	
+});
+
+function loadEvents(){
+	$.getJSON('/demo/ajax/events.json', function(data){
+		$.each(data, function(key, value){
+			$('#calendar').fullCalendar(
+				'renderEvent',
+				event={
+					title:value.fields.name,
+					start:value.fields.begin
+				}
+			);
+		});
+	
+	});
+
+};
+
+function showPos(event) {
+	var new_event_pop_up, x, y;
+
+	new_event_pop_up = document.getElementById('newEventForm');
+	if (window.event) {
+		x = window.event.clientX + document.documentElement.scrollLeft
+			+ document.body.scrollLeft;
+		y = window.event.clientY + document.documentElement.scrollTop +
+			+ document.body.scrollTop;
+	}
+	else {
+		x = event.clientX + window.scrollX;
+		y = event.clientY + window.scrollY;
+	}
+
+	new_event_pop_up.style.left = x + "px";
+	new_event_pop_up.style.top = y + "px";
+	new_event_pop_up.style.display = "block";
+	//based on "Making a popup window using a DIV (hide DIV on mouseover)" at http://web.cortland.edu/flteach/mm-course/glossPopupDiv.html 
+}
+
+</script>
+
+</head>
+
+{% load dict %}
+
+
+
+
+<div id='w' >
+	<div id='calendar'>
+
+	</div>
+</div>
+
+<div id = "newEventForm" style='display: none; position: absolute; left: 300px; top: 50px'; class= box>
+	<h1>Create New Event</h1>
+	<form action="/demo/" method="post">{% csrf_token %}
+		{{ event_form.as_p }}
+
+	<input type="submit" value="Submit" />
+	<input type="button" value="Cancel" onClick="document.getElementById('newEventForm').style.display = 'none'" />
+	</form>
+</div>
+
+
+<div class = box>
+{% for t in current_terms%}	
+	<h1>Term from {{t.begin|date:"F"}} to {{t.end|date:"F"}}</h1>
+	<p>You have {{t.pool_set.all.count}} active pool{%if t.pool_set.all.count > 1 %}s{%endif%} this term.</p>
+	<ul>
+	{% for pool in  t.pool_set.all %}
+		<li>{{pool}}</li>
+	{% endfor %}
+	</ul>
+{% endfor%}
+</div>
+
