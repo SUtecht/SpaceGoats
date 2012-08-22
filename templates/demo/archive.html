@@ -1,0 +1,13 @@
+{%extends "base.html"%}
+{% load dict %}
+{% block body %}
+	</br>
+	<center><h2>Space Goats CoastToCoast Archived Articles</h2></center>
+	
+	{%for i in articles %}
+	
+			<li><a href= "/demo/article/{{i.id}}">{{i.title}}</li>
+	
+		</ul>
+	{%endfor%}
+{% endblock %}

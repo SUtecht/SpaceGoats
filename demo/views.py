@@ -9,6 +9,9 @@ from django.utils import timezone
 from dateutils import relativedelta
 import datetime
 from django.core import serializers
+import battlenet
+from battlenet import Realm, Guild
+
 
 def eventsJson(request):
 	month_start = datetime.datetime(timezone.now().year, timezone.now().month, 1, 0)
@@ -19,27 +22,74 @@ def eventsJson(request):
 	return HttpResponse(data, content_type="text/plain")
 
 def index(request):
+
+	
+	
+		
 	if request.method == 'POST':
+		print('\n I see the post! \n ')
 		event_form = EventForm(request.POST)
 		if event_form.is_valid():
+			print('\n Valid Event! \n')
 			name = event_form.cleaned_data['name']
-			type = event_form.cleaned_data['type']
-			begin = event_form.cleaned_data['begin']
-			end = event_form.cleaned_data['end']
-			completed = 'N'
-			
-			new_event = Event(name=name, type=type,begin=begin, end=end, completed=completed)
+			begin = event_form.cleaned_data['begin_date']
+		
+			new_event = Event(name=name, begin=begin)
 			new_event.save()
-			print('event created')
-	
-	current_terms = Term.objects.filter(begin__lte=timezone.now(), end__gte=timezone.now())
-	pools_in_term = {}
-	for  t in current_terms:
-		pools_in_term[t] = Pool.objects.filter(term = t)
-	event_form = EventForm()
+			print('\n Event created!\n')
+			event_form = EventForm()
+		else:
+			print(event_form.errors)
+	else:		
+		event_form = EventForm()
+	latest_articles = Article.objects.all().order_by('-id')[:5]
+	print(latest_articles)
 	return render_to_response('demo/index.html', {'event_form':event_form,
-													'pools_in_term':pools_in_term,
-													'current_terms':current_terms,
-													'timezone':timezone},
+													'timezone':timezone,
+													'latest_articles':latest_articles},
 													context_instance=RequestContext(request))
 	
+
+														
+
+													
+def event(request, event_id):
+	if request.method == 'POST':
+		print('\n I see the post! \n ')
+		at_form = AttendForm(request.POST)
+		if at_form.is_valid():
+			char = at_form.cleaned_data['char']
+			event = Event.objects.get(pk=event_id)
+			print(char)
+			event.attendees.add(char)
+			event.save()
+		
+	event = Event.objects.get(pk=event_id)
+	at_form = AttendForm()
+	
+	 
+	characters = {}
+	for c in event.attendees.all():
+		characters[c] = battlenet.Character(battlenet.UNITED_STATES, c.server, c.name).get_class_name()
+	print(characters)
+	return render_to_response('demo/events.html', {'event':event,
+												'at_form':at_form,
+												'timeszone':timezone,
+												'characters':characters},
+												context_instance=RequestContext(request))
+
+
+def about(request):
+	guild = Guild(battlenet.UNITED_STATES, 'Auchindoun', 'Space Goats CoastToCoast')
+	return render_to_response('demo/about.html', {'guild':guild},
+												context_instance=RequestContext(request))
+												
+def archive(request):
+	articles = Article.objects.all().order_by('-id')
+	return render_to_response('demo/archive.html', {'articles':articles},
+												context_instance=RequestContext(request))
+												
+def article(request,article_id):
+	article = Article.objects.get(pk=article_id)
+	return render_to_response('demo/article.html', {'article':article},
+												context_instance=RequestContext(request))

@@ -1,0 +1,65 @@
+<head>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}demo_index.css" />
+<link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
+<script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
+<script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script>
+<script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
+<script>
+function showPos(event) {
+	var new_event_pop_up, x, y;
+
+	new_event_pop_up = document.getElementById('newEventForm');
+	if (window.event) {
+		x = window.event.clientX + document.documentElement.scrollLeft
+			+ document.body.scrollLeft;
+		y = window.event.clientY + document.documentElement.scrollTop +
+			+ document.body.scrollTop;
+	}
+	else {
+		x = event.clientX + window.scrollX;
+		y = event.clientY + window.scrollY;
+	}
+
+	new_event_pop_up.style.left = x + "px";
+	new_event_pop_up.style.top = y + "px";
+	new_event_pop_up.style.display = "block";
+	//based on "Making a popup window using a DIV (hide DIV on mouseover)" at http://web.cortland.edu/flteach/mm-course/glossPopupDiv.html 
+}
+
+function menuGO(url){
+	window.location = url;
+}
+
+</script>
+{%block myhead%}{%endblock%}
+</head>
+{% load dict %}
+
+
+	<div id='logo'>
+		<img src="{{STATIC_URL}}d_left.png" height="205px">
+		<img src="{{STATIC_URL}}logo.png"onClick=menuGO("/demo") >
+		<img src="{{STATIC_URL}}d_right.png" height="205px">
+	</div>
+		
+	
+	<div class="menu">
+		<div class="menu_item" onClick=menuGO("/demo")>
+			Home
+		</div>
+		<div class="menu_item">
+			Archive
+		</div>
+		<div class="menu_item" onClick=menuGO("http://otg2.com/forum/viewforum.php?f=3&sid=a0b8047878d7b7c4a091fae51ea386a3")>
+			Forum
+		</div>
+		<div class="menu_item">
+			About
+		</div>
+		<div id="last_item" class="menu_item">
+			Apply
+		</div>
+		
+	</div>
+{% block body%}{%endblock%}

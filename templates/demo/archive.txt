@@ -1,0 +1,16 @@
+{%extends "base.html"%}
+{% load dict %}
+{% block body %}
+	<h1>Space Goats CoastToCoast Archived Articles</h1>
+{%endblock%}
+
+{% block articles%}
+	{%for i in articles %}
+		</br>
+		<div class="article box">
+			<h2>{{i.title}}</h2>
+			{{i.text|safe}}
+		</div>
+		</br>
+	{%endfor%}
+{% endblock %}

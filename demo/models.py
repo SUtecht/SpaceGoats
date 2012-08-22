@@ -6,62 +6,43 @@ from django.forms.extras.widgets import SelectDateWidget
 
 
 
-class Voter(models.Model):
-	fname = models.CharField(max_length=100)
-	mname = models.CharField(max_length=100, blank=True)
-	lname = models.CharField(max_length=100)
-	address = models.TextField()
-	email = models.EmailField(max_length=254, blank=True)
-	home_phone = models.CharField(max_length=100, blank=True)
-	work_phone = models.CharField(max_length=100, blank=True)
-	cell_phone = models.CharField(max_length=100, blank=True)
-	loc_code = models.CharField(max_length=3)
+class Character(models.Model):
+	name = models.CharField(max_length=100)
+	player = models.ForeignKey('Player')
+	server = models.CharField(max_length=100, blank=True)
 	def __unicode__(self):
-		return "{} {} {}".format(self.id, self.fname, self.lname )
+		return "{} ".format(self.name)
 
+class Player(models.Model):
+	name = models.CharField(max_length=100)
+	email = models.EmailField(max_length=254, blank=True)
+	def __unicode__(self):
+		return "{} ".format(self.name)
 	
+	
+class AttendForm(forms.Form):
+	char = forms.ModelChoiceField(Character.objects.all())
+
 		
 class Event(models.Model):
 	name = models.CharField(max_length=100)
-	type = models.IntegerField()
-	begin = models.DateTimeField()
-	end = models.DateTimeField()
-	completed = models.CharField(max_length=1)
+	begin = models.DateField()
+	attendees = models.ManyToManyField('Character', blank=True,null=True)
 	def __unicode__(self):
-		return "{} {}".format(self.id, self.name)
+		return "{} {}".format( self.name, self.begin)
 		
 class EventForm(forms.Form):
-	name = forms.CharField(max_length=100, label='Event Name')
-	type = forms.IntegerField( label='What type of event is this?')
-	begin = forms.DateTimeField(widget=SelectDateWidget(),  label='When does the event start?')
-	end = forms.DateTimeField(widget=SelectDateWidget(),  label='What is the estimate end date?')
-		
-class Term(models.Model):
-	begin = models.DateTimeField()
-	end = models.DateTimeField()
-	def __unicode__(self):
-		return "Term {} from {} to {}".format(self.id, self.begin, self.end )
-		
-class Pool(models.Model):
-	term = models.ForeignKey(Term)
+	name = forms.CharField(max_length=100)
+	begin_date = forms.CharField( )	
+	
+class Rank(models.Model):
 	name = models.CharField(max_length=100)
-	parent_pool =  models.ForeignKey('self', blank=True, null=True)
+	level = models.IntegerField()
 	def __unicode__(self):
-		return "{} {} ".format(self.id, self.name)
+		return "{} ".format( self.name)
 
-
-class Pool_Member(models.Model):
-	voter = models.ForeignKey(Voter)
-	pool = models.ForeignKey(Pool)
-	status =  models.IntegerField()
-	def __unicode__(self):
-		return "{} {} ".format(self.voter, self.pool)
-	
-	
-class Transaction(models.Model):
-	pool_member = models.ForeignKey(Pool_Member)
-	event = models.ForeignKey(Event)
-	payment_amount = models.DecimalField(max_digits = 10, decimal_places = 2)
-	processed =  models.CharField(max_length=1)
-	def __unicode__(self):
-		return "{} {} {}".format(self.pool_member, self.event, self.payment_ammount)
+class Article(models.Model):
+	title = models.CharField(max_length=100)
+	text  = models.TextField()
+	img = models.ImageField(upload_to = "uploads")
+	author = models.ForeignKey('Player')

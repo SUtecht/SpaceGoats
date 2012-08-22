@@ -1,0 +1,25 @@
+<head>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}demo_index.css" />
+<link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
+<script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
+<script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
+</head>
+
+<h1>{{voter}}</h1>
+<p>Lives in Location {{voter.loc_code}}.</p>
+<h3>Pool Info</h3>
+<p>{{voter.fname}} is currently in Pool: {{member.pool}}
+</br>
+Status: {{member.status}}</p>
+
+<h3>Payment Info</h3>
+<p>This person has no payment info</p>
+
+<h3>Contact Info</h3>
+
+Home: {{voter.home_phone}}</br>
+Work: {{voter.work_phone}}</br>
+Cell: {{voter.cell_phone}}</br>
+Email: {{voter.email}}</br>
+Address: {{voter.address}}</p>
+

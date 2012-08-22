@@ -9,9 +9,7 @@ class PollAdmin(admin.ModelAdmin):
 	]
 
 admin.site.register(Poll, PollAdmin)
-admin.site.register(Voter)
 admin.site.register(Event)
-admin.site.register(Term)
-admin.site.register(Pool)
-admin.site.register(Transaction)
-admin.site.register(Pool_Member)
+admin.site.register(Character)
+admin.site.register(Player)
+admin.site.register(Article)

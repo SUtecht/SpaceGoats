@@ -1,0 +1,28 @@
+{% load dict %}
+<head>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}demo_index.css" />
+<link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
+<script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
+<script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
+</head>
+
+<h1>Pool {{pool}}</h1>
+
+{%if pool.parent_pool != null%}
+<p>This pool is a sub-pool of {{pool.parent_pool}}</p>
+</br>
+{%endif%}
+
+<ol>
+{% for member in members_of_this_pool%}
+<li><a href="/demo/pool_member/{{member.id}}">{{member}}</a></li>
+{%endfor%}
+</ol>
+
+
+<p>Total Members: {{members_of_this_pool.all.count}}
+{% for c in count.keys %}
+	</br>
+	Total Members with Status {{c}} : {{count|key:c}}
+{%endfor%}
+
