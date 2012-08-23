@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+<title>Space Goats CoastToCoast</title>
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}demo_index.css" />
 <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
 <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
@@ -39,22 +40,27 @@
 </head>
 <body>
 	<div id='logo'>
-		<img src="{{STATIC_URL}}d_left.png"  class ="goats">
-		<img src="{{STATIC_URL}}logo.png"onClick=menuGO("/demo") >
-		<img src="{{STATIC_URL}}d_right.png"  class ="goats">
+        <img src="{{STATIC_URL}}d_left.png" 
+             alt="Space Goat Hunter facing left" 
+             class ="goats" />
+        <img src="{{STATIC_URL}}logo.png"
+             onClick="menuGO('/demo')" 
+             alt="Space Goats CoastToCoast Logo"/>
+        <img src="{{STATIC_URL}}d_right.png" 
+             alt="Space Goat Hunter facing right" 
+             class="goats" />
 	</div>
-    <title>Space Goats CoastToCoast</title>
 	<div class="menu">
-		<div id="menu_first" class="menu_item" onClick=menuGO("/demo")>
+		<div id="menu_first" class="menu_item" onClick="menuGO('/demo')">
 			Home
 		</div>
-		<div class="menu_item" onClick=menuGO("/demo/archive")>
+		<div class="menu_item" onClick="menuGO('/demo/archive')">
 			Archive
 		</div>
-		<div class="menu_item" onClick=menuGO("http://otg2.com/forum/viewforum.php?f=3&sid=a0b8047878d7b7c4a091fae51ea386a3")>
+		<div class="menu_item" onClick="menuGO('http://otg2.com/forum/viewforum.php?f=3&sid=a0b8047878d7b7c4a091fae51ea386a3')">
 			Forum
 		</div>
-		<div class="menu_item" onClick=menuGO("/demo/about")>
+		<div class="menu_item" onClick="menuGO('/demo/about')">
 			About
 		</div>
 		<div id="menu_last" class="menu_item">
