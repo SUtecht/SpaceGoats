@@ -1,6 +1,6 @@
 {%extends "base.html"%}
 {%block myhead%}
-<script>
+<script type="text/javascript">
 
 	$(document).ready(function() {
 
@@ -62,44 +62,45 @@
 {%endblock%}
 
 {% block body %}
-
-	
-	<p></br></p>
-	<div id='cal' >
-		<div id='calendar' >
-
-		</div>
+	<div id="cal">
+		<div id="calendar"></div>
 	</div>
 
-	<div id = "newEventForm" style='display: none; position: absolute; left: 300px; top: 50px; z-index:10;'; class= box>
-		<center><h1>Create New Event</h1>
-		</br>
-		<form action="/demo/" method="post">{% csrf_token %}
-			<div  class="fieldWrapper">
-				{{event_form.name.errors}}
-				<p><label for="id_name">Name of the new event</label>
-				<input type="text" name="name" id="id_name"/></p>
-			</div>
-			</br>
-			<div  class="fieldWrapper">
-				{{event_form.begin.errors}}
-				<p><label for="id_begin_date">When does the event start?</label>
-				<input type="text" name="begin_date" id="id_begin_date" class="datepicker" />
-			</div>
-			</br>
-		<p><input type="submit" value="Submit" />
-		<input type="button" value="Cancel" onClick="document.getElementById('newEventForm').style.display = 'none'" /></p>
-		</form>
+	<div id="newEventForm" class="box">
+        <center>
+            <h1>Create New Event</h1>
+            <br/>
+            <form action="/demo/" method="post">{% csrf_token %}
+                <div  class="fieldWrapper">
+                    {{event_form.name.errors}}
+                    <p><label for="id_name">Name of the new event</label>
+                    <input type="text" name="name" id="id_name"/></p>
+                </div>
+                <br/>
+                <div  class="fieldWrapper">
+                    {{event_form.begin.errors}}
+                    <p>
+                        <label for="id_begin_date">When does the event start?</label>
+                        <input type="text" name="begin_date" id="id_begin_date" class="datepicker" />
+                    </p>
+                </div>
+                <br/>
+                <p>
+                    <input type="submit" value="Submit" />
+                    <input type="button" value="Cancel" 
+                        onClick="document.getElementById('newEventForm').style.display = 'none'" />
+                </p>
+            </form>
 		</center>
 	</div>
 {% endblock %}
 {% block articles%}
 	{%for i in latest_articles %}
-		</br>
+		<br/>
 		<div class="article box">
 			<center><h2>{{i.title}}</h2></center>
 			{{i.text|safe}}
 		</div>
-		</br>
+		<br/>
 	{%endfor%}
 {% endblock %}

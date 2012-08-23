@@ -16,7 +16,9 @@ h3
 	font-size:12pt;
 }
 
-body {background-color:#FFFFBB;} 
+body {
+    background-color:#FFFFBB;
+} 
 
 .box
 {
@@ -30,14 +32,9 @@ body {background-color:#FFFFBB;}
 
 #menu_first{
 	margin-left:20%;
-	
-	
 }
 
 #menu_last{
-	
-	
-	
 }
 
 .menu_item{
@@ -54,7 +51,6 @@ body {background-color:#FFFFBB;}
 	margin-right:20%;
 	padding-left:8%;
 	padding-right:8%;
-	
 }
 
 .goats{
@@ -70,23 +66,30 @@ body {background-color:#FFFFBB;}
 	margin-left:15%;
 	margin-right:15%;
 	width:550px;
-	
-	
 }
-
-
 
 #the_big_div{
 	margin-left:20%;
 	margin-right:20%;
 	padding:10px;
+	padding-left:8%;
+	padding-right:8%;
+    padding-top: 40px;
+    padding-bottom: 20px;
+
 	border:1.5px solid gray;
 	float:center;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	background-color:white;
-	padding-left:8%;
-	padding-right:8%;
 	min-width:640px;
+}
+
+#newEventForm {
+    display: none; 
+    position: absolute; 
+    left: 300px; 
+    top: 50px; 
+    z-index:10;
 }
 
