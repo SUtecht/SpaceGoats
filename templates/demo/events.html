@@ -9,14 +9,14 @@
 	</p>
 
 	<p>
-	{%if not event.attendees.all%}
+	{%if not attendees%}
 		This event has no one attending.
 	{%else%}
 		The following characters are attending this event:
 		<ul>
-		{%for char in event.attendees.all %}
+		{%for char in attendees%}
 			<li><a href="http://us.battle.net/wow/en/character/{{char.server}}/{{char.name}}/simple">{{char}}</a>
-			{{characters|key:char}}</li>
+            {{char.bnet.get_class_name}}</li>
 		{%endfor%}
 		</ul>
 	{%endif%}

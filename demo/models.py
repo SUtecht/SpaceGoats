@@ -7,11 +7,12 @@ from django.forms.extras.widgets import SelectDateWidget
 
 
 class Character(models.Model):
-	name = models.CharField(max_length=100)
-	player = models.ForeignKey('Player')
-	server = models.CharField(max_length=100, blank=True)
-	def __unicode__(self):
-		return "{} ".format(self.name)
+    name = models.CharField(max_length=100)
+    player = models.ForeignKey('Player')
+    server = models.CharField(max_length=100, blank=True)
+    bnet = None
+    def __unicode__(self):
+        return "{} ".format(self.name)
 
 class Player(models.Model):
 	name = models.CharField(max_length=100)
