@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <head>
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}demo_index.css" />
 <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
@@ -6,42 +6,44 @@
 <script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
 <script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script>
 <script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
-<script>
+<script type='text/javascript'>
 
-function showPos(event,id) {
-	var new_event_pop_up, x, y;
+    function showPos(event,id) {
+        var new_event_pop_up, x, y;
 
-	new_event_pop_up = document.getElementById(id);
-	if (window.event) {
-		x = window.event.clientX + document.documentElement.scrollLeft
-			+ document.body.scrollLeft;
-		y = window.event.clientY + document.documentElement.scrollTop +
-			+ document.body.scrollTop;
-	}
-	else {
-		x = event.clientX + window.scrollX;
-		y = event.clientY + window.scrollY;
-	}
+        new_event_pop_up = document.getElementById(id);
+        if (window.event) {
+            x = window.event.clientX + document.documentElement.scrollLeft
+                + document.body.scrollLeft;
+            y = window.event.clientY + document.documentElement.scrollTop +
+                + document.body.scrollTop;
+        }
+        else {
+            x = event.clientX + window.scrollX;
+            y = event.clientY + window.scrollY;
+        }
 
-	new_event_pop_up.style.left = x + "px";
-	new_event_pop_up.style.top = y + "px";
-	new_event_pop_up.style.display = "block";
-	//based on "Making a popup window using a DIV (hide DIV on mouseover)" at http://web.cortland.edu/flteach/mm-course/glossPopupDiv.html 
-}
+        new_event_pop_up.style.left = x + "px";
+        new_event_pop_up.style.top = y + "px";
+        new_event_pop_up.style.display = "block";
+        //based on "Making a popup window using a DIV (hide DIV on mouseover)"
+        //at http://web.cortland.edu/flteach/mm-course/glossPopupDiv.html 
+    }
 
-function menuGO(url){
-	window.location = url;
-}
+    function menuGO(url){
+        window.location = url;
+    }
 
 </script>
 {%block myhead%}{%endblock%}
 </head>
+<body>
 	<div id='logo'>
 		<img src="{{STATIC_URL}}d_left.png"  class ="goats">
 		<img src="{{STATIC_URL}}logo.png"onClick=menuGO("/demo") >
 		<img src="{{STATIC_URL}}d_right.png"  class ="goats">
 	</div>
-<title>Space Goats CoastToCoast</title>
+    <title>Space Goats CoastToCoast</title>
 	<div class="menu">
 		<div id="menu_first" class="menu_item" onClick=menuGO("/demo")>
 			Home
@@ -58,19 +60,14 @@ function menuGO(url){
 		<div id="menu_last" class="menu_item">
 			Apply
 		</div>
-		
 	</div>
 	
-<div id="the_big_div"  >
-
-
-		
-	
-
-{% block body%}{%endblock%}
-
+<div id="the_big_div">
+    {% block body %}{% endblock %}
 </div>
 
 {% block articles%}{%endblock%}
 
 {% block pop_ups%}{%endblock%}
+</body>
+</html>
