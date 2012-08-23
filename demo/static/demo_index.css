@@ -28,19 +28,25 @@ body {background-color:#FFFFBB;}
 	background-color:white;
 }
 
-.menu{
+#menu_first{
 	margin-left:20%;
-	margin-right:20%;
-
+	
+	
 }
 
+#menu_last{
+	
+	
+	
+}
 
 .menu_item{
 	float:left;
-	padding-left:8.025%;
-	padding-right:8.025%;
+	text-align:center;
 	border:1px solid gray;
 	background-color:DDDDDD;
+	min-width:156px;
+	width:11.9%;
 }
 
 .article{
@@ -81,6 +87,6 @@ body {background-color:#FFFFBB;}
 	background-color:white;
 	padding-left:8%;
 	padding-right:8%;
-
+	min-width:640px;
 }
 
