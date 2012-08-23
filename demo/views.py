@@ -54,29 +54,29 @@ def index(request):
 
 													
 def event(request, event_id):
-	if request.method == 'POST':
-		print('\n I see the post! \n ')
-		at_form = AttendForm(request.POST)
-		if at_form.is_valid():
-			char = at_form.cleaned_data['char']
-			event = Event.objects.get(pk=event_id)
-			print(char)
-			event.attendees.add(char)
-			event.save()
-		
-	event = Event.objects.get(pk=event_id)
-	at_form = AttendForm()
-	
-	 
-	characters = {}
-	for c in event.attendees.all():
-		characters[c] = battlenet.Character(battlenet.UNITED_STATES, c.server, c.name).get_class_name()
-	print(characters)
-	return render_to_response('demo/events.html', {'event':event,
-												'at_form':at_form,
-												'timeszone':timezone,
-												'characters':characters},
-												context_instance=RequestContext(request))
+    if request.method == 'POST':
+        print('\n I see the post! \n ')
+        at_form = AttendForm(request.POST)
+        if at_form.is_valid():
+            char = at_form.cleaned_data['char']
+            event = Event.objects.get(pk=event_id)
+            print(char)
+            event.attendees.add(char)
+            event.save()
+
+    event = Event.objects.get(pk=event_id)
+    at_form = AttendForm()
+    attendees = event.attendees.all()
+ 
+    for c in attendees:
+        c.bnet = battlenet.Character(battlenet.UNITED_STATES, c.server, c.name)
+        print(c.bnet)
+    print(attendees[0].bnet)
+    return render_to_response('demo/events.html', {'event':event,
+                                                'at_form':at_form,
+                                                'attendees':attendees,
+                                                'timeszone':timezone},
+                                                context_instance=RequestContext(request))
 
 
 def about(request):
