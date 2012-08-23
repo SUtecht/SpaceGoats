@@ -2,9 +2,15 @@
 <head>
 <title>Space Goats CoastToCoast</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/reset.css" />
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/text.css" />
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/960.css" />
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}demo_index.css" />
+
 <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
 <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
+
 <script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
 <script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script>
 <script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
@@ -40,41 +46,55 @@
 {%block myhead%}{%endblock%}
 </head>
 <body>
+    <div id="container" class="container_12">
 	<div id='logo'>
         <img src="{{STATIC_URL}}d_left.png" 
              alt="Space Goat Hunter facing left" 
              class ="goats" />
-        <img src="{{STATIC_URL}}logo.png"
-             onClick="menuGO('/demo')" 
-             alt="Space Goats CoastToCoast Logo"/>
+        <a href="/demo">
+            <img src="{{STATIC_URL}}logo.png"
+                 alt="Space Goats CoastToCoast Logo"/>
+        </a>
         <img src="{{STATIC_URL}}d_right.png" 
              alt="Space Goat Hunter facing right" 
              class="goats" />
 	</div>
-	<div class="menu">
-		<div id="menu_first" class="menu_item" onClick="menuGO('/demo')">
-			Home
-		</div>
-		<div class="menu_item" onClick="menuGO('/demo/archive')">
-			Archive
-		</div>
-		<div class="menu_item" onClick="menuGO('http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3')">
-			Forum
-		</div>
-		<div class="menu_item" onClick="menuGO('/demo/about')">
-			About
-		</div>
-		<div id="menu_last" class="menu_item">
-			Apply
-		</div>
-	</div>
-	
-<div id="the_big_div">
-    {% block body %}{% endblock %}
-</div>
+    <ul class="menu">
+        <li>
+            <a href="/demo/" id="menu_first" class="menu_item">
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="/demo/archive/" class="menu_item">
+                Archive
+            </a>
+        </li>
+        <li>
+            <a href="http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3"
+               class = "menu_item">
+                Forum
+            </a>
+        </li>
+        <li>
+            <a href="/demo/about/" class="menu_item">
+                About
+            </a>
+        </li>
+        <li>
+            <a href="" id="menu_last" class="menu_item">
+                Apply
+            </a>
+        </li>
+    </ul>
 
-{% block articles%}{%endblock%}
+    <div id="the_big_div">
+        {% block body %}{% endblock %}
+    </div>
 
-{% block pop_ups%}{%endblock%}
+    {% block articles%}{%endblock%}
+
+    {% block pop_ups%}{%endblock%}
+</div> <!-- container -->
 </body>
 </html>
