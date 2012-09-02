@@ -40,7 +40,7 @@
 {%block myhead%}{%endblock%}
 </head>
 <body>
-	<div id='logo'>
+    <div id='logo'>
         <img src="{{STATIC_URL}}d_left.png" 
              alt="Space Goat Hunter facing left" 
              class ="goats" />
@@ -50,25 +50,25 @@
         <img src="{{STATIC_URL}}d_right.png" 
              alt="Space Goat Hunter facing right" 
              class="goats" />
-	</div>
-	<div class="menu">
-		<div id="menu_first" class="menu_item" onClick="menuGO('/demo')">
-			Home
-		</div>
-		<div class="menu_item" onClick="menuGO('/demo/archive')">
-			Archive
-		</div>
-		<div class="menu_item" onClick="menuGO('http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3')">
-			Forum
-		</div>
-		<div class="menu_item" onClick="menuGO('/demo/about')">
-			About
-		</div>
-		<div id="menu_last" class="menu_item">
-			Apply
-		</div>
-	</div>
-	
+    </div>
+    <div class="menu">
+        <div id="menu_first" class="menu_item" onClick="menuGO('/demo')">
+            Home
+        </div>
+        <div class="menu_item" onClick="menuGO('/demo/archive')">
+            Archive
+        </div>
+        <div class="menu_item" onClick="menuGO('http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3')">
+            Forum
+        </div>
+        <div class="menu_item" onClick="menuGO('/demo/about')">
+            About
+        </div>
+        <div id="menu_last" class="menu_item">
+            Apply
+        </div>
+    </div>
+    
 <div id="the_big_div">
     {% block body %}{% endblock %}
 </div>

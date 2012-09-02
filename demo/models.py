@@ -15,35 +15,35 @@ class Character(models.Model):
         return "{} ".format(self.name)
 
 class Player(models.Model):
-	name = models.CharField(max_length=100)
-	email = models.EmailField(max_length=254, blank=True)
-	def __unicode__(self):
-		return "{} ".format(self.name)
-	
-	
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254, blank=True)
+    def __unicode__(self):
+        return "{} ".format(self.name)
+    
+    
 class AttendForm(forms.Form):
-	char = forms.ModelChoiceField(Character.objects.all())
+    char = forms.ModelChoiceField(Character.objects.all())
 
-		
+        
 class Event(models.Model):
-	name = models.CharField(max_length=100)
-	begin = models.DateField()
-	attendees = models.ManyToManyField('Character', blank=True,null=True)
-	def __unicode__(self):
-		return "{} {}".format( self.name, self.begin)
-		
+    name = models.CharField(max_length=100)
+    begin = models.DateField()
+    attendees = models.ManyToManyField('Character', blank=True,null=True)
+    def __unicode__(self):
+        return "{} {}".format( self.name, self.begin)
+        
 class EventForm(forms.Form):
-	name = forms.CharField(max_length=100)
-	begin_date = forms.CharField( )	
-	
+    name = forms.CharField(max_length=100)
+    begin_date = forms.CharField( )	
+    
 class Rank(models.Model):
-	name = models.CharField(max_length=100)
-	level = models.IntegerField()
-	def __unicode__(self):
-		return "{} ".format( self.name)
+    name = models.CharField(max_length=100)
+    level = models.IntegerField()
+    def __unicode__(self):
+        return "{} ".format( self.name)
 
 class Article(models.Model):
-	title = models.CharField(max_length=100)
-	text  = models.TextField()
-	img = models.ImageField(upload_to = "uploads")
-	author = models.ForeignKey('Player')
+    title = models.CharField(max_length=100)
+    text  = models.TextField()
+    img = models.ImageField(upload_to = "uploads")
+    author = models.ForeignKey('Player')

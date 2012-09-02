@@ -15,14 +15,14 @@ urlpatterns = patterns('demo.views',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-	#
-	# \/
-	# (________>
-   	url(r'^$', 'index'),
-	url(r'^ajax/events.json', 'eventsJson'),
-	url(r'^event/(?P<event_id>\d+)', 'event'),
-	url(r'^about/', 'about'),
-	url(r'^archive/', 'archive'),
-	url(r'^article/(?P<article_id>\d+)', 'article'),
+    #
+    # \/
+    # (________>
+    url(r'^$', 'index'),
+    url(r'^ajax/events.json', 'eventsJson'),
+    url(r'^event/(?P<event_id>\d+)', 'event'),
+    url(r'^about/', 'about'),
+    url(r'^archive/', 'archive'),
+    url(r'^article/(?P<article_id>\d+)', 'article'),
 )	
 

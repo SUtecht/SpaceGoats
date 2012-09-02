@@ -1,19 +1,19 @@
 h1
 {
-	color:#3355BB;
-	font-size:14pt;
+    color:#3355BB;
+    font-size:14pt;
 }
 
 h2
 {
-	color:#3355BB;
-	font-size:18pt;
+    color:#3355BB;
+    font-size:18pt;
 }
 
 h3
 {
-	color:#3355BB;
-	font-size:12pt;
+    color:#3355BB;
+    font-size:12pt;
 }
 
 body {
@@ -22,67 +22,67 @@ body {
 
 .box
 {
-	padding:10px;
-	border:1.5px solid gray;
-	float:left;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-	background-color:white;
+    padding:10px;
+    border:1.5px solid gray;
+    float:left;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color:white;
 }
 
 #menu_first{
-	margin-left:20%;
+    margin-left:20%;
 }
 
 #menu_last{
 }
 
 .menu_item{
-	float:left;
-	text-align:center;
-	border:1px solid gray;
-	background-color:DDDDDD;
-	min-width:156px;
-	width:11.9%;
+    float:left;
+    text-align:center;
+    border:1px solid gray;
+    background-color:DDDDDD;
+    min-width:156px;
+    width:11.9%;
 }
 
 .article{
-	margin-left:20%;
-	margin-right:20%;
-	padding-left:8%;
-	padding-right:8%;
+    margin-left:20%;
+    margin-right:20%;
+    padding-left:8%;
+    padding-right:8%;
 }
 
 .goats{
-	width:15%
+    width:15%
 }
 
 #logo{
-	margin-left:30%;
+    margin-left:30%;
 }
 
 #cal
 {
-	margin-left:15%;
-	margin-right:15%;
-	width:550px;
+    margin-left:15%;
+    margin-right:15%;
+    width:550px;
 }
 
 #the_big_div{
-	margin-left:20%;
-	margin-right:20%;
-	padding:10px;
-	padding-left:8%;
-	padding-right:8%;
+    margin-left:20%;
+    margin-right:20%;
+    padding:10px;
+    padding-left:8%;
+    padding-right:8%;
     padding-top: 40px;
     padding-bottom: 20px;
 
-	border:1.5px solid gray;
-	float:center;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-	background-color:white;
-	min-width:640px;
+    border:1.5px solid gray;
+    float:center;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color:white;
+    min-width:640px;
 }
 
 #newEventForm {

@@ -1,41 +1,41 @@
 {%extends "base.html"%}
 {% load dict %}
 {% block body %}
-	</br><h2>{{event.name}}</h2>
+    </br><h2>{{event.name}}</h2>
 
-	<p>
-	{%if event.begin < timezone.now %} Begins: {%else%} Began: {%endif%}{{event.begin}}</br>
+    <p>
+    {%if event.begin < timezone.now %} Begins: {%else%} Began: {%endif%}{{event.begin}}</br>
 
-	</p>
+    </p>
 
-	<p>
-	{%if not attendees%}
-		This event has no one attending.
-	{%else%}
-		The following characters are attending this event:
-		<ul>
-		{%for char in attendees%}
-			<li><a href="http://us.battle.net/wow/en/character/{{char.server}}/{{char.name}}/simple">{{char}}</a>
+    <p>
+    {%if not attendees%}
+        This event has no one attending.
+    {%else%}
+        The following characters are attending this event:
+        <ul>
+        {%for char in attendees%}
+            <li><a href="http://us.battle.net/wow/en/character/{{char.server}}/{{char.name}}/simple">{{char}}</a>
             {{char.bnet.get_class_name}}</li>
-		{%endfor%}
-		</ul>
-	{%endif%}
-	</p>
+        {%endfor%}
+        </ul>
+    {%endif%}
+    </p>
 
-	<div>
-	<p>
+    <div>
+    <p>
 
-	<input type="button" value="+ Sign up for this event" onClick="showPos(event,'addPoolForm')" />
-	</p>
-	</div>
+    <input type="button" value="+ Sign up for this event" onClick="showPos(event,'addPoolForm')" />
+    </p>
+    </div>
 
 
-	<div  id="addPoolForm" style='display: none; position: absolute; left: 300px; top: 50px; z-index:10;'; class= box>
-	<h1>Join Event<h1>
-		<form action="" method="post">{% csrf_token %}
-		{{at_form.as_p}}
-		<p><input type="submit" value="Submit" />
-		<input type="button" value="Cancel" onClick="document.getElementById('addPoolForm').style.display = 'none'" /></p>
-		</form>
-	</div>
+    <div  id="addPoolForm" style='display: none; position: absolute; left: 300px; top: 50px; z-index:10;'; class= box>
+    <h1>Join Event<h1>
+        <form action="" method="post">{% csrf_token %}
+        {{at_form.as_p}}
+        <p><input type="submit" value="Submit" />
+        <input type="button" value="Cancel" onClick="document.getElementById('addPoolForm').style.display = 'none'" /></p>
+        </form>
+    </div>
 {%endblock%}
