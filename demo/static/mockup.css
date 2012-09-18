@@ -1,0 +1,56 @@
+/* #container { */
+/*     border: 1px solid black; */
+/* } */
+
+.grid_1, .grid_2, .grid_3, .grid_4, .grid_5,
+.grid_6, .grid_7, .grid_8, .grid_9, .grid_10,
+.grid_11, .grid_12 {
+    background-color: gray;
+}
+
+
+/******************* real stuff ********************/
+
+ul {
+    list-style: none;
+}
+li {
+    margin: 0;
+}
+
+
+
+#nav, #logo {
+    height: 100px;
+    background-color: #cfe2f3;
+
+}
+
+#articles {
+    min-height: 800px;
+}
+#sidebar {
+    min-height: 800px;
+}
+#footer {
+    background-color: #f3cfcf;
+}
+
+#events {
+    height: 350px;
+    background-color: #bfe7c4;
+}
+#goat_of_the_week {
+    height: 200px;
+    background-color: #f9bfef;
+}
+#roster {
+    height: 500px;
+    background-color: #cfe2f3;
+}
+
+.article {
+    min-height: 200px;
+    background-color: #fff2cc;
+}
+

@@ -94,3 +94,10 @@ def article(request,article_id):
     article = Article.objects.get(pk=article_id)
     return render_to_response('demo/article.html', {'article':article},
                                                 context_instance=RequestContext(request))
+
+
+
+def mockup(request):
+    return render_to_response('demo/mockup.html', None,
+                                                context_instance=RequestContext(request))
+
