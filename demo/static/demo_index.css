@@ -17,7 +17,7 @@ h3
 }
 
 body {
-    background-color:#FFFFBB;
+    /*background-color:#FFFFBB;*/
 	background-image:url(ZFYCt.png);
 } 
 
@@ -59,7 +59,7 @@ body {
 }
 
 #logo{
-    margin-left:30%;
+    margin-left:40%;
 }
 
 #cal
