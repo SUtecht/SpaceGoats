@@ -18,30 +18,22 @@ h3
 
 body {
     background-color:#FFFFBB;
+    background-image: url('/static/ZFYCt.png');
 } 
 a {
     text-decoration: none;
 }
 
-ul {
-    margin: 0;
-}
-li {
-    margin: 0;
-}
+/* ul { */
+/*     margin: 0; */
+/* } */
+/* li { */
+/*     margin: 0; */
+/* } */
 
-.box
-{
-    padding:10px;
-    border:1.5px solid gray;
-    float:left;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    background-color:white;
-}
 
 #container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 #logo {
@@ -54,59 +46,75 @@ li {
 .menu {
     text-align: center;
     list-style: none;
+
+    margin: 10px;
 }
 .menu li {
-    display: inline;
-}
-
-
-#menu_first{
-}
-
-#menu_last{
-}
-
-.menu_item{
-    margin-left: 0;
     display: inline-block;
+    padding: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+
+    width: 100px;
 
     text-align:center;
     border:1px solid gray;
     background-color: #DDDDDD;
-    min-width:156px;
-    width: 40px;
+}
+
+.menu li a {
+    display: inline-block;
+    width: 100%;
+}
+
+#menu_first{
+}
+#menu_last{
+}
+.menu_item{
 }
 
 /*
-.article{
-    margin-left:20%;
-    margin-right:20%;
-    padding-left:8%;
-    padding-right:8%;
-}
 
 .goats{
     width:15%
 }
 
 
-#the_big_div{
-    margin-left:20%;
-    margin-right:20%;
-    padding:10px;
-    padding-left:8%;
-    padding-right:8%;
-    padding-top: 40px;
-    padding-bottom: 20px;
-
+*/
+.box {
     border:1.5px solid gray;
-    float:center;
     -moz-border-radius: 15px;
     border-radius: 15px;
     background-color:white;
-    min-width:640px;
 }
-*/
+
+.content {
+    /* margins and padding placed
+     * on this enclosed div
+     * to keep the parent from
+     * growing
+     */
+    padding-top: 10px;
+    padding-bottom: 30px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.article {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#the_big_div{
+
+    border:1.5px solid gray;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+
+    background-color:white;
+}
 
 #cal
 {
