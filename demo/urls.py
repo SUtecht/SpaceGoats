@@ -24,5 +24,7 @@ urlpatterns = patterns('demo.views',
     url(r'^about/', 'about'),
     url(r'^archive/', 'archive'),
     url(r'^article/(?P<article_id>\d+)', 'article'),
+
+    url(r'^mockup/', 'mockup'),
 )	
 

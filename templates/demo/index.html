@@ -96,11 +96,11 @@
 {% endblock %}
 {% block articles%}
     {%for i in latest_articles %}
-        <br/>
-        <div class="article box">
-            <center><h2>{{i.title}}</h2></center>
-            {{i.text|safe}}
+        <div class="grid_12 article box">
+            <div class="content">
+                <center><h2>{{i.title}}</h2></center>
+                {{i.text|safe}}
+            </div>
         </div>
-        <br/>
     {%endfor%}
 {% endblock %}
