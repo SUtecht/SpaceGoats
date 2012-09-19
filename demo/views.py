@@ -10,6 +10,8 @@ from dateutils import relativedelta
 import datetime
 from django.core import serializers
 import battlenet
+import glob
+import Image
 from battlenet import Realm, Guild
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -132,6 +134,9 @@ def save_article(request):
             new_article = Article(title=title, text=text, img=img, author=author, approved = 'N')
             new_article.save()
 
-            
+
+            im = Image.open(new_article.img.url)
+            im.thumbnail((128, 128), Image.ANTIALIAS)
+            im.save("uploads/T_" + new_article.img.url[8:200])
             return redirect('/demo/mockup/')
     return new_article_page(request)
