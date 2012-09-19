@@ -4,20 +4,22 @@
         <a href= "/demo/article/{{art0.id}}">
             <center><h2>{{art0.title}}</h2></center>
         </a>
-        {{art0.text|safe}}
-        
+        <p>{{art0.text|safe|slice:"600"}}</p>
+        <p><a href="/demo/article/{{art0.id}}">Read More</a></p>        
     </div>
     <div class="article">
         <a href= "/demo/article/{{art1.id}}">
             <center><h2>{{art1.title}}</h2></center>
         </a>
-        {{art1.text|safe}}
+        <p>{{art1.text|safe|slice:"600"}}</p>
+            <p><a href="/demo/article/{{art1.id}}">Read More</a></p>
     </div>
     <div class="article">
         <a href= "/demo/article/{{art2.id}}">
             <center><h2>{{art2.title}}</h2></center>
         </a>
-        {{art2.text|safe}}
+        <p>{{art2.text|safe|slice:"600"}}</p>
+        <p><a href="/demo/article/{{art2.id}}">Read More</a></p>  
     </div>
 {%endblock%}
 

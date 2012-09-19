@@ -47,9 +47,12 @@ class Article(models.Model):
     text  = models.TextField()
     img = models.ImageField(upload_to = "uploads")
     author = models.ForeignKey('Player')
+    approved = models.CharField(max_length=1)
+    def __unicode__(self):
+        return "{} by {}  {} ".format( self.title , self.author , self.approved )
 
 class ArticleForm(forms.Form):
     title = forms.CharField(max_length=100)
-    text  = forms.CharField()
+    text  = forms.CharField(widget=forms.Textarea)
     img = forms.ImageField()
     author = forms.ModelChoiceField(Player.objects.all())

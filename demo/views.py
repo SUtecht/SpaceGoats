@@ -11,6 +11,8 @@ import datetime
 from django.core import serializers
 import battlenet
 from battlenet import Realm, Guild
+from django.shortcuts import redirect
+from django.core.mail import send_mail
 
 
 def eventsJson(request):
@@ -86,8 +88,8 @@ def about(request):
                                                 context_instance=RequestContext(request))
                                                 
 def archive(request):
-    articles = Article.objects.all().order_by('-id')
-    print articles
+    approved_articles = Article.objects.all().filter(approved = 'Y')
+    articles = approved_articles.order_by('-id')
     return render_to_response('demo/archive.html', {'articles':articles},
                                                 context_instance=RequestContext(request))
                                                 
@@ -99,7 +101,8 @@ def article(request,article_id):
 
 
 def mockup(request):
-    latest_articles = Article.objects.all().order_by('-id')[:3]
+    approved_articles = Article.objects.all().filter(approved = 'Y')
+    latest_articles = approved_articles.order_by('-id')[:3]
     all_upcoming_events = Event.objects.all().filter(begin__gte = datetime.date.today())
     soon_events = all_upcoming_events.order_by('begin')[:4]
     return render_to_response('demo/home.html', {'art0':latest_articles[0],
@@ -109,3 +112,26 @@ def mockup(request):
                                                    'upcoming_events':soon_events},                        
                                                 context_instance=RequestContext(request))
 
+def new_article_page(request):
+    if request.method == 'POST':
+        article_form = ArticleForm(request.POST)
+    else:
+        article_form = ArticleForm()
+    return render_to_response('demo/new_article.html', {'article_form':article_form},
+                                                context_instance=RequestContext(request))
+def save_article(request):
+    if request.method == 'POST':
+        print 'I see the post!'
+        article_form = ArticleForm(request.POST, request.FILES)
+        if article_form.is_valid():
+            print 'it is valid!'
+            title = article_form.cleaned_data['title']
+            text = article_form.cleaned_data['text']
+            img = article_form.cleaned_data['img']
+            author = article_form.cleaned_data['author']
+            new_article = Article(title=title, text=text, img=img, author=author, approved = 'N')
+            new_article.save()
+
+            
+            return redirect('/demo/mockup/')
+    return new_article_page(request)
