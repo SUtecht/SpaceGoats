@@ -1,0 +1,60 @@
+{%extends "mockup.html"%}
+{% block articles%}
+    <div class="article">
+        <a href= "/demo/article/{{art0.id}}">
+            <center><h2>{{art0.title}}</h2></center>
+        </a>
+        {{art0.text|safe}}
+        
+    </div>
+    <div class="article">
+        <a href= "/demo/article/{{art1.id}}">
+            <center><h2>{{art1.title}}</h2></center>
+        </a>
+        {{art1.text|safe}}
+    </div>
+    <div class="article">
+        <a href= "/demo/article/{{art2.id}}">
+            <center><h2>{{art2.title}}</h2></center>
+        </a>
+        {{art2.text|safe}}
+    </div>
+{%endblock%}
+
+{% block events %}
+
+<!-- Timer from http://www.hashemian.com/tools/javascript-countdown.htm-->
+<p>
+<script language="JavaScript">
+TargetDate = "{{e0.begin|date:'m/d/Y '}} 7:00 PM"
+BackColor = "palegreen";
+ForeColor = "navy";
+CountActive = true;
+CountStepper = -1;
+LeadingZero = true;
+DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds. until <b>{{e0.name}}</b>";
+FinishMessage = "GET LOGGED IN NOW!  It's time for <b>{{e0.name}}</b>";
+</script>
+<script language="JavaScript" src="{{STATIC_URL}}countdown.js"></script>
+
+(begins on {{e0.begin|date:"D d M" }})
+</br>&nbsp &nbsp &nbsp &nbsp
+<a href=''>Sign up for this event</a>
+</p>
+
+
+
+
+<table>
+    {%for e in upcoming_events%} 
+    <tr><td><a href='/demo/event/{{e.id}}'>{{e.name}}</a></td>
+        <td>
+        {%if e.id == 5 %}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
+        {%else%}<img src="{{STATIC_URL}}not_attending.png" alt="not attending"/>
+        {%endif%}
+        </td>
+    </tr>
+    {%endfor%} 
+</table>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Space Goats CoastToCoast</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/reset.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/text.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/960.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}mockup.css" />
+
+    <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
+    <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
+
+    <script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
+    <script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script>
+    <script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
+    
+    <script type='text/javascript'>
+        function showPos(event,id) {
+            var new_event_pop_up, x, y;
+
+            new_event_pop_up = document.getElementById(id);
+            if (window.event) {
+                x = window.event.clientX + document.documentElement.scrollLeft
+                    + document.body.scrollLeft;
+                y = window.event.clientY + document.documentElement.scrollTop +
+                    + document.body.scrollTop;
+            }
+            else {
+                x = event.clientX + window.scrollX;
+                y = event.clientY + window.scrollY;
+            }
+
+            new_event_pop_up.style.left = x + "px";
+            new_event_pop_up.style.top = y + "px";
+            new_event_pop_up.style.display = "block";
+            //based on "Making a popup window using a DIV (hide DIV on mouseover)"
+            //at http://web.cortland.edu/flteach/mm-course/glossPopupDiv.html 
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <div id="container" class="container_16">
+        <div id="nav" class="grid_2">
+            <ul>
+                <li><a href="/demo/about">About</a></li>
+                <li><a href="http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3">Forum</a></li>
+                <li>Roster</li>
+                <li>Login</li>
+            </ul>
+        </div>
+        <div id="logo" class="grid_14">
+            <a href="/demo/mockup">
+                <img src="{{STATIC_URL}}logo.png"
+                 alt="Space Goats CoastToCoast Logo"/>
+            </a>
+        </div>
+        <div class="clear"></div>
+
+        <div id="articles" class="grid_11">
+            {% block articles%}{%endblock%}
+            
+        </div>
+        <div id="sidebar" class="grid_5">
+            <div id="events">
+               {% block events%}{%endblock%}
+            </div>
+            <div id="goat_of_the_week">
+                <p>Goat of the Week</p>
+                <img src="/static/JDBaF.png"/>
+            </div>
+            <div id="roster">
+                <p>Roster and stuff</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div id="footer" class="grid_16">
+            <p>footer here?</p>
+        </div>
+
+
+    </div> <!-- container -->
+
+
+
+
+
+</body>
+</html>
