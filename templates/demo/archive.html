@@ -1,13 +1,14 @@
-{%extends "base.html"%}
+{%extends "mockup.html"%}
 {% load dict %}
-{% block body %}
-    </br>
+{% block articles %}<!--make body for old site-->
+    <div class="article">
     <center><h2>Space Goats CoastToCoast Archived Articles</h2></center>
     
     {%for i in articles %}
-    
+        <ul>
             <li><a href= "/demo/article/{{i.id}}">{{i.title}}</li>
     
         </ul>
     {%endfor%}
+    </div>
 {% endblock %}

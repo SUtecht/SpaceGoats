@@ -87,6 +87,7 @@ def about(request):
                                                 
 def archive(request):
     articles = Article.objects.all().order_by('-id')
+    print articles
     return render_to_response('demo/archive.html', {'articles':articles},
                                                 context_instance=RequestContext(request))
                                                 

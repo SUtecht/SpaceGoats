@@ -47,3 +47,9 @@ class Article(models.Model):
     text  = models.TextField()
     img = models.ImageField(upload_to = "uploads")
     author = models.ForeignKey('Player')
+
+class ArticleForm(forms.Form):
+    title = forms.CharField(max_length=100)
+    text  = forms.CharField()
+    img = forms.ImageField()
+    author = forms.ModelChoiceField(Player.objects.all())
