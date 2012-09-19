@@ -1,7 +1,8 @@
-{%extends "base.html"%}
+{%extends "mockup.html"%}
 {% load dict %}
-{% block body %}
-    </br>
+   
+{% block articles %}<!-- make block body out for old site-->
+<div class= 'article' ><!-- take out for old site-->
     <center><h2>About Space Goats CoastToCoast</h2></center>
     
     <p>We are an Aliance guild on US Auchindoun started by a small group of friends. 
@@ -11,11 +12,9 @@
             <li>Leader: <a href="http://us.battle.net/wow/en/character/auchindoun/{{guild.get_leader}}/simple"> {{guild.get_leader}}</a></li>
             <li>Level: {{guild.level}}</li>
             <li>Total Achievement Points: {{guild.achievement_points}}</li>
-            <li><a href="http://us.battle.net/wow/en/guild/auchindoun/Space_Goats_CoastToCoast/">Read about us on Battlenet!</a>
-
-            </li>
+            <li><a href="http://us.battle.net/wow/en/guild/auchindoun/Space_Goats_CoastToCoast/">Read about us on Battlenet!</a></li>
             
         </ul>
     </p>
-    
+</div><!-- take out for old site-->
 {%endblock%}

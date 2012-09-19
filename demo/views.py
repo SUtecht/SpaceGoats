@@ -98,6 +98,13 @@ def article(request,article_id):
 
 
 def mockup(request):
-    return render_to_response('demo/mockup.html', None,
+    latest_articles = Article.objects.all().order_by('-id')[:3]
+    all_upcoming_events = Event.objects.all().filter(begin__gte = datetime.date.today())
+    soon_events = all_upcoming_events.order_by('begin')[:4]
+    return render_to_response('demo/home.html', {'art0':latest_articles[0],
+                                                   'art1':latest_articles[1],                        
+                                                   'art2':latest_articles[2],
+                                                   'e0':soon_events[0],
+                                                   'upcoming_events':soon_events},                        
                                                 context_instance=RequestContext(request))
 
