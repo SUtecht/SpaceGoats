@@ -7,9 +7,10 @@
         </a>
         <img src="{{article.img.url_128x128}}"/>
         <p>{{article.text|safe|slice:"600"}}</p>
-        <p><a href="/demo/article/{{article.id}}">Read More</a></p>        
+        <p><a href="/demo/article/{{article.id}}">Read Full Article</a></p>        
     </div> <!-- article -->
     {% endfor %}
+    <a href="/demo/archive">View Older Articles</a>
 
 {%endblock%}
 
@@ -17,6 +18,7 @@
 
 <!-- Timer from http://www.hashemian.com/tools/javascript-countdown.htm-->
 <p>
+<b>{{e0.name}}</b> starts in </br>
 <script language="JavaScript">
 TargetDate = "{{e0.begin|date:'m/d/Y '}} 7:00 PM"
 BackColor = "#D1C2B2";
@@ -24,8 +26,8 @@ ForeColor = "navy";
 CountActive = true;
 CountStepper = -1;
 LeadingZero = true;
-DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds until <b>{{e0.name}}</b>";
-FinishMessage = "GET LOGGED IN NOW!  It's time for <b>{{e0.name}}</b>";
+DisplayFormat = " %%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds. ";
+FinishMessage = "GET LOGGED IN NOW!";
 </script>
 <script language="JavaScript" src="{{STATIC_URL}}countdown.js"></script>
 
