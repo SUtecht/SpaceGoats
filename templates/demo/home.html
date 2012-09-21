@@ -7,8 +7,9 @@
         </a>
         <img src="{{article.img.url_128x128}}"/>
         <p>{{article.text|safe|slice:"600"}}</p>
-        <p><a href="/demo/article/{{article.id}}">Read More</a></p>        
+        <p><a href="/demo/article/{{article.id}}">Read Full Article</a></p>        
     </div> <!-- article -->
     {% endfor %}
-{%endblock%}
+    <a href="/demo/archive">View Older Articles</a>
 
+{% endblock %}
