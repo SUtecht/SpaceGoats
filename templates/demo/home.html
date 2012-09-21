@@ -4,7 +4,8 @@
         <a href= "/demo/article/{{art0.id}}">
             <center><h2>{{art0.title}}</h2></center>
         </a>
-        <img src="{{STATIC_URL}}thumbs/T_{{art0.img.url|slice:"8:"}}"/>
+        
+        <img src="{{STATIC_URL}}thumbs/T_{{art0.img.url|slice:'8:'}}"/>
         <p>{{art0.text|safe|slice:"600"}}</p>
         <p><a href="/demo/article/{{art0.id}}">Read More</a></p>        
     </div>
@@ -12,15 +13,17 @@
         <a href= "/demo/article/{{art1.id}}">
             <center><h2>{{art1.title}}</h2></center>
         </a>
-        <img src="{{STATIC_URL}}thumbs/T_{{art1.img.url|slice:"8:"}}"/>
+        
+        <img src="{{STATIC_URL}}thumbs/T_{{art1.img.url|slice:'8:'}}"/>
         <p>{{art1.text|safe|slice:"600"}}</p>
             <p><a href="/demo/article/{{art1.id}}">Read More</a></p>
     </div>
     <div class="article">
-        <img src="{{STATIC_URL}}thumbs/T_{{art2.img.url|slice:"8:"}}"/>
+        
         <a href= "/demo/article/{{art2.id}}">
             <center><h2>{{art2.title}}</h2></center>
         </a>
+        <img src="{{STATIC_URL}}thumbs/T_{{art2.img.url|slice:'8:'}}"/>
         <p>{{art2.text|safe|slice:"600"}}</p>
         <p><a href="/demo/article/{{art2.id}}">Read More</a></p>  
     </div>

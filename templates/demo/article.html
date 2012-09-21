@@ -10,5 +10,15 @@
             <center><h2>{{article.title}}</h2></center>
             {{article.text|safe}}
         </div>
+        <div class = "commnets">
+            <!-- START: Livefyre Embed -->
+            <script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
+            <script type='text/javascript'>
+                var fyre = LF({
+                    site_id: 312416
+                });
+            </script>
+            <!-- END: Livefyre Embed -->               
+        </div>
     <!---</div>-->
 {% endblock %}
