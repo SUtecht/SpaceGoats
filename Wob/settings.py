@@ -130,6 +130,12 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+# append a custom context processor
+from django.conf import global_settings
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    "demo.context_processors.events",
+)
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.

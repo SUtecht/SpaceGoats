@@ -107,11 +107,7 @@ def article(request,article_id):
 def mockup(request):
     approved_articles = Article.objects.all().filter(approved = 'Y')
     latest_articles = approved_articles.order_by('-id') #[:3] # <-- temporarily set to everything
-    all_upcoming_events = Event.objects.all().filter(begin__gte = datetime.date.today())
-    soon_events = all_upcoming_events.order_by('begin')[:4]
-    return render_to_response('demo/home.html', {'articles': latest_articles,
-                                                 'e0':soon_events[0],
-                                                 'upcoming_events':soon_events},
+    return render_to_response('demo/home.html', {'articles': latest_articles },
                                                 context_instance=RequestContext(request))
 
 def new_article_page(request):

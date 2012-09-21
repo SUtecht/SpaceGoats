@@ -10,43 +10,5 @@
         <p><a href="/demo/article/{{article.id}}">Read More</a></p>        
     </div> <!-- article -->
     {% endfor %}
-
 {%endblock%}
 
-{% block events %}
-
-<!-- Timer from http://www.hashemian.com/tools/javascript-countdown.htm-->
-<p>
-<script language="JavaScript">
-TargetDate = "{{e0.begin|date:'m/d/Y '}} 7:00 PM"
-BackColor = "#D1C2B2";
-ForeColor = "navy";
-CountActive = true;
-CountStepper = -1;
-LeadingZero = true;
-DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds until <b>{{e0.name}}</b>";
-FinishMessage = "GET LOGGED IN NOW!  It's time for <b>{{e0.name}}</b>";
-</script>
-<script language="JavaScript" src="{{STATIC_URL}}countdown.js"></script>
-
-(begins on {{e0.begin|date:"D d M" }})
-</br>&nbsp &nbsp &nbsp &nbsp
-<a href=''>Sign up for this event</a>
-</p>
-
-
-
-
-<table>
-    {%for e in upcoming_events%} 
-    <tr><td><a href='/demo/event/{{e.id}}'>{{e.name}}</a></td>
-        <td>
-        {%if e.id == 5 %}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
-        {%else%}<img src="{{STATIC_URL}}not_attending.png" alt="not attending"/>
-        {%endif%}
-        </td>
-    </tr>
-    {%endfor%} 
-</table>
-
-{% endblock %}
