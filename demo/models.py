@@ -45,7 +45,8 @@ class Rank(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=100)
     text  = models.TextField()
-    img = models.ImageField(upload_to = "{{STATIC_URL}}/uploads")
+    img = models.ImageField(upload_to = "uploads")
+    thumb = models.ImageField(upload_to = "uploads", blank=True,null=True)
     author = models.ForeignKey('Player')
     approved = models.CharField(max_length=1)
     def __unicode__(self):

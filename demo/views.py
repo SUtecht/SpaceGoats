@@ -15,6 +15,8 @@ import Image
 from battlenet import Realm, Guild
 from django.shortcuts import redirect
 from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 def eventsJson(request):
@@ -137,6 +139,9 @@ def save_article(request):
 
             im = Image.open(new_article.img.url)
             im.thumbnail((128, 128), Image.ANTIALIAS)
-            im.save("uploads/T_" + new_article.img.url[8:200])
+            print 
+            im.save( settings.STATIC_ROOT + "\\thumbs\T_" + new_article.img.url[8:200])
+            #new_article.thumb = temp/T_
+            #new_article.save()
             return redirect('/demo/mockup/')
     return new_article_page(request)
