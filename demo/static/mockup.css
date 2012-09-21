@@ -5,7 +5,7 @@
 .grid_1, .grid_2, .grid_3, .grid_4, .grid_5,
 .grid_6, .grid_7, .grid_8, .grid_9, .grid_10,
 .grid_11, .grid_12 {
-    background-color: gray;
+    background-color: F5F0EB;
 }
 
 
@@ -22,7 +22,7 @@ li {
 
 #nav, #logo {
     height: 100px;
-    background-color: #cfe2f3;
+    /*background-color: #cfe2f3;*/
 
 }
 
@@ -33,24 +33,59 @@ li {
     min-height: 800px;
 }
 #footer {
-    background-color: #f3cfcf;
+   /* background-color: #f3cfcf;*/
 }
 
 #events {
     height: 350px;
-    background-color: #bfe7c4;
+    /*background-color: #bfe7c4;*/
+    
 }
 #goat_of_the_week {
     height: 200px;
-    background-color: #f9bfef;
+    /*background-color: #f9bfef;*/
 }
 #roster {
     height: 500px;
-    background-color: #cfe2f3;
+    /*background-color: #cfe2f3;*/
+
+}
+#roster,#goat_of_the_week, #events
+{
+    padding-left:10px;
+    border-width:3px;
+    border-color:#000024;
+    border-left-style:dotted;
+}
+#nav, #logo, #events, #goat_of_the_week
+{
+    border-width:3px;
+    border-color:#000024;
+    border-bottom-style:dotted;
 }
 
 .article {
     min-height: 200px;
-    background-color: #fff2cc;
+    border-width:3px;
+    border-color:#000024;
+    border-bottom-style:dotted;
+    /*background-color: #F5F0EB;*/
+   
 }
 
+body {
+    background-color:#F5F0EB;
+    
+} 
+p{
+    color:#000024;
+}
+
+h2, a:link, a:visited{
+
+    color:#000024;
+}
+
+h2{
+    font-size:1.5em;
+}
