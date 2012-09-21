@@ -1,14 +1,15 @@
 {%extends "mockup.html"%}
 {% load dict %}
-<!---{% block body %}
+{% block body %}
 </br>
 <center><h2>You are looking an archived article.<h2><center>
 {%endblock%}-->
 {% block articles %}
-    <!--<div class="grid_12 article box">-->
-        <div class="article">
+    <div class="article">
+        <a href= "/demo/article/{{article.id}}">
             <center><h2>{{article.title}}</h2></center>
-            {{article.text|safe}}
-        </div>
-    <!---</div>-->
+        </a>
+        <img src="{{article.img.url}}"/>
+        <p>{{article.text|safe}}</p>
+    </div> <!-- article -->
 {% endblock %}

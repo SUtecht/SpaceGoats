@@ -4,7 +4,7 @@ from django.utils import timezone
 from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 
-
+from goatnails.db.models import ImageWithThumbsField
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
@@ -45,10 +45,11 @@ class Rank(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=100)
     text  = models.TextField()
-    img = models.ImageField(upload_to = "uploads")
-    thumb = models.ImageField(upload_to = "uploads", blank=True,null=True)
+    # img = models.ImageField(upload_to = "uploads")
+    img = ImageWithThumbsField(upload_to = "uploads", 
+                               sizes=((128,128), (200,200)))
     author = models.ForeignKey('Player')
-    approved = models.CharField(max_length=1)
+    approved = models.BooleanField(default=False)
     def __unicode__(self):
         return "{} by {}  {} ".format( self.title , self.author , self.approved )
 

@@ -106,14 +106,12 @@ def article(request,article_id):
 
 def mockup(request):
     approved_articles = Article.objects.all().filter(approved = 'Y')
-    latest_articles = approved_articles.order_by('-id')[:3]
+    latest_articles = approved_articles.order_by('-id') #[:3] # <-- temporarily set to everything
     all_upcoming_events = Event.objects.all().filter(begin__gte = datetime.date.today())
     soon_events = all_upcoming_events.order_by('begin')[:4]
-    return render_to_response('demo/home.html', {'art0':latest_articles[0],
-                                                   'art1':latest_articles[1],                        
-                                                   'art2':latest_articles[2],
-                                                   'e0':soon_events[0],
-                                                   'upcoming_events':soon_events},                        
+    return render_to_response('demo/home.html', {'articles': latest_articles,
+                                                 'e0':soon_events[0],
+                                                 'upcoming_events':soon_events},
                                                 context_instance=RequestContext(request))
 
 def new_article_page(request):
@@ -125,23 +123,25 @@ def new_article_page(request):
                                                 context_instance=RequestContext(request))
 def save_article(request):
     if request.method == 'POST':
-        print 'I see the post!'
+        # print 'I see the post!'
         article_form = ArticleForm(request.POST, request.FILES)
         if article_form.is_valid():
-            print 'it is valid!'
+            # print 'it is valid!'
             title = article_form.cleaned_data['title']
             text = article_form.cleaned_data['text']
             img = article_form.cleaned_data['img']
             author = article_form.cleaned_data['author']
-            new_article = Article(title=title, text=text, img=img, author=author, approved = 'N')
+            new_article = Article(title=title, text=text, img=img, 
+                                  author=author, approved = 'N')
             new_article.save()
 
-
-            im = Image.open(new_article.img.url)
-            im.thumbnail((128, 128), Image.ANTIALIAS)
-            print 
-            im.save( settings.STATIC_ROOT + "\\thumbs\T_" + new_article.img.url[8:200])
+            # im = Image.open(new_article.img.url)
+            # im.thumbnail((128, 128), Image.ANTIALIAS)
+            # print 
+            # im.save( settings.STATIC_ROOT + "\\thumbs\T_" + new_article.img.url[8:200])
             #new_article.thumb = temp/T_
             #new_article.save()
+
+            # TODO: Make this use the reverse() thingy
             return redirect('/demo/mockup/')
     return new_article_page(request)
