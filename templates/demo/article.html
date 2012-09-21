@@ -3,13 +3,23 @@
 {% block body %}
 </br>
 <center><h2>You are looking an archived article.<h2><center>
-{%endblock%}-->
+{%endblock%}
 {% block articles %}
     <div class="article">
         <a href= "/demo/article/{{article.id}}">
             <center><h2>{{article.title}}</h2></center>
-        </a>
         <img src="{{article.img.url}}"/>
         <p>{{article.text|safe}}</p>
     </div> <!-- article -->
+
+    <div class = "commnets">
+        <!-- START: Livefyre Embed -->
+        <script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
+        <script type='text/javascript'>
+            var fyre = LF({
+                site_id: 312416
+            });
+        </script>
+        <!-- END: Livefyre Embed -->               
+    </div> <!-- comments -->
 {% endblock %}
