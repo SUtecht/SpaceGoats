@@ -17,6 +17,10 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth import logout
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+from django.contrib.auth.hashers import make_password
 
 
 def eventsJson(request):
@@ -28,10 +32,6 @@ def eventsJson(request):
     return HttpResponse(data, content_type="text/plain")
 
 def index(request):
-
-    
-    
-        
     if request.method == 'POST':
         print('\n I see the post! \n ')
         event_form = EventForm(request.POST)
@@ -46,7 +46,7 @@ def index(request):
             event_form = EventForm()
         else:
             print(event_form.errors)
-    else:		
+    else:       
         event_form = EventForm()
     latest_articles = Article.objects.all().order_by('-id')[:5]
     print(latest_articles)
@@ -54,10 +54,6 @@ def index(request):
                                                     'timezone':timezone,
                                                     'latest_articles':latest_articles},
                                                     context_instance=RequestContext(request))
-    
-
-                                                        
-
                                                     
 def event(request, event_id):
     if request.method == 'POST':
@@ -134,10 +130,53 @@ def save_article(request):
             # im = Image.open(new_article.img.url)
             # im.thumbnail((128, 128), Image.ANTIALIAS)
             # print 
-            # im.save( settings.STATIC_ROOT + "\\thumbs\T_" + new_article.img.url[8:200])
+            # im.save( settings.ST)TIC_ROOT + "\\thumbs\T_" + new_article.img.url[8:200])
             #new_article.thumb = temp/T_
             #new_article.save()
 
             # TODO: Make this use the reverse() thingy
             return redirect('/demo/mockup/')
     return new_article_page(request)
+
+def register_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = make_password(request.POST['password'])
+        email = request.POST['email']
+        character = request.POST['character']
+        server = request.POST['server']
+        user = User(username=username, password=password, email=email)
+        user.save()
+        login_user = authenticate(username=username, password=request.POST['password'])
+        login(request, login_user)
+        character = Character(name=character, server=server, player=user)
+        character.save()
+        player = Player(user=user, main=character)
+        player.save()
+    return redirect('/demo/mockup/')
+
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/demo/mockup/')
+
+def login_view(request):
+    if request.method == 'POST':
+        #create new user
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/demo/mockup')
+        else:
+            # return an error message
+            pass
+    else:
+        #display page for logging in
+        login_form = LoginForm()
+        new_user_form = NewUserForm()
+        return render_to_response('demo/login.html',
+                dict(login_form=login_form, new_user_form=new_user_form),
+                context_instance=RequestContext(request))

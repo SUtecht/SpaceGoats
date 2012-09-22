@@ -50,7 +50,11 @@
                 <li><a href="/demo/about">About</a></li>
                 <li><a href="http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3">Forum</a></li>
                 <li>Roster</li>
-                <li>Login</li>
+                {% if user.is_authenticated %}
+                    <li><a href='/logout'>Logout</a></li>
+                {% else %}
+                    <li><a href='/login'>Login</a></li>
+                {% endif %}
                 <li><a href="/demo/new_article">Submit Article</a></li>
             </ul>
         </div>
