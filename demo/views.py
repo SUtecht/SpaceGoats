@@ -21,6 +21,7 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import login_required
 
 
 def eventsJson(request):
@@ -105,7 +106,7 @@ def mockup(request):
     latest_articles = approved_articles.order_by('-id') #[:3] # <-- temporarily set to everything
     return render_to_response('demo/home.html', {'articles': latest_articles },
                                                 context_instance=RequestContext(request))
-
+@login_required  
 def new_article_page(request):
     if request.method == 'POST':
         article_form = ArticleForm(request.POST)
@@ -113,6 +114,8 @@ def new_article_page(request):
         article_form = ArticleForm()
     return render_to_response('demo/new_article.html', {'article_form':article_form},
                                                 context_instance=RequestContext(request))
+                                                
+@login_required                                             
 def save_article(request):
     if request.method == 'POST':
         # print 'I see the post!'
@@ -122,9 +125,8 @@ def save_article(request):
             title = article_form.cleaned_data['title']
             text = article_form.cleaned_data['text']
             img = article_form.cleaned_data['img']
-            author = article_form.cleaned_data['author']
             new_article = Article(title=title, text=text, img=img, 
-                                  author=author, approved = 'N')
+                                  author= request.user, approved = False)
             new_article.save()
 
             # im = Image.open(new_article.img.url)

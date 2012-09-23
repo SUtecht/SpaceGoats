@@ -64,4 +64,4 @@ class ArticleForm(forms.Form):
     title = forms.CharField(max_length=100)
     text  = forms.CharField(widget=forms.Textarea)
     img = forms.ImageField()
-    author = forms.ModelChoiceField(User.objects.all())
+    
