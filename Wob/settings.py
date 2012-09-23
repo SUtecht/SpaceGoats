@@ -67,6 +67,9 @@ STATIC_ROOT =  'static'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+# the URL @login_required forwards to when not logged in
+LOGIN_URL = '/login/'
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
