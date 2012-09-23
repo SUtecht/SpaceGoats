@@ -1,5 +1,5 @@
-{%extends "mockup.html"%}
-{% block articles%}
+{% extends "base.html" %}
+{% block articles %}
     {% for article in articles %}
     <div class="article">
         <a href= "/demo/article/{{article.id}}">

@@ -1,7 +1,5 @@
-# Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from demo.models import *
 from django.http import Http404
@@ -10,19 +8,28 @@ from dateutils import relativedelta
 import datetime
 from django.core import serializers
 import battlenet
-import glob
-import Image
 from battlenet import Realm, Guild
 from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 
+# old imports not being used anymore, probably need to be deleted
+# import glob
+# import Image
+# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+# from django.core.urlresolvers import reverse
+
+
+def index(request):
+    approved_articles = Article.objects.all().filter(approved = 'Y')
+    latest_articles = approved_articles.order_by('-id') #[:3] # <-- temporarily set to everything
+    return render_to_response('demo/home.html', {'articles': latest_articles },
+                                                context_instance=RequestContext(request))
 
 def eventsJson(request):
     month_start = datetime.datetime(timezone.now().year, timezone.now().month, 1, 0)
@@ -32,30 +39,6 @@ def eventsJson(request):
     data = serializers.serialize("json", Event.objects.all())
     return HttpResponse(data, content_type="text/plain")
 
-def index(request):
-    if request.method == 'POST':
-        print('\n I see the post! \n ')
-        event_form = EventForm(request.POST)
-        if event_form.is_valid():
-            print('\n Valid Event! \n')
-            name = event_form.cleaned_data['name']
-            begin = event_form.cleaned_data['begin_date']
-        
-            new_event = Event(name=name, begin=begin)
-            new_event.save()
-            print('\n Event created!\n')
-            event_form = EventForm()
-        else:
-            print(event_form.errors)
-    else:       
-        event_form = EventForm()
-    latest_articles = Article.objects.all().order_by('-id')[:5]
-    print(latest_articles)
-    return render_to_response('demo/index.html', {'event_form':event_form,
-                                                    'timezone':timezone,
-                                                    'latest_articles':latest_articles},
-                                                    context_instance=RequestContext(request))
-                                                    
 def event(request, event_id):
     if request.method == 'POST':
         print('\n I see the post! \n ')
@@ -82,7 +65,6 @@ def event(request, event_id):
                                                 'timeszone':timezone},
                                                 context_instance=RequestContext(request))
 
-
 def about(request):
     guild = Guild(battlenet.UNITED_STATES, 'Auchindoun', 'Space Goats CoastToCoast')
     return render_to_response('demo/about.html', {'guild':guild},
@@ -93,19 +75,12 @@ def archive(request):
     articles = approved_articles.order_by('-id')
     return render_to_response('demo/archive.html', {'articles':articles},
                                                 context_instance=RequestContext(request))
-                                                
+
 def article(request,article_id):
     article = Article.objects.get(pk=article_id)
     return render_to_response('demo/article.html', {'article':article},
                                                 context_instance=RequestContext(request))
 
-
-
-def mockup(request):
-    approved_articles = Article.objects.all().filter(approved = 'Y')
-    latest_articles = approved_articles.order_by('-id') #[:3] # <-- temporarily set to everything
-    return render_to_response('demo/home.html', {'articles': latest_articles },
-                                                context_instance=RequestContext(request))
 @login_required  
 def new_article_page(request):
     if request.method == 'POST':
@@ -114,7 +89,7 @@ def new_article_page(request):
         article_form = ArticleForm()
     return render_to_response('demo/new_article.html', {'article_form':article_form},
                                                 context_instance=RequestContext(request))
-                                                
+
 @login_required                                             
 def save_article(request):
     if request.method == 'POST':
@@ -126,18 +101,10 @@ def save_article(request):
             text = article_form.cleaned_data['text']
             img = article_form.cleaned_data['img']
             new_article = Article(title=title, text=text, img=img, 
-                                  author= request.user, approved = False)
+                                  author= request.user, approved=False)
             new_article.save()
 
-            # im = Image.open(new_article.img.url)
-            # im.thumbnail((128, 128), Image.ANTIALIAS)
-            # print 
-            # im.save( settings.ST)TIC_ROOT + "\\thumbs\T_" + new_article.img.url[8:200])
-            #new_article.thumb = temp/T_
-            #new_article.save()
-
-            # TODO: Make this use the reverse() thingy
-            return redirect('/demo/mockup/')
+            return redirect('home')
     return new_article_page(request)
 
 def register_view(request):
@@ -155,15 +122,15 @@ def register_view(request):
         character.save()
         player = Player(user=user, main=character)
         player.save()
-    return redirect('/demo/mockup/')
-
-
+    return redirect('home')
 
 def logout_view(request):
     logout(request)
-    return redirect('/demo/mockup/')
+    return redirect('home')
 
 def login_view(request):
+    error_message = None
+
     if request.method == 'POST':
         #create new user
         username = request.POST['username']
@@ -171,14 +138,17 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/demo/mockup')
+            return redirect('home')
         else:
             # return an error message
-            pass
-    else:
-        #display page for logging in
-        login_form = LoginForm()
-        new_user_form = NewUserForm()
-        return render_to_response('demo/login.html',
-                dict(login_form=login_form, new_user_form=new_user_form),
-                context_instance=RequestContext(request))
+            error_message = "Login or password was invalid!"
+
+
+    #display page for logging in
+    login_form = LoginForm()
+    new_user_form = NewUserForm()
+    return render_to_response('demo/login.html',
+            dict(login_form=login_form, 
+                 new_user_form=new_user_form,
+                 error_message=error_message),
+            context_instance=RequestContext(request))

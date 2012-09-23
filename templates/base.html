@@ -1,104 +1,131 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Space Goats CoastToCoast</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Space Goats CoastToCoast</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/reset.css" />
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/text.css" />
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/960.css" />
-<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}demo_index.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/reset.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/text.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/960.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}mockup.css" />
 
-<link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
-<link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
+    <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
+    <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
 
-<script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
-<script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script>
-<script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
-<script type='text/javascript'>
+    <script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
+    <script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script>
+    <script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
+    
+    <script type='text/javascript'>
+        function showPos(event,id) {
+            var new_event_pop_up, x, y;
 
-    function showPos(event,id) {
-        var new_event_pop_up, x, y;
+            new_event_pop_up = document.getElementById(id);
+            if (window.event) {
+                x = window.event.clientX + document.documentElement.scrollLeft
+                    + document.body.scrollLeft;
+                y = window.event.clientY + document.documentElement.scrollTop +
+                    + document.body.scrollTop;
+            }
+            else {
+                x = event.clientX + window.scrollX;
+                y = event.clientY + window.scrollY;
+            }
 
-        new_event_pop_up = document.getElementById(id);
-        if (window.event) {
-            x = window.event.clientX + document.documentElement.scrollLeft
-                + document.body.scrollLeft;
-            y = window.event.clientY + document.documentElement.scrollTop +
-                + document.body.scrollTop;
+            new_event_pop_up.style.left = x + "px";
+            new_event_pop_up.style.top = y + "px";
+            new_event_pop_up.style.display = "block";
+            //based on "Making a popup window using a DIV (hide DIV on mouseover)"
+            //at http://web.cortland.edu/flteach/mm-course/glossPopupDiv.html 
         }
-        else {
-            x = event.clientX + window.scrollX;
-            y = event.clientY + window.scrollY;
-        }
+    </script>
 
-        new_event_pop_up.style.left = x + "px";
-        new_event_pop_up.style.top = y + "px";
-        new_event_pop_up.style.display = "block";
-        //based on "Making a popup window using a DIV (hide DIV on mouseover)"
-        //at http://web.cortland.edu/flteach/mm-course/glossPopupDiv.html 
-    }
 
-    function menuGO(url){
-        window.location = url;
-    }
-
-</script>
-{%block myhead%}{%endblock%}
 </head>
+
 <body>
-    <div id="container" class="container_12">
-	<div id='logo'>
-        <!-- <img src="{{STATIC_URL}}d_left.png" --> 
-        <!--      alt="Space Goat Hunter facing left" --> 
-        <!--      class ="goats" /> -->
-        <a href="/demo">
-            <img src="{{STATIC_URL}}logo.png"
-                 alt="Space Goats CoastToCoast Logo"/>
-        </a>
-        <!-- <img src="{{STATIC_URL}}d_right.png" --> 
-        <!--      alt="Space Goat Hunter facing right" --> 
-        <!--      class="goats" /> -->
-	</div>
-    <ul class="menu grid_12">
-        <li>
-            <a href="/demo/" id="menu_first" class="menu_item">
-                Home
-            </a>
-        </li>
-        <li>
-            <a href="/demo/archive/" class="menu_item">
-                Archive
-            </a>
-        </li>
-        <li>
-            <a href="http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3"
-               class = "menu_item">
-                Forum
-            </a>
-        </li>
-        <li>
-            <a href="/demo/about/" class="menu_item">
-                About
-            </a>
-        </li>
-        <li>
-            <a href="" id="menu_last" class="menu_item">
-                Apply
-            </a>
-        </li>
-    </ul>
-
-    <div id="the_big_div" class="grid_12">
-        <div class="content">
-            {% block body %}{% endblock %}
+    <div id="container" class="container_16">
+        <div id="nav" class="grid_2">
+            <ul>
+                <li><a href="/demo/about">About</a></li>
+                <li><a href="http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3">Forum</a></li>
+                <li>Roster</li>
+                {% if user.is_authenticated %}
+                    <li><a href='/logout'>Logout</a></li>
+                {% else %}
+                    <li><a href='/login'>Login</a></li>
+                {% endif %}
+                <li><a href="/demo/new_article">Submit Article</a></li>
+            </ul>
         </div>
-    </div>
-    <div class="clear"></div>
+        <div id="logo" class="grid_14">
+            <a href="{% url home %}">
+                <img src="{{STATIC_URL}}logo.png"
+                 alt="Space Goats CoastToCoast Logo"/>
+            </a>
+        </div>
+        <div class="clear"></div>
 
-    {% block articles%}{%endblock%}
+        <div id="articles" class="grid_11">
+            {% block articles%}{%endblock%}
+            
+        </div>
+        <div id="sidebar" class="grid_5">
+            <div id="events">
+                <h2>Events</h2>
 
-    {% block pop_ups%}{%endblock%}
-</div> <!-- container -->
+                <!-- Timer from http://www.hashemian.com/tools/javascript-countdown.htm-->
+                <p><b>{{upcoming_events.0.name}}</b> starts in </br>
+                <script language="JavaScript">
+                TargetDate = "{{upcoming_events.0.begin|date:'m/d/Y '}} 7:00 PM"
+                BackColor = "#D1C2B2";
+                ForeColor = "navy";
+                CountActive = true;
+                CountStepper = -1;
+                LeadingZero = true;
+                DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds.";
+                FinishMessage = "GET LOGGED IN NOW!</b>";
+                </script>
+                <script language="JavaScript" src="{{STATIC_URL}}countdown.js"></script>
+
+                (begins on {{upcoming_events.0.begin|date:"D d M" }})
+                </br>&nbsp &nbsp &nbsp &nbsp
+                <a href=''>Sign up for this event</a>
+                </p>
+
+                <table>
+                    {%for e in upcoming_events%} 
+                    <tr><td><a href='/demo/event/{{e.id}}'>{{e.name}}</a></td>
+                        <td>
+                        {%if e.id == 5 %}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
+                        {%else%}<img src="{{STATIC_URL}}not_attending.png" alt="not attending"/>
+                        {%endif%}
+                        </td>
+                    </tr>
+                    {%endfor%} 
+                </table>
+
+            </div>
+            <div id="goat_of_the_week">
+                <h2>Goat of the Week</h2>
+                <img src="/static/JDBaF.png"/>
+            </div>
+            <div id="roster">
+                <h2>Roster and stuff</h2>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div id="footer" class="grid_16">
+            <p><center>&#169;2012 Space Goats Coast to Coast </center></p>
+        </div>
+
+
+    </div> <!-- container -->
+
+
+
+
+
 </body>
 </html>
