@@ -22,11 +22,12 @@ def roster(request):
         player['ilvl'] = 12
         alts = []
         for a in Character.objects.filter(player=p.user):
-            alt = {}
-            alt['name'] = a.name
-            alt['class'] = 'Druid'
-            alt['ilvl'] = 124
-            alts.append(alt)
+            if a.name != p.main.name:
+                alt = {}
+                alt['name'] = a.name
+                alt['class'] = 'Druid'
+                alt['ilvl'] = 124
+                alts.append(alt)
         player['alts'] = alts
         players.append(player)
     return dict(players=players)
