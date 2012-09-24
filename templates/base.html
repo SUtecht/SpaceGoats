@@ -123,12 +123,12 @@
                     </tr>
                     {% for p in players %}
                         <tr class="{{p.name}} main">
-                            <td class="{{p.class}}">{{p.name}}</td>
+                            <td class="{{p.class_name}}">{{p.name}}</td>
                             <td>{{p.ilvl}}</td>
                         </tr>
                         {% for a in p.alts %}
                             <tr class="{{p.name}} alt">
-                                <td class="{{a.class}}">{{a.name}}</td>
+                                <td class="{{a.class_name}}">{{a.name}}</td>
                                 <td>{{a.ilvl}}</td>
                             </tr>
                         {% endfor %}

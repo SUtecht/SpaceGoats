@@ -150,8 +150,9 @@ def register_view(request):
         user.save()
         login_user = authenticate(username=username, password=request.POST['password'])
         login(request, login_user)
-        character = Character(name=character, server=server, player=user)
+        character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
         character.save()
+        update_character(character)
         player = Player(user=user, main=character)
         player.save()
     return redirect('home')
@@ -184,3 +185,6 @@ def login_view(request):
                  new_user_form=new_user_form,
                  error_message=error_message),
             context_instance=RequestContext(request))
+
+def update_character(char):
+    pass

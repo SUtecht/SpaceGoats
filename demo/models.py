@@ -8,6 +8,9 @@ class Character(models.Model):
     name = models.CharField(max_length=100)
     player = models.ForeignKey(User)
     server = models.CharField(max_length=100, blank=True)
+    class_name = models.CharField(max_length=10)
+    ilvl = models.IntegerField()
+    level = models.IntegerField()
     def __unicode__(self):
         return "{} ".format(self.name)
 
