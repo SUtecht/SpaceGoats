@@ -9,7 +9,9 @@ def events(request):
 
 def gow(request):
     all_gows = Goat_of_the_Week.objects.all().order_by('-id')
-    return dict(gow = all_gows[0])
+    if all_gows:
+        return dict(gow = all_gows[0])
+    return dict(gow = None)
     
 def roster(request):
     players = []
