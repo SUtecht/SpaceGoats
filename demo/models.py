@@ -37,7 +37,7 @@ class AttendForm(forms.Form):
         
 class Event(models.Model):
     name = models.CharField(max_length=100)
-    begin = models.DateField()
+    begin = models.DateTimeField()
     attendees = models.ManyToManyField('Character', blank=True,null=True)
     def __unicode__(self):
         return "{} {}".format( self.name, self.begin)
