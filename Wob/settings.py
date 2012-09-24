@@ -137,6 +137,7 @@ from django.conf import global_settings
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     "demo.context_processors.events",
     "demo.context_processors.gow",
+    "demo.context_processors.roster",
 )
 
 # A sample logging configuration. The only tangible logging

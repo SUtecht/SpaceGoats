@@ -115,7 +115,25 @@
                 </p>
             </div>
             <div id="roster">
-                <h2>Roster and stuff</h2>
+                <h2>Roster</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Item Level</th>
+                    </tr>
+                    {% for p in players %}
+                        <tr class="{{p.name}} main">
+                            <td class="{{p.class}}">{{p.name}}</td>
+                            <td>{{p.ilvl}}</td>
+                        </tr>
+                        {% for a in p.alts %}
+                            <tr class="{{p.name}} alt">
+                                <td class="{{a.class}}">{{a.name}}</td>
+                                <td>{{a.ilvl}}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </table>
             </div>
         </div>
         <div class="clear"></div>
