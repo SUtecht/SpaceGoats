@@ -89,3 +89,41 @@ h2, a:link, a:visited{
 h2{
     font-size:1.5em;
 }
+
+/*------ Class Colors ---------*/
+#roster a{
+    text-decoration:none;
+}
+.Death {
+    color:#C41F3B;
+}
+.Druid{
+    color:#FF7D0A;
+}
+.Hunter{
+    color:#ABD473;
+}
+.Mage{
+    color:#69CCF0;
+}
+.Monk{
+    color:#558A84;
+}
+.Paladin{
+    color:#F58CBA;
+}
+.Priest{
+    color:#FFFFFF;
+}
+.Rogue{
+    color:#FFF569;
+}
+.Shaman{
+    color:#0070DE;
+}
+.Warlock{
+    color:#9482C9;
+}
+.Warrior{
+    color:#C79C6E;
+}
