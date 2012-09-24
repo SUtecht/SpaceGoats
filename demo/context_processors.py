@@ -9,22 +9,25 @@ def events(request):
 
 def gow(request):
     all_gows = Goat_of_the_Week.objects.all().order_by('-id')
-    return dict(gow = all_gows[0])
+    if all_gows:
+        return dict(gow = all_gows[0])
+    return dict(gow = None)
     
 def roster(request):
     players = []
     for p in Player.objects.all():
         player = {}
         player['name'] = p.main.name
-        player['class'] = 'Shaman'
-        player['ilvl'] = 12
+        player['class'] = p.main.class_name
+        player['ilvl'] = p.main.ilvl
         alts = []
         for a in Character.objects.filter(player=p.user):
-            alt = {}
-            alt['name'] = a.name
-            alt['class'] = 'Druid'
-            alt['ilvl'] = 124
-            alts.append(alt)
+            if a.name != p.main.name:
+                alt = {}
+                alt['name'] = a.name
+                alt['class'] = a.class_name
+                alt['ilvl'] = a.ilvl
+                alts.append(alt)
         player['alts'] = alts
         players.append(player)
     return dict(players=players)

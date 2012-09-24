@@ -8,6 +8,9 @@ class Character(models.Model):
     name = models.CharField(max_length=100)
     player = models.ForeignKey(User)
     server = models.CharField(max_length=100, blank=True)
+    class_name = models.CharField(max_length=10)
+    ilvl = models.IntegerField()
+    level = models.IntegerField()
     def __unicode__(self):
         return "{} ".format(self.name)
 
@@ -34,7 +37,7 @@ class AttendForm(forms.Form):
         
 class Event(models.Model):
     name = models.CharField(max_length=100)
-    begin = models.DateField()
+    begin = models.DateTimeField()
     attendees = models.ManyToManyField('Character', blank=True,null=True)
     def __unicode__(self):
         return "{} {}".format( self.name, self.begin)
