@@ -18,15 +18,15 @@ def roster(request):
     for p in Player.objects.all():
         player = {}
         player['name'] = p.main.name
-        player['class'] = 'Shaman'
-        player['ilvl'] = 12
+        player['class'] = p.main.class_name
+        player['ilvl'] = p.main.ilvl
         alts = []
         for a in Character.objects.filter(player=p.user):
             if a.name != p.main.name:
                 alt = {}
                 alt['name'] = a.name
-                alt['class'] = 'Druid'
-                alt['ilvl'] = 124
+                alt['class'] = a.class_name
+                alt['ilvl'] = a.ilvl
                 alts.append(alt)
         player['alts'] = alts
         players.append(player)
