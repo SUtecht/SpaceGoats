@@ -65,3 +65,14 @@ class ArticleForm(forms.Form):
     text  = forms.CharField(widget=forms.Textarea)
     img = forms.ImageField()
     
+class Goat_of_the_Week(models.Model):
+    name =  models.ForeignKey('Character')
+    img = ImageWithThumbsField(upload_to = "uploads", 
+                               sizes=((128,128), (200,200)))
+    desc = models.TextField()
+    
+class Goat_of_the_Week_Form(forms.Form):
+    name = forms.ModelChoiceField(Character.objects.all())
+    img = forms.ImageField()
+    desc  = forms.CharField(widget=forms.Textarea)
+

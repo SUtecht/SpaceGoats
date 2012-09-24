@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load dict %}
+{% block articles %}
+    <div class="article">
+        <a href= "/demo/gow/{{my_gow.id}}">
+            <center><h2>This weeks goat of the week is {{my_gow.name}}!</h2></center>
+        </a>
+        <img src="{{my_gow.img.url}}"/>
+        <p>{{my_gow.desc|safe}}</p>
+        <a href = "/demo/archive/#gows"> View previous Goats of the Week</a>
+    </div> <!-- article -->
+
+    <div class = "comments">
+        <!-- START: Livefyre Embed -->
+        <script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
+        <script type='text/javascript'>
+            var fyre = LF({
+                site_id: 312416
+            });
+        </script>
+        <!-- END: Livefyre Embed -->               
+    </div> <!-- comments -->
+{% endblock %}

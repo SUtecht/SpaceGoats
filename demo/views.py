@@ -73,7 +73,9 @@ def about(request):
 def archive(request):
     approved_articles = Article.objects.all().filter(approved = 'Y')
     articles = approved_articles.order_by('-id')
-    return render_to_response('demo/archive.html', {'articles':articles},
+    gows =  Goat_of_the_Week.objects.all().order_by('-id')
+    return render_to_response('demo/archive.html', {'articles':articles,
+                                                    'gows':gows},
                                                 context_instance=RequestContext(request))
 
 def article(request,article_id):
@@ -107,6 +109,36 @@ def save_article(request):
             return redirect('home')
     return new_article_page(request)
 
+@login_required  
+def new_g_o_w(request):
+    if request.method == 'POST':
+        g_o_w_form = Goat_of_the_Week_Form(request.POST)
+    else:
+        g_o_w_form = Goat_of_the_Week_Form()
+    return render_to_response('demo/g_of_week_new.html', {'g_o_w_form':g_o_w_form},
+                                                context_instance=RequestContext(request))
+    
+def save_g_o_w(request):
+    if request.method == 'POST':
+        # print 'I see the post!'
+        g_o_w_form = Goat_of_the_Week_Form(request.POST, request.FILES)
+        if g_o_w_form.is_valid():
+            # print 'it is valid!'
+            name = g_o_w_form.cleaned_data['name']
+            img = g_o_w_form.cleaned_data['img']
+            desc = g_o_w_form.cleaned_data['desc']
+            new_goat_of_week = Goat_of_the_Week(name=name,  img=img, 
+                                  desc = desc)
+            new_goat_of_week .save()
+
+            return redirect('home')
+    return new_g_o_w(request)
+
+def gow(request,gow_id):
+    my_gow = Goat_of_the_Week.objects.get(pk=gow_id)
+    return render_to_response('demo/gow.html', {'my_gow':my_gow},
+                                                context_instance=RequestContext(request))
+    
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
