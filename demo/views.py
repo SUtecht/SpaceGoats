@@ -18,6 +18,8 @@ from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 
+from demo.utils import update_character
+
 # old imports not being used anymore, probably need to be deleted
 # import glob
 # import Image
@@ -186,5 +188,3 @@ def login_view(request):
                  error_message=error_message),
             context_instance=RequestContext(request))
 
-def update_character(char):
-    pass
