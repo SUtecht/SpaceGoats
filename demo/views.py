@@ -140,24 +140,51 @@ def gow(request,gow_id):
     my_gow = Goat_of_the_Week.objects.get(pk=gow_id)
     return render_to_response('demo/gow.html', {'my_gow':my_gow},
                                                 context_instance=RequestContext(request))
-    
+
+def register_failed(request, error_message):
+        if request.method == 'POST':
+            new_user_form = NewUserForm(request.POST)
+        return render_to_response('demo/register.html',{'new_user_form':new_user_form, 'error_message':error_message } ,
+                                                context_instance=RequestContext(request))
+                                                
+def register(request ):                                               
+        new_user_form = NewUserForm()
+        return render_to_response('demo/register.html',{'new_user_form':new_user_form } ,
+                                                context_instance=RequestContext(request)) 
+                                                
 def register_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = make_password(request.POST['password'])
-        email = request.POST['email']
-        character = request.POST['character']
-        server = request.POST['server']
-        user = User(username=username, password=password, email=email)
-        user.save()
-        login_user = authenticate(username=username, password=request.POST['password'])
-        login(request, login_user)
-        character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
-        character.save()
-        update_character(character)
-        player = Player(user=user, main=character)
-        player.save()
-    return redirect('home')
+        new_user_form = NewUserForm(request.POST)
+        if new_user_form.is_valid():
+            username = request.POST['username']
+            for u in User.objects.all() :
+                if username == u.username:
+                    error_message = "Username is taken."
+                    return register_failed(request, error_message)
+            password = make_password(request.POST['password'])
+            email = request.POST['email']
+            character = request.POST['character']
+            server = request.POST['server']
+            try:
+                c = battlenet.Character(battlenet.UNITED_STATES, server, character)
+            except Exception as e:
+                    error_message = "This character does not exist on this server."
+                    return register_failed(request, error_message)
+            user = User(username=username, password=password, email=email)
+            user.save()
+            login_user = authenticate(username=username, password=request.POST['password'])
+            login(request, login_user)
+            character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
+            character.save()
+            update_character(character)
+            player = Player(user=user, main=character)
+            player.save()
+            return redirect('home')
+        else:
+            error_message = "There was a problem with your application."
+            return register_failed(request, error_message)
+    else:
+        return redirect('home')
 
 def logout_view(request):
     logout(request)
@@ -181,10 +208,9 @@ def login_view(request):
 
     #display page for logging in
     login_form = LoginForm()
-    new_user_form = NewUserForm()
+   
     return render_to_response('demo/login.html',
             dict(login_form=login_form, 
-                 new_user_form=new_user_form,
                  error_message=error_message),
             context_instance=RequestContext(request))
 

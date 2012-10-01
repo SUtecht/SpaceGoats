@@ -30,6 +30,7 @@ urlpatterns = patterns('demo.views',
     url(r'^save_article/', 'save_article'),
     url(r'^new_g_o_w/', 'new_g_o_w'),
     url(r'^save_g_o_w/', 'save_g_o_w'),
-    url(r'^gow/(?P<gow_id>\d+)', 'gow')
+    url(r'^gow/(?P<gow_id>\d+)', 'gow'),
+    url(r'^register/', 'register')
 )	
 
