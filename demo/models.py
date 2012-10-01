@@ -30,21 +30,28 @@ class NewUserForm(forms.Form):
     email = forms.CharField(max_length=100)
     character = forms.CharField(max_length=100)
     server = forms.CharField(max_length=100, initial='Auchindoun')
-
+    
 class AttendForm(forms.Form):
     char = forms.ModelChoiceField(Character.objects.all())
-
         
 class Event(models.Model):
     name = models.CharField(max_length=100)
     begin = models.DateTimeField()
-    attendees = models.ManyToManyField('Character', blank=True,null=True)
     def __unicode__(self):
         return "{} {}".format( self.name, self.begin)
+
+class Event_Attendee(models.Model):
+    event = models.ForeignKey('Event')
+    character =  models.ForeignKey('Character')
+    role = models.ForeignKey('Role')
         
 class EventForm(forms.Form):
     name = forms.CharField(max_length=100)
     begin_date = forms.CharField( ) 
+    
+class Role(models.Model):
+    name = models.CharField(max_length=10)
+    img = models.ImageField(upload_to = "uploads")
     
 class Rank(models.Model):
     name = models.CharField(max_length=100)

@@ -49,18 +49,18 @@ def event(request, event_id):
             char = at_form.cleaned_data['char']
             event = Event.objects.get(pk=event_id)
             print(char)
-            event.attendees.add(char)
-            event.save()
+            attendee = Event_Attendee(event=event, character=char, Role= Role.objects.get(1))
+            attendee.save()
 
     event = Event.objects.get(pk=event_id)
     at_form = AttendForm()
-    attendees = event.attendees.all()
+    attendees = Event_Attendee.objects.filter(event=event)
  
-    for c in attendees:
+    '''for c in attendees:
         c.bnet = battlenet.Character(battlenet.UNITED_STATES, c.server, c.name)
         print(c.bnet)
     if len(attendees) > 0:
-        print(attendees[0].bnet)
+        print(attendees[0].bnet)'''
     return render_to_response('demo/events.html', {'event':event,
                                                 'at_form':at_form,
                                                 'attendees':attendees,

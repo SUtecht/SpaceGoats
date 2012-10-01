@@ -17,8 +17,8 @@
         The following characters are attending this event:
         <ul>
         {%for char in attendees%}
-            <li><a href="http://us.battle.net/wow/en/character/{{char.server}}/{{char.name}}/simple">{{char}}</a>
-            {{char.bnet.get_class_name}}</li>
+            <li><a href="http://us.battle.net/wow/en/character/{{char.character.server}}/{{char.character.name}}/simple">{{char.character}}</a>
+            {{char.character.bnet.get_class_name}}</li>
         {%endfor%}
         </ul>
     {%endif%}
