@@ -8,6 +8,10 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
+        # Removing M2M table for field attendees on 'Event'
+        # THIS IS WRONG YOU ARE DUMB MOVING YOU UP THE FILE
+        db.delete_table('demo_event_attendees')
+
         # Adding model 'Event_Attendees'
         db.create_table('demo_event_attendees', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -25,8 +29,7 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('demo', ['Role'])
 
-        # Removing M2M table for field attendees on 'Event'
-        db.delete_table('demo_event_attendees')
+
 
 
     def backwards(self, orm):
