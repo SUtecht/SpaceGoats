@@ -48,13 +48,14 @@ def event(request, event_id):
         if at_form.is_valid():
             char = at_form.cleaned_data['char']
             event = Event.objects.get(pk=event_id)
+            role = at_form.cleaned_data['role']
             print(char)
-            attendee = Event_Attendee(event=event, character=char, Role= Role.objects.get(1))
+            attendee = Event_Attendee(event=event, character=char, role=role)
             attendee.save()
 
     event = Event.objects.get(pk=event_id)
     at_form = AttendForm()
-    attendees = Event_Attendee.objects.filter(event=event)
+    attendees = Event_Attendee.objects.filter(event=event).order_by('role')
  
     '''for c in attendees:
         c.bnet = battlenet.Character(battlenet.UNITED_STATES, c.server, c.name)

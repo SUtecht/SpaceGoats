@@ -30,10 +30,7 @@ class NewUserForm(forms.Form):
     email = forms.CharField(max_length=100)
     character = forms.CharField(max_length=100)
     server = forms.CharField(max_length=100, initial='Auchindoun')
-    
-class AttendForm(forms.Form):
-    char = forms.ModelChoiceField(Character.objects.all())
-        
+           
 class Event(models.Model):
     name = models.CharField(max_length=100)
     begin = models.DateTimeField()
@@ -54,7 +51,11 @@ class Role(models.Model):
     img = models.ImageField(upload_to = "uploads")
     def __unicode__(self):
         return "{} ".format(self.name)
-    
+  
+class AttendForm(forms.Form):
+    char = forms.ModelChoiceField(Character.objects.all())
+    role = forms.ModelChoiceField(Role.objects.all())
+  
 class Rank(models.Model):
     name = models.CharField(max_length=100)
     level = models.IntegerField()
