@@ -52,6 +52,8 @@ class EventForm(forms.Form):
 class Role(models.Model):
     name = models.CharField(max_length=10)
     img = models.ImageField(upload_to = "uploads")
+    def __unicode__(self):
+        return "{} ".format(self.name)
     
 class Rank(models.Model):
     name = models.CharField(max_length=100)
