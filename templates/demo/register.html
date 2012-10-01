@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load dict %}
+   
+{% block articles %}
+<div class= 'article' >
+<center><h2>Create a New User</h2></center>
+    <form action="/register/" method="post">{% csrf_token %}
+        {{ new_user_form.non_field_errors }}
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+        <div class="fieldWrapper">
+            {{ new_user_form.username.errors }}
+            <label for="id_subject">Username:</label>
+            {{ new_user_form.username }}
+        </div>
+        </br>
+        <div class="fieldWrapper">
+            {{ new_user_form.password.errors }}
+            <label for="id_subject">Password:</label>
+            {{ new_user_form.password }}
+        </div>
+        </br>
+        <div class="fieldWrapper">
+            {{ new_user_form.email.errors }}
+            <label for="id_subject">Email:</label>
+            {{ new_user_form.email }}
+        </div>
+        </br>        
+        <div class="fieldWrapper">
+            {{ new_user_form.character.errors }}
+            <label for="id_subject">Main Character:</label>
+            {{ new_user_form.character }}
+        </div>
+        </br>
+        <div class="fieldWrapper">
+            {{ new_user_form.server.errors }}
+            <label for="id_subject">Server:</label>
+            {{ new_user_form.server }}
+        </div>
+        </br>        
+        <input type="submit" value="Register" />
+    </form>
+    
+    </div>
+{% endblock %}
+

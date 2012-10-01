@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load dict %}
+   
+{% block articles %}
+<div class= 'article' ><!-- take out for old site-->
+<center><h2>Create a New User</h2></center>
+    <form action="/register/" method="post">{% csrf_token %}
+        {{ new_user_form.as_p }}
+        <input type="submit" value="Register" />
+    </form>
+    
+    </div><!-- take out for old site-->
+{% endblock %}
