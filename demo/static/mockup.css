@@ -73,6 +73,14 @@ li {
    
 }
 
+.pop_up {
+    border-style:dotted;
+    border-width:3px;
+    border-color:#000024;
+    background-color:#F5F0EB;
+    padding:10px;
+}
+
 body {
     background-color:#F5F0EB;
     

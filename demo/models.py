@@ -56,8 +56,11 @@ class Role(models.Model):
         return "{} ".format(self.name)
   
 class AttendForm(forms.Form):
-    char = forms.ModelChoiceField(Character.objects.all())
     role = forms.ModelChoiceField(Role.objects.all())
+    def __init__(self, user, *args, **kwargs):
+        super(AttendForm, self).__init__(*args, **kwargs)
+        self.fields['char'] = forms.ChoiceField(choices=[ (o.id, str(o)) for o in Character.objects.filter(player=user)])
+
   
 class Rank(models.Model):
     name = models.CharField(max_length=100)

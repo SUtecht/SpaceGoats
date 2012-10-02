@@ -44,17 +44,21 @@ def eventsJson(request):
 def event(request, event_id):
     if request.method == 'POST':
         print('\n I see the post! \n ')
-        at_form = AttendForm(request.POST)
+        at_form = AttendForm( request.user, request.POST)
         if at_form.is_valid():
             char = at_form.cleaned_data['char']
             event = Event.objects.get(pk=event_id)
             role = at_form.cleaned_data['role']
-            print(char)
-            attendee = Event_Attendee(event=event, character=char, role=role)
-            attendee.save()
-
+            attendee = Event_Attendee(event=event, character= Character.objects.get(pk = char), role=role)
+            try:
+                attendee.save()
+            except Exception as e:
+                pass
+            
     event = Event.objects.get(pk=event_id)
-    at_form = AttendForm()
+    at_form = None
+    if request.user.is_authenticated():
+        at_form = AttendForm(request.user)
     attendees = Event_Attendee.objects.filter(event=event).order_by('role')
  
     '''for c in attendees:

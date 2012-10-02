@@ -26,9 +26,13 @@
     </p>
 
     <div>
-    <p>
-
-    <input type="button" value="+ Sign up for this event" onClick="showPos(event,'addPoolForm')" />
+ 
+   <p>
+        {% if user.is_authenticated %}
+            <input type="button" value="+ Sign up for this event" onClick="showPos(event,'signUpForm')" />
+        {%else%}
+            Log in to sign up for this event!
+        {%endif%}
     </p>
     </div>
     
@@ -43,14 +47,15 @@
         <!-- END: Livefyre Embed -->               
     </div> <!-- comments -->
 
-
-    <div  id="addPoolForm" style='display: none; position: absolute; left: 300px; top: 50px; z-index:10;'; class= 'article'>
-    <h1>Join Event<h1>
-        <form action="" method="post">{% csrf_token %}
-        {{at_form.as_p}}
-        <p><input type="submit" value="Submit" />
-        <input type="button" value="Cancel" onClick="document.getElementById('addPoolForm').style.display = 'none'" /></p>
-        </form>
-    </div>
+    {% if user.is_authenticated %}
+        <div  id="signUpForm" style='display: none; position: absolute; left: 300px; top: 50px; z-index:10;'; class= 'pop_up'>
+        <h1>Join Event<h1>
+            <form action="" method="post">{% csrf_token %}
+            {{at_form.as_p}}
+            <p><input type="submit" value="Submit" />
+            <input type="button" value="Cancel" onClick="document.getElementById('signUpForm').style.display = 'none'" /></p>
+            </form>
+        </div>
+    {%endif%}
 </div>
 {%endblock%}
