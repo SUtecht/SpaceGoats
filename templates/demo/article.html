@@ -9,7 +9,9 @@
         <a href= "/demo/article/{{article.id}}">
             <center><h2>{{article.title}}</h2></center>
         </a>
-        <img src="{{article.img.url}}"/>
+        <a href="{{ article.img.url }}" class="article_image">
+            <img src="{{article.img.url}}" />
+        </a>
         <p>{{article.text|safe}}</p>
     </div> <!-- article -->
 

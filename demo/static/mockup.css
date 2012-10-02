@@ -81,6 +81,10 @@ li {
     padding:10px;
 }
 
+.article_image img {
+    max-width: 640px;
+}
+
 body {
     background-color:#F5F0EB;
     
