@@ -30,8 +30,7 @@ from demo.utils import update_character
 def index(request):
     approved_articles = Article.objects.all().filter(approved = 'Y')
     latest_articles = approved_articles.order_by('-id') #[:3] # <-- temporarily set to everything
-    return render_to_response('demo/home.html', {'articles': latest_articles },
-                                                context_instance=RequestContext(request))
+    return render_to_response('demo/home.html', {'articles': latest_articles }, context_instance=RequestContext(request))
 
 def eventsJson(request):
     month_start = datetime.datetime(timezone.now().year, timezone.now().month, 1, 0)
@@ -89,6 +88,26 @@ def article(request,article_id):
     article = Article.objects.get(pk=article_id)
     return render_to_response('demo/article.html', {'article':article},
                                                 context_instance=RequestContext(request))
+@login_required
+def profile(request):
+    characters = Character.objects.filter(player=request.user)
+    new_character_form = NewCharacterForm()
+    error_message = ''
+    if request.method =='POST':
+        char_form = NewCharacterForm(request.POST)
+        if char_form.is_valid():
+            name = char_form.cleaned_data['name']
+            server = char_form.cleaned_data['server']
+            try:
+                c = battlenet.Character(battlenet.UNITED_STATES, server, name)
+                character = Character(name=name, server=server, player=request.user, level=0, ilvl=0)
+                character.save()
+                update_character(character)
+            except Exception as e:
+                    error_message = "This character does not exist on this server."
+        else:
+            new_character_form = char_form
+    return render_to_response('demo/profile.html', {'error_message': error_message, 'characters':characters, 'new_character_form':new_character_form}, context_instance=RequestContext(request))
 
 @login_required  
 def new_article_page(request):

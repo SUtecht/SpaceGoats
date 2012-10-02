@@ -30,7 +30,14 @@ class NewUserForm(forms.Form):
     email = forms.CharField(max_length=100)
     character = forms.CharField(max_length=100)
     server = forms.CharField(max_length=100, initial='Auchindoun')
-           
+    
+class NewCharacterForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    server = forms.CharField(max_length=100, initial='Auchindoun')
+
+class AttendForm(forms.Form):
+    char = forms.ModelChoiceField(Character.objects.all())
+        
 class Event(models.Model):
     name = models.CharField(max_length=100)
     begin = models.DateTimeField()
