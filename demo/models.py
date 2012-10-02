@@ -31,6 +31,10 @@ class NewUserForm(forms.Form):
     character = forms.CharField(max_length=100)
     server = forms.CharField(max_length=100, initial='Auchindoun')
     
+class NewCharacterForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    server = forms.CharField(max_length=100, initial='Auchindoun')
+
 class AttendForm(forms.Form):
     char = forms.ModelChoiceField(Character.objects.all())
         
