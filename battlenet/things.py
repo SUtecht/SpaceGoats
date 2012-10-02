@@ -69,7 +69,7 @@ class Character(LazyThing):
     DWARF = 'Dwarf'
     GNOME = 'Gnome'
     HUMAN = 'Human'
-    NIGHT_ELF = 'Night Elf'
+    NIGHT_ELF = 'Nihgt Elf'
     WORGEN = 'Worgen'
 
     BLOOD_ELF = 'Blood Elf'
@@ -89,6 +89,7 @@ class Character(LazyThing):
     SHAMAN = 'Shaman'
     WARLOCK = 'Warlock'
     WARRIOR = 'Warrior'
+    MONK = 'Monk'
 
     ALCHEMY = 'Alchemy'
     BLACKSMITHING = 'Blacksmithing'
@@ -119,11 +120,8 @@ class Character(LazyThing):
     GUILD = 'guild'
     QUESTS = 'quests'
     PETS = 'pets'
-    PROGRESSION = 'progression'
-    ACHIEVEMENTS = 'achievements'
     ALL_FIELDS = [STATS, TALENTS, ITEMS, REPUTATIONS, TITLES, PROFESSIONS,
-                  APPEARANCE, COMPANIONS, MOUNTS, GUILD, QUESTS, PETS,
-                  PROGRESSION, ACHIEVEMENTS]
+                  APPEARANCE, COMPANIONS, MOUNTS, GUILD, QUESTS, PETS]
 
     def __init__(self, region, realm=None, name=None, data=None, fields=None, connection=None):
         self.region = region
@@ -197,16 +195,6 @@ class Character(LazyThing):
         return self._professions
 
     @property
-    def progression(self):
-        if self._refresh_if_not_present(Character.PROGRESSION):
-            instances = { 'raids': [] }
-            for type_ in instances.keys():
-                instances[type_] = [Instance(self, instance, type_) for instance in self._data[Character.PROGRESSION][type_]]
-            self._progression = instances
-
-        return self._progression
-
-    @property
     def equipment(self):
         if self._refresh_if_not_present(Character.ITEMS):
             self._items = Equipment(self, self._data[Character.ITEMS])
@@ -276,19 +264,6 @@ class Character(LazyThing):
 
         return self._stats
 
-    @property
-    def achievements(self):
-        if self._refresh_if_not_present(Character.ACHIEVEMENTS):
-            self._achievements = {}
-
-            achievements_completed = self._data['achievements']['achievementsCompleted']
-            achievements_completed_ts = self._data['achievements']['achievementsCompletedTimestamp']
-
-            for id_, timestamp in zip(achievements_completed, achievements_completed_ts):
-                self._achievements[id_] = datetime.datetime.fromtimestamp(timestamp / 1000)
-
-        return self._achievements
-
     def refresh(self, *fields):
         for field in fields:
             self._fields.add(field)
@@ -334,7 +309,6 @@ class Title(Thing):
 
         self.id = data['id']
         self.format = data['name']
-        self.selected = data.get('selected', False)
 
     def __str__(self):
         return self.format % self._character.name
@@ -477,29 +451,29 @@ class Equipment(Thing):
         self._data = data
 
         self.average_item_level = data['averageItemLevel']
-        self.average_item_level_equipped = data['averageItemLevelEquipped']
+        self.average_item_level_equiped = data['averageItemLevelEquipped']
 
-        self.main_hand = EquippedItem(self._character.region, data['mainHand']) if data.get('mainHand') else None
-        self.off_hand = EquippedItem(self._character.region, data['offHand']) if data.get('offHand') else None
-        self.ranged = EquippedItem(self._character.region, data['ranged']) if data.get('ranged') else None
+        self.main_hand = Item(self._character.region, data['mainHand']) if data.get('mainHand') else None
+        self.off_hand = Item(self._character.region, data['offHand']) if data.get('offHand') else None
+        self.ranged = Item(self._character.region, data['ranged']) if data.get('ranged') else None
 
-        self.head = EquippedItem(self._character.region, data['head']) if data.get('head') else None
-        self.neck = EquippedItem(self._character.region, data['neck']) if data.get('neck') else None
-        self.shoulder = EquippedItem(self._character.region, data['shoulder']) if data.get('shoulder') else None
-        self.back = EquippedItem(self._character.region, data['back']) if data.get('back') else None
-        self.chest = EquippedItem(self._character.region, data['chest']) if data.get('chest') else None
-        self.shirt = EquippedItem(self._character.region, data['shirt']) if data.get('shirt') else None
-        self.tabard = EquippedItem(self._character.region, data['tabard']) if data.get('tabard') else None
-        self.wrist = EquippedItem(self._character.region, data['wrist']) if data.get('wrist') else None
+        self.head = Item(self._character.region, data['head']) if data.get('head') else None
+        self.neck = Item(self._character.region, data['neck']) if data.get('neck') else None
+        self.shoulder = Item(self._character.region, data['shoulder']) if data.get('shoulder') else None
+        self.back = Item(self._character.region, data['back']) if data.get('back') else None
+        self.chest = Item(self._character.region, data['chest']) if data.get('chest') else None
+        self.shirt = Item(self._character.region, data['shirt']) if data.get('shirt') else None
+        self.tabard = Item(self._character.region, data['tabard']) if data.get('tabard') else None
+        self.wrist = Item(self._character.region, data['wrist']) if data.get('wrist') else None
 
-        self.hands = EquippedItem(self._character.region, data['hands']) if data.get('hands') else None
-        self.waist = EquippedItem(self._character.region, data['waist']) if data.get('waist') else None
-        self.legs = EquippedItem(self._character.region, data['legs']) if data.get('legs') else None
-        self.feet = EquippedItem(self._character.region, data['feet']) if data.get('feet') else None
-        self.finger1 = EquippedItem(self._character.region, data['finger1']) if data.get('finger1') else None
-        self.finger2 = EquippedItem(self._character.region, data['finger2']) if data.get('finger2') else None
-        self.trinket1 = EquippedItem(self._character.region, data['trinket1']) if data.get('trinket1') else None
-        self.trinket2 = EquippedItem(self._character.region, data['trinket2']) if data.get('trinket2') else None
+        self.hands = Item(self._character.region, data['hands']) if data.get('hands') else None
+        self.waist = Item(self._character.region, data['waist']) if data.get('waist') else None
+        self.legs = Item(self._character.region, data['legs']) if data.get('legs') else None
+        self.feet = Item(self._character.region, data['feet']) if data.get('feet') else None
+        self.finger1 = Item(self._character.region, data['finger1']) if data.get('finger1') else None
+        self.finger2 = Item(self._character.region, data['finger2']) if data.get('finger2') else None
+        self.trinket1 = Item(self._character.region, data['trinket1']) if data.get('trinket1') else None
+        self.trinket2 = Item(self._character.region, data['trinket2']) if data.get('trinket2') else None
 
     def __getitem__(self, item):
         try:
@@ -510,14 +484,12 @@ class Equipment(Thing):
 
 class Build(Thing):
     def __init__(self, character, data):
-        NONE = 'None'
-        NOICON = 'inv_misc_questionmark' # The infamous macro 'question mark' icon, because Blizzard uses it in this situation.
         self._character = character
         self._data = data
 
         self.build = data['build']
-        self.icon = data.get('icon') if self.build.strip('0') else NOICON
-        self.name = data['name'] if self.build.strip('0') else NONE
+        self.icon = data.get('icon')
+        self.name = data['name']
         self.selected = data.get('selected', False)
         self.glyphs = {
             'prime': [],
@@ -533,7 +505,7 @@ class Build(Thing):
         self.trees = [Tree(**tree) for tree in data['trees']]
 
     def __str__(self):
-        return self.name + ' (%d/%d/%d)' % tuple(map(operator.attrgetter('total'), self.trees))
+        return self.name + ' (%d/%d/%d' % tuple(map(operator.attrgetter('total'), self.trees))
 
     def __repr__(self):
         return '<%s: %s>' % (self.__class__.__name__, str(self))
@@ -560,51 +532,6 @@ class Glyph(Thing):
 
     def get_icon_url(self, size='large'):
         return make_icon_url(self._character.region, self.icon, size)
-
-
-class Instance(Thing):
-    def __init__(self, character, data, type_):
-        self._character = character
-        self._data = data
-        self._type = type_
-
-        self.name = data['name']
-        self.normal = data['normal']
-        self.heroic = data['heroic']
-        self.id = data['id']
-
-        self.bosses = [Boss(self, boss) for boss in data['bosses']]
-
-    def is_complete(self, type_):
-        assert type_ in ['normal', 'heroic']
-        return self._data[type_] == 2
-
-    def is_started(self, type_):
-        assert type_ in ['normal', 'heroic']
-        return self._data[type_] == 1
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return '<%s: %s>' % (self.__class__.__name__, self.name)
-
-
-class Boss(Thing):
-    def __init__(self, instance, data):
-        self._instance = instance
-        self._data = data
-
-        self.id = data['id']
-        self.name = data['name']
-        self.normal = data['normalKills']
-        self.heroic = data['heroicKills']
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return '<%s: %s>' % (self.__class__.__name__, self.name)
 
 
 class Profession(Thing):
@@ -644,8 +571,7 @@ class Pet(Thing):
 class Guild(LazyThing):
     ACHIEVEMENTS = 'achievements'
     MEMBERS = 'members'
-    NEWS = 'news'
-    ALL_FIELDS = [ACHIEVEMENTS, MEMBERS, NEWS]
+    ALL_FIELDS = [ACHIEVEMENTS, MEMBERS]
 
     def __init__(self, region, realm=None, name=None, data=None, fields=None, connection=None):
         self.region = region
@@ -742,25 +668,6 @@ class Guild(LazyThing):
         return self._members
 
     @property
-    def news(self):
-        if self._refresh_if_not_present(Guild.NEWS):
-            self._news = []
-
-            for item in self._data[Guild.NEWS]:
-                news = {'type': item['type'],
-                        'timestamp': item['timestamp']}
-
-                if 'character' in item:
-                    character = Character(self.region, self.realm.name, item['character'], connection=self.connection)
-                    character._guild = self
-                    news['character'] = character
-                self._news.append(news)
-                if 'itemId' in item:
-                    news['itemId'] = self.connection.get_item(self.region, item['itemId']) 
-        return self._news
-
-
-    @property
     def realm(self):
         if not hasattr(self, '_realm'):
             self._realm = Realm(self.region, self._data['realm'], connection=self.connection)
@@ -826,7 +733,7 @@ class Reward(Thing):
         self.min_guild_reputation = data['minGuildRepLevel']
         self.races = data.get('races', [])
         self.achievement = data.get('achievement')
-        self.item = EquippedItem(region, data['item'])
+        self.item = Item(region, data['item'])
 
     def __str__(self):
         return self.item.name
@@ -886,7 +793,7 @@ class Realm(Thing):
         return not self.status
 
 
-class EquippedItem(Thing):
+class Item(Thing):
     def __init__(self, region, data):
         self._region = region
         self._data = data
@@ -918,34 +825,3 @@ class EquippedItem(Thing):
 
     def get_icon_url(self, size='large'):
         return make_icon_url(self._region, self.icon, size)
-
-
-class Class(Thing):
-    def __init__(self, data):
-        self._data = data
-
-        self.id = data['id']
-        self.mask = data['mask']
-        self.name = data['name']
-        self.power_type = data['powerType']
-        
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return '<%s: %s>' % (self.__class__.__name__, self.name)
-
-class Race(Thing):
-    def __init__(self, data):
-        self._data = data
-
-        self.id = data['id']
-        self.mask = data['mask']
-        self.name = data['name']
-        self.side = data['side']
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return '<%s: %s>' % (self.__class__.__name__, self.name)
