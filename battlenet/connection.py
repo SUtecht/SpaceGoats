@@ -5,7 +5,7 @@ import hmac
 import hashlib
 import time
 import urlparse
-from .things import Character, Realm, Guild, Reward, Perk, Class, Race
+from .things import Character, Realm, Guild, Reward, Perk
 from .exceptions import APIError, CharacterNotFound, GuildNotFound, RealmNotFound
 from .utils import quote
 
@@ -21,7 +21,7 @@ except ImportError:
 
 __all__ = ['Connection']
 
-URL_FORMAT = 'https://%(region)s.battle.net/api/%(game)s%(path)s?%(params)s'
+URL_FORMAT = 'http://%(region)s.battle.net/api/%(game)s%(path)s?%(params)s'
 
 logger = logging.getLogger('battlenet')
 
@@ -45,8 +45,6 @@ class Connection(object):
         self.game = game
         self.eventlet = eventlet or Connection.defaults.get('eventlet', False)
 
-        self._cache = {}
-
     def __eq__(self, other):
         if not isinstance(other, Connection):
             return False
@@ -65,7 +63,7 @@ class Connection(object):
         hash = hmac.new(private_key, string_to_sign, hashlib.sha1).digest()
         return base64.encodestring(hash).rstrip()
 
-    def make_request(self, region, path, params=None, cache=False):
+    def make_request(self, region, path, params=None):
         params = params or {}
 
         now = time.gmtime()
@@ -85,9 +83,6 @@ class Connection(object):
                 for k, v in params.items() if v)
         }
 
-        if cache and url in self._cache:
-            return self._cache[url]
-
         uri = urlparse.urlparse(url)
 
         if self.public_key:
@@ -96,18 +91,14 @@ class Connection(object):
 
         logger.debug('Battle.net => ' + url)
 
-        request = urllib2.Request(url, None, headers)
-
-        if self.eventlet and eventlet_urllib2:
-            try:
+        try:
+            request = urllib2.Request(url, None, headers)
+            if self.eventlet and eventlet_urllib2:
                 response = eventlet_urllib2.urlopen(request)
-            except (eventlet_urllib2.URLError), e:
-                raise APIError(str(e))
-        else:
-            try:
+            else:
                 response = urllib2.urlopen(request)
-            except (urllib2.URLError), e:
-                raise APIError(str(e))
+        except urllib2.URLError, e:
+            raise APIError(str(e))
 
         try:
             data = json.loads(response.read())
@@ -116,9 +107,6 @@ class Connection(object):
         else:
             if data.get('status') == 'nok':
                 raise APIError(data['reason'])
-
-        if cache:
-            self._cache[url] = data
 
         return data
 
@@ -178,8 +166,14 @@ class Connection(object):
         return Realm(self, region, data=data['realms'][0], connection=self)
 
     def get_guild_perks(self, region, raw=False):
-        data = self.make_request(region, '/data/guild/perks', cache=True)
-        perks = data['perks']
+        name = '__%s_guild_perks' % region
+
+        if not hasattr(self, name):
+            data = self.make_request(region, '/data/guild/perks')
+            setattr(self, name, data['perks'])
+            perks = data['perks']
+        else:
+            perks = getattr(self, name)
 
         if raw:
             return perks
@@ -187,32 +181,24 @@ class Connection(object):
         return [Perk(region, perk) for perk in perks]
 
     def get_guild_rewards(self, region, raw=False):
-        data = self.make_request(region, '/data/guild/rewards', cache=True)
-        rewards = data['rewards']
+        name = '__%s_guild_rewards' % region
+
+        if not hasattr(self, name):
+            data = self.make_request(region, '/data/guild/rewards')
+            setattr(self, name, data['rewards'])
+            rewards = data['rewards']
+        else:
+            rewards = getattr(self, name)
 
         if raw:
             return rewards
 
         return [Reward(region, reward) for reward in rewards]
 
-    def get_character_classes(self, region, raw=False):
-        data = self.make_request(region, '/data/character/classes', cache=True)
-        classes = data['classes']
+    def get_character_classes(self, region):
+        data = self.make_request(region, '/data/character/classes')
+        return data['classes']
 
-        if raw:
-            return classes
-
-        return [Class(class_) for class_ in classes]
-
-    def get_character_races(self, region, raw=False):
-        data = self.make_request(region, '/data/character/races', cache=True)
-        races = data['races']
-
-        if raw:
-            return races
-
-        return [Race(race) for race in races]
-
-    def get_item(self, region, item_id, raw=False):
-        data = self.make_request(region, '/item/%d' % item_id)
-        return data
+    def get_character_races(self, region):
+        data = self.make_request(region, '/data/character/races')
+        return data['races']

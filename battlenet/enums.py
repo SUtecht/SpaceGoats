@@ -11,6 +11,7 @@ RACE = {
     10: 'Blood Elf',
     11: 'Draenei',
     22: 'Worgen',
+    25: 'Panderan',
 }
 
 CLASS = {
@@ -24,6 +25,7 @@ CLASS = {
     9: 'Warlock',
     11: 'Druid',
     6: 'Death Knight',
+    10: 'Monk',
 }
 
 QUALITY = {
@@ -47,4 +49,5 @@ RACE_TO_FACTION = {
     10: 'Horde',
     11: 'Alliance',
     22: 'Alliance',
+    25: 'Alliance',
 }
