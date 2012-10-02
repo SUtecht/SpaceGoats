@@ -41,6 +41,9 @@ class Event_Attendee(models.Model):
     event = models.ForeignKey('Event')
     character =  models.ForeignKey('Character')
     role = models.ForeignKey('Role')
+    class Meta :
+        unique_together = (('event', 'character'),)
+
         
 class EventForm(forms.Form):
     name = forms.CharField(max_length=100)
