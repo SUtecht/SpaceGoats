@@ -15,9 +15,9 @@
         This event has no one attending.
     {%else%}
         The following characters are attending this event:
-        <ul>
+        <ul id="event_signup">
         {%for char in attendees%}
-            <li><img src="{{char.role.img.url}}"/><a href="http://us.battle.net/wow/en/character/{{char.character.server}}/{{char.character.name}}/simple">{{char.character}}</a>
+            <li><img src="{{char.role.img.url}}"/><a href="http://us.battle.net/wow/en/character/{{char.character.server}}/{{char.character.name}}/simple"><span class="{{char.character.class_name}}">{{char.character}}</span></a>
             {{char.character.bnet.get_class_name}}</li>
         {%endfor%}
         </ul>

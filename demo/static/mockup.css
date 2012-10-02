@@ -102,6 +102,10 @@ h2{
 #roster a{
     text-decoration:none;
 }
+#event_signup a{
+    text-decoration:none;
+}
+
 .Death {
     color:#C41F3B;
 }
