@@ -85,6 +85,10 @@ li {
     max-width: 640px;
 }
 
+.note{
+    font-size:11px;
+}
+
 #upcoming_table_event_name{
     padding-right:10px;
 }
