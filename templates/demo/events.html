@@ -21,7 +21,7 @@
                     {{char.character.bnet.get_class_name}}
                     {% if user.is_authenticated and  char.character.player = user %}
                         <li>
-                        &nbsp  &nbsp &nbsp &nbsp  <a href="/demo/remove_attendance/{{char.id}}">Remove</a>
+                        &nbsp  &nbsp &nbsp &nbsp  <a href="{% url remove_attendance char.id %}">Remove</a>
                         </li>
                     {%endif%}
                 </li>
@@ -51,7 +51,7 @@
         <script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
         <script type='text/javascript'>
             var fyre = LF({
-                site_id: 312416
+                site_id: 313192
             });
         </script>
         <!-- END: Livefyre Embed -->               

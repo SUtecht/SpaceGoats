@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load dict %}
    
-{% block articles %}<!-- make block body out for old site-->
+{% block articles %}
 <h2>Your characters</h2>
 <p>Please contact a site administrator if there is an error</p>
 <ul>
@@ -10,9 +10,8 @@
 {% endfor %}
 </ul>
 
-
 <h2>Register New Character</h2>
-<form action="/profile/" method="post">{% csrf_token %}
+<form action="{% url profile %}" method="post">{% csrf_token %}
     <p>{{error_message}}</p>
     <div class="fieldWrapper">
         {{new_character_form.name.errors}}

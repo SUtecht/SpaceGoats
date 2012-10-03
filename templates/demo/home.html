@@ -2,14 +2,14 @@
 {% block articles %}
     {% for article in articles %}
     <div class="article">
-        <a href= "/demo/article/{{article.id}}">
+        <a href= "{% url article article.id %}">
             <center><h2>{{article.title}}</h2></center>
         </a>
         <img src="{{article.img.url_128x128}}"/>
         <p>{{article.text|safe|slice:"600"}}</p>
-        <p><a href="/demo/article/{{article.id}}">Read Full Article</a></p>        
+        <p><a href="{% url article article.id %}">Read Full Article</a></p>        
     </div> <!-- article -->
     {% endfor %}
-    <a href="/demo/archive">View Older Articles</a>
+    <a href="{% url archive %}">View Older Articles</a>
 
 {% endblock %}

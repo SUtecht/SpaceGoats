@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load dict %}
-{% block articles %}<!--make body for old site-->
+{% block articles %}
         <div class="article">
-            <form enctype="multipart/form-data" action="/demo/save_article/" method="post">{% csrf_token %}
+            <form enctype="multipart/form-data" action="{% url save_article %}" method="post">{% csrf_token %}
                 {{ article_form.non_field_errors }}
                 <div class="fieldWrapper">
                     {{ article_form.title.errors }}
