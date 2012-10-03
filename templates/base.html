@@ -9,11 +9,11 @@
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}960/960.css" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}site.css" />
 
-    <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' />
+    <!-- <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}fullcalendar.css' /> -->
     <link rel='stylesheet' type='text/css' href='{{STATIC_URL}}jquery-ui-1.8.22.custom/css/redmond/jquery-ui-1.8.22.custom.css' />
 
     <script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
-    <script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script>
+    <!-- <script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script> -->
     <script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
     
     <script type='text/javascript'>
@@ -47,15 +47,14 @@
     <div id="container" class="container_16">
         <div id="nav" class="grid_2">
             <ul>
-                <li><a href="/demo/about">About</a></li>
-                <!---<li><a href="http://otg2.com/forum/viewforum.php?f=3&amp;sid=a0b8047878d7b7c4a091fae51ea386a3">Forum</a></li>-->
+                <li><a href="{% url about %}">About</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href='/logout'>Logout</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/demo/new_article">Submit Article</a></li>
+                <li><a href='{% url logout %}'>Logout</a></li>
+                <li><a href="{% url profile %}">Profile</a></li>
+                <li><a href="{% url new_article %}">Submit Article</a></li>
                 {% else %}
-                    <li><a href='/login'>Login</a></li>
-                    <li><a href='/demo/register'>Register</a></li>
+                <li><a href='{% url login %}'>Login</a></li>
+                <li><a href='{% url register %}'>Register</a></li>
                 {% endif %}
                 
             </ul>
@@ -92,12 +91,12 @@
 
                     (begins on {{upcoming_events.0.begin|date:"D d M, h:i A" }})
                     </br>&nbsp &nbsp &nbsp &nbsp
-                    <a href='/demo/event/{{upcoming_events.0.id}}'>Sign up for {{upcoming_events.0.name}}</a>
+                    <a href='{% url events upcoming_events.0.id %}'>Sign up for {{upcoming_events.0.name}}</a>
                     </p>
 
                     <table>
                         {%for e in upcoming_events|slice:"1:"%} 
-                        <tr><td><a href='/demo/event/{{e.id}}'>{{e.name}}</a></td>
+                        <tr><td><a href='{% url events e.id %}'>{{e.name}}</a></td>
                             <td>
                             {% if user.is_authenticated %}
                                 {%if e.id = 2%}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
@@ -114,10 +113,10 @@
             </div>
             <div id="goat_of_the_week">
                 <h2>Goat of the Week</h2>
-                <b><a href = "/demo/gow/{{gow.id}}"> {{gow.name}}</a></b>
+                <b><a href = "{% url gow gow.id %}"> {{gow.name}}</a></b>
                 <img src="{{gow.img.url_128x128}}"/>
                 <p>{{gow.desc|safe|slice:"200"}}
-                    <a href = "/demo/gow/{{gow.id}}"> View Full </a>
+                    <a href = "{% url gow gow.id %}"> View Full </a>
                 </p>
             </div>
             <div id="roster">
@@ -150,12 +149,6 @@
             <p><center>&#169;2012 Space Goats Coast to Coast </center></p>
         </div>
 
-
     </div> <!-- container -->
-
-
-
-
-
 </body>
 </html>

@@ -2,12 +2,12 @@
 {% load dict %}
 {% block articles %}
     <div class="article">
-        <a href= "/demo/gow/{{my_gow.id}}">
+        <a href= "{% url gow my_gow.id %}">
             <center><h2>This weeks goat of the week is {{my_gow.name}}!</h2></center>
         </a>
         <img style="max-width:600px" src="{{my_gow.img.url}}"/>
         <p>{{my_gow.desc|safe}}</p>
-        <a href = "/demo/archive/#gows"> View previous Goats of the Week</a>
+        <a href = "/archive/#gows"> View previous Goats of the Week</a>
     </div> <!-- article -->
 
     <div class = "comments">
@@ -15,7 +15,7 @@
         <script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
         <script type='text/javascript'>
             var fyre = LF({
-                site_id: 312416
+                site_id: 313192
             });
         </script>
         <!-- END: Livefyre Embed -->               

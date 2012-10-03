@@ -6,7 +6,7 @@
 {%endblock%}
 {% block articles %}
     <div class="article">
-        <a href= "/demo/article/{{article.id}}">
+        <a href= "{% url article article.id %}">
             <center><h2>{{article.title}}</h2></center>
         </a>
         <a href="{{ article.img.url }}" class="article_image">
@@ -20,7 +20,7 @@
         <script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
         <script type='text/javascript'>
             var fyre = LF({
-                site_id: 312416
+                site_id: 313192
             });
         </script>
         <!-- END: Livefyre Embed -->               

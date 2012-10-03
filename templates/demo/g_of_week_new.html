@@ -2,7 +2,7 @@
 {% load dict %}
 {% block articles %}<!--make body for old site-->
         <div class="article">
-            <form enctype="multipart/form-data" action="/demo/save_g_o_w/" method="post">{% csrf_token %}
+            <form enctype="multipart/form-data" action="{% url save_gow %}" method="post">{% csrf_token %}
                 {{ g_o_w_form.non_field_errors }}
                 <div class="fieldWrapper">
                     {{ g_o_w_form.name.errors }}

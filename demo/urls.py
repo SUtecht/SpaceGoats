@@ -18,20 +18,26 @@ urlpatterns = patterns('demo.views',
     #
     # \/
     # (________>
-    url(r'^$', 'index'),
-    url(r'^ajax/events.json', 'eventsJson'),
-    url(r'^event/(?P<event_id>\d+)', 'event', name='events'),
-    url(r'^about/', 'about'),
-    url(r'^archive/', 'archive'),
-    url(r'^article/(?P<article_id>\d+)', 'article'),
 
-    # url(r'^mockup/', 'mockup'),
-    url(r'^new_article/', 'new_article_page'),
-    url(r'^save_article/', 'save_article'),
-    url(r'^new_g_o_w/', 'new_g_o_w'),
-    url(r'^save_g_o_w/', 'save_g_o_w'),
-    url(r'^gow/(?P<gow_id>\d+)', 'gow'),
-    url(r'^register/', 'register'),
-    url(r'^remove_attendance/(?P<att_id>\d+)', 'remove_attendance'),
+    url(r'^$', 'index', name='home'),
+    url(r'^ajax/events.json', 'eventsJson', name='eventsjson'),
+    url(r'^event/(?P<event_id>\d+)', 'event', name='events'),
+    url(r'^about/', 'about', name='about'),
+    url(r'^archive/', 'archive', name='archive'),
+    url(r'^article/(?P<article_id>\d+)', 'article', name='article'),
+
+    url(r'^new_article/', 'new_article_page', name='new_article'),
+    url(r'^save_article/', 'save_article', name='save_article'),
+    url(r'^new_g_o_w/', 'new_g_o_w', name='new_gow'),
+    url(r'^save_g_o_w/', 'save_g_o_w', name='save_gow'),
+    url(r'^gow/(?P<gow_id>\d+)', 'gow', name='gow'),
+    url(r'^remove_attendance/(?P<att_id>\d+)', 'remove_attendance', name='remove_attendance'),
+
+    # user stuff
+    url(r'^logout/', 'logout_view', name='logout'),
+    url(r'^profile/', 'profile', name='profile'),
+    url(r'^login/', 'login_view', name='login'),
+    url(r'^register/', 'register', name='register'),
+    url(r'register_view/', 'register_view', name='register_view'),
 )	
 
