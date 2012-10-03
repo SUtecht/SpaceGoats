@@ -59,7 +59,7 @@ def event(request, event_id):
     if request.user.is_authenticated():
         at_form = AttendForm(request.user)
     attendees = Event_Attendee.objects.filter(event=event).order_by('role')
- 
+    num = dict(Tank=attendees.filter(role=1).count(), Healer=attendees.filter(role=2).count(), DPS=attendees.filter(role=3).count())
     '''for c in attendees:
         c.bnet = battlenet.Character(battlenet.UNITED_STATES, c.server, c.name)
         print(c.bnet)
@@ -68,7 +68,8 @@ def event(request, event_id):
     return render_to_response('demo/events.html', {'event':event,
                                                 'at_form':at_form,
                                                 'attendees':attendees,
-                                                'timeszone':timezone},
+                                                'timeszone':timezone,
+                                                'num':num},
                                                 context_instance=RequestContext(request))
 
 def about(request):

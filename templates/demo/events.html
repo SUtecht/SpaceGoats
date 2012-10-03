@@ -11,18 +11,22 @@
     </p>
 
     <p>
-    {%if not attendees%}
-        This event has no one attending.
-    {%else%}
-        The following characters are attending this event:
-        <ul id="event_signup">
-        {%for char in attendees%}
-            <li><img src="{{char.role.img.url}}"/><a href="http://us.battle.net/wow/en/character/{{char.character.server}}/{{char.character.name}}/simple"><span class="{{char.character.class_name}}">{{char.character}}</span></a>
-            {{char.character.bnet.get_class_name}}</li>
-        {%endfor%}
-        </ul>
-    {%endif%}
-    {{attendees.count}} total players signed up. 
+        {%if not attendees%}
+            This event has no one attending.
+        {%else%}
+            The following characters are attending this event:
+            <ul id="event_signup">
+            {%for char in attendees%}
+                <li><img src="{{char.role.img.url}}"/><a href="http://us.battle.net/wow/en/character/{{char.character.server}}/{{char.character.name}}/simple"><span class="{{char.character.class_name}}">{{char.character}}</span></a>
+                {{char.character.bnet.get_class_name}}</li>
+            {%endfor%}
+            </ul>
+        {%endif%}
+        {{attendees.count}} total players. 
+        </br>
+        {% for c in num.keys %} 
+            {{num|key:c}} 
+        {{c}}{%endfor%}. <!--I know the indent looks bad, but it wil add an extra space on the  webpage otherwise--->
     </p>
 
     <div>

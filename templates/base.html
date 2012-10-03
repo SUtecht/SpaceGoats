@@ -99,8 +99,10 @@
                         {%for e in upcoming_events|slice:"1:"%} 
                         <tr><td><a href='/demo/event/{{e.id}}'>{{e.name}}</a></td>
                             <td>
-                            {%if e.id == 5 %}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
-                            {%else%}<img src="{{STATIC_URL}}not_attending.png" alt="not attending"/>
+                            {% if user.is_authenticated %}
+                                {%if e.id = 2%}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
+                                {%else%}<img src="{{STATIC_URL}}not_attending.png" alt="not attending"/>
+                                {%endif%}
                             {%endif%}
                             </td>
                         </tr>
