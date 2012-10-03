@@ -29,7 +29,7 @@ from demo.utils import update_character
 
 def index(request):
     approved_articles = Article.objects.all().filter(approved = 'Y')
-    latest_articles = approved_articles.order_by('-id') #[:3] # <-- temporarily set to everything
+    latest_articles = approved_articles.order_by('-id')[:4]
     return render_to_response('demo/home.html', {'articles': latest_articles }, context_instance=RequestContext(request))
 
 def eventsJson(request):
