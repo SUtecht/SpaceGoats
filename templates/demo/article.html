@@ -7,11 +7,12 @@
 {% block articles %}
     <div class="article">
         <a href= "/demo/article/{{article.id}}">
-            <center><h2>{{article.title}}</h2></center>
+            <center><h2>{{article.title}}</h2></center>                          
         </a>
         <a href="{{ article.img.url }}" class="article_image">
             <img src="{{article.img.url}}" />
         </a>
+        <p>By {{article.author}}</p>
         <p>{{article.text|safe}}</p>
     </div> <!-- article -->
 
