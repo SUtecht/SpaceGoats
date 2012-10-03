@@ -85,6 +85,9 @@ li {
     max-width: 640px;
 }
 
+#upcoming_table_event_name{
+    padding-right:10px;
+}
 
 body {
     background-color:#F5F0EB;

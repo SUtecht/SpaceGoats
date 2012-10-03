@@ -78,29 +78,40 @@
                 {% if upcoming_events %} 
                     <!-- Timer from http://www.hashemian.com/tools/javascript-countdown.htm-->
                     <p><b>{{upcoming_events.0.name}}</b> starts in </br>
-                    <script language="JavaScript">
-                    TargetDate = "{{upcoming_events.0.begin|date:'m/d/Y h:i A'}}"
-                    BackColor = "#D1C2B2";
-                    ForeColor = "navy";
-                    CountActive = true;
-                    CountStepper = -1;
-                    LeadingZero = true;
-                    DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds.";
-                    FinishMessage = "GET LOGGED IN NOW!</b>";
-                    </script>
-                    <script language="JavaScript" src="{{STATIC_URL}}countdown.js"></script>
+                        <script language="JavaScript">
+                        TargetDate = "{{upcoming_events.0.begin|date:'m/d/Y h:i A'}}"
+                        BackColor = "#D1C2B2";
+                        ForeColor = "navy";
+                        CountActive = true;
+                        CountStepper = -1;
+                        LeadingZero = true;
+                        DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds.";
+                        FinishMessage = "GET LOGGED IN NOW!</b>";
+                        </script>
+                        <script language="JavaScript" src="{{STATIC_URL}}countdown.js"></script>
 
-                    (begins on {{upcoming_events.0.begin|date:"D d M, h:i A" }})
-                    </br>&nbsp &nbsp &nbsp &nbsp
-                    <a href='/demo/event/{{upcoming_events.0.id}}'>Sign up for {{upcoming_events.0.name}}</a>
+                        (begins on {{upcoming_events.0.begin|date:"D d M, h:i A" }})
+                        </br>&nbsp &nbsp &nbsp &nbsp
+                        
+                        {% if user.is_authenticated %}
+                            {%if upcoming_events.0.id in im_attending%}
+                                <a href='/demo/event/{{upcoming_events.0.id}}'>You are attending</a>
+                            {%else%}
+                                <a href='/demo/event/{{upcoming_events.0.id}}'>Sign up for {{upcoming_events.0.name}}</a>
+                            {%endif%}
+                        {%else%}
+                            <a href='/demo/event/{{upcoming_events.0.id}}'>View {{upcoming_events.0.name}}</a>
+                        {%endif%}
                     </p>
 
-                    <table>
+
+                    
+                    <table  >
                         {%for e in upcoming_events|slice:"1:"%} 
-                        <tr><td><a href='/demo/event/{{e.id}}'>{{e.name}}</a></td>
+                        <tr><td id="upcoming_table_event_name"><a href='/demo/event/{{e.id}}'>{{e.name}}</a></td>
                             <td>
                             {% if user.is_authenticated %}
-                                {%if e.id = 2%}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
+                                {%if e.id in im_attending%}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
                                 {%else%}<img src="{{STATIC_URL}}not_attending.png" alt="not attending"/>
                                 {%endif%}
                             {%endif%}

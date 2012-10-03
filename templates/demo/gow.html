@@ -3,7 +3,7 @@
 {% block articles %}
     <div class="article">
         <a href= "/demo/gow/{{my_gow.id}}">
-            <center><h2>This week's goat of the week is {{my_gow.name}}!</h2></center>
+            <center><h2>This week's Goat of the Week is {{my_gow.name}}</h2></center>
         </a>
         <img style="max-width:600px" src="{{my_gow.img.url}}"/>
         <p>{{my_gow.desc|safe}}</p>
