@@ -79,7 +79,7 @@
                     <!-- Timer from http://www.hashemian.com/tools/javascript-countdown.htm-->
                     <p><b>{{upcoming_events.0.name}}</b> starts in </br>
                     <script language="JavaScript">
-                    TargetDate = "{{upcoming_events.0.begin|date:'m/d/Y h:m A'}}"
+                    TargetDate = "{{upcoming_events.0.begin|date:'m/d/Y h:i A'}}"
                     BackColor = "#D1C2B2";
                     ForeColor = "navy";
                     CountActive = true;
@@ -90,7 +90,7 @@
                     </script>
                     <script language="JavaScript" src="{{STATIC_URL}}countdown.js"></script>
 
-                    (begins on {{upcoming_events.0.begin|date:"D d M, h:m A" }})
+                    (begins on {{upcoming_events.0.begin|date:"D d M, h:i A" }})
                     </br>&nbsp &nbsp &nbsp &nbsp
                     <a href='/demo/event/{{upcoming_events.0.id}}'>Sign up for {{upcoming_events.0.name}}</a>
                     </p>
