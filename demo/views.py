@@ -239,3 +239,8 @@ def login_view(request):
                  error_message=error_message),
             context_instance=RequestContext(request))
 
+def remove_attendance(request, att_id):
+    attendee = Event_Attendee.objects.get(pk = att_id)
+    event_id = attendee.event.id
+    attendee.delete()
+    return redirect('events', event_id)

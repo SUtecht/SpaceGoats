@@ -20,7 +20,7 @@ urlpatterns = patterns('demo.views',
     # (________>
     url(r'^$', 'index'),
     url(r'^ajax/events.json', 'eventsJson'),
-    url(r'^event/(?P<event_id>\d+)', 'event'),
+    url(r'^event/(?P<event_id>\d+)', 'event', name='events'),
     url(r'^about/', 'about'),
     url(r'^archive/', 'archive'),
     url(r'^article/(?P<article_id>\d+)', 'article'),
@@ -31,6 +31,7 @@ urlpatterns = patterns('demo.views',
     url(r'^new_g_o_w/', 'new_g_o_w'),
     url(r'^save_g_o_w/', 'save_g_o_w'),
     url(r'^gow/(?P<gow_id>\d+)', 'gow'),
-    url(r'^register/', 'register')
+    url(r'^register/', 'register'),
+    url(r'^remove_attendance/(?P<att_id>\d+)', 'remove_attendance'),
 )	
 

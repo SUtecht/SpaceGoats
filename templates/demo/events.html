@@ -18,7 +18,13 @@
             <ul id="event_signup">
             {%for char in attendees%}
                 <li><img src="{{char.role.img.url}}"/><a href="http://us.battle.net/wow/en/character/{{char.character.server}}/{{char.character.name}}/simple"><span class="{{char.character.class_name}}">{{char.character}}</span></a>
-                {{char.character.bnet.get_class_name}}</li>
+                    {{char.character.bnet.get_class_name}}
+                    {% if user.is_authenticated and  char.character.player = user %}
+                        <li>
+                        &nbsp  &nbsp &nbsp &nbsp  <a href="/demo/remove_attendance/{{char.id}}">Remove</a>
+                        </li>
+                    {%endif%}
+                </li>
             {%endfor%}
             </ul>
         {%endif%}
@@ -61,5 +67,6 @@
             </form>
         </div>
     {%endif%}
+
 </div>
 {%endblock%}
