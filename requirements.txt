@@ -1,6 +1,12 @@
 DateUtils==0.5.2
 Django==1.4.1
+MySQL-python==1.2.4b3
 PIL==1.1.7
+South==0.7.6
 battlenet==0.2.6
-python-dateutil==2.1
 django-extensions==0.9
+gunicorn==0.14.6
+python-dateutil==2.1
+pytz==2012f
+six==1.2.0
+wsgiref==0.1.2
