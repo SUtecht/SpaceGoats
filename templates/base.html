@@ -126,9 +126,10 @@
             <div id="goat_of_the_week">
                 <h2>Goat of the Week</h2>
                 <b><a href = "{% url gow gow.id %}"> {{gow.name}}</a></b>
+                <br/>
                 <img src="{{gow.img.url_128x128}}"/>
-                <p>{{gow.desc|safe|slice:"200"}}
-                    <a href = "{% url gow gow.id %}"> View Full </a>
+                <p>
+                <a href = "{% url gow gow.id %}"> View Full </a>
                 </p>
             </div>
             <div id="roster">
