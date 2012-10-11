@@ -142,7 +142,7 @@
                     {% for p in players %}
                         <tr class="{{p.name}} main">
                             <td>
-                                <a href="http://us.battle.net/wow/en/character/{{p.server}}/{{p.name}}/advanced"><span class="{{p.class}}">{{p.name}}</span></a></td>
+                                <a href="http://us.battle.net/wow/en/character/{{p.server}}/{{p.name}}/advanced"><span class="{{p.class}}"><b>{{p.name}}</b></span></a></td>
                             <td>{{p.ilvl}}</td>
                         </tr>
                         {% for a in p.alts %}
