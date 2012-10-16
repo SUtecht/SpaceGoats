@@ -181,6 +181,10 @@ def register_view(request):
     if request.method == 'POST':
         new_user_form = NewUserForm(request.POST)
         if new_user_form.is_valid():
+            # make this actually secure later
+            if request.POST['secret_word'] != 'do not eat':
+                error_message = "Please ask an officer in the guild for the secret word"
+                return register_failed(request, error_message)
             username = request.POST['username']
             for u in User.objects.all() :
                 if username == u.username:
