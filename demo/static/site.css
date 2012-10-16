@@ -135,7 +135,8 @@ thead th {
     border: 1px solid black;
     padding: 2px;
     margin-left: 5px;
-    background-color: grey;
+    background-color: lightgrey;
+    cursor: pointer;
 }
 
 .Death {
