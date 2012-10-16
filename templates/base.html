@@ -15,6 +15,7 @@
     <script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
     <!-- <script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script> -->
     <script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
+    <script type='text/javascript' src='{{STATIC_URL}}roster.js'></script>
     
     <script type='text/javascript'>
         function showPos(event,id) {
@@ -135,15 +136,22 @@
             <div id="roster">
                 <h2>Roster</h2>
                 <table>
+                    <thead>
                     <tr>
-                        <th style="min-width:150px">Name</th>
-                        <th>Item Level</th>
+                        <th class="name">Name</th>
+                        <th>ilvl</th>
+                        <th>alts?</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     {% for p in players %}
                         <tr class="{{p.name}} main">
                             <td>
-                                <a href="http://us.battle.net/wow/en/character/{{p.server}}/{{p.name}}/advanced"><span class="{{p.class}}"><b>{{p.name}}</b></span></a></td>
+                                <a href="http://us.battle.net/wow/en/character/{{p.server}}/{{p.name}}/advanced"><span class="{{p.class}}">{{p.name}}</span></a></td>
                             <td>{{p.ilvl}}</td>
+                            <td class="{{p.name}} toggle">
+                               <span>toggle</span>
+                            </td>
                         </tr>
                         {% for a in p.alts %}
                             <tr class="{{p.name}} alt">
@@ -153,6 +161,7 @@
                             </tr>
                         {% endfor %}
                     {% endfor %}
+                </tbody>
                 </table>
             </div>
         </div>

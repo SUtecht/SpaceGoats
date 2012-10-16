@@ -109,6 +109,10 @@ h2{
     font-size:1.5em;
 }
 
+thead th {
+    font-weight: bold;
+}
+
 /*------ Class Colors ---------*/
 #roster a{
     text-decoration:none;
@@ -117,36 +121,53 @@ h2{
     text-decoration:none;
 }
 
+#roster .name {
+    min-width: 125px;
+}
+
+
+#roster .main span {
+    font-weight: bold;
+}
+
+
+.toggle span {
+    border: 1px solid black;
+    padding: 2px;
+    margin-left: 5px;
+    background-color: grey;
+}
+
 .Death {
-    color:#C41F3B;
+    background-color:#C41F3B;
 }
 .Druid{
-    color:#FF7D0A;
+    background-color:#FF7D0A;
 }
 .Hunter{
-    color:#ABD473;
+    background-color:#ABD473;
 }
 .Mage{
-    color:#69CCF0;
+    background-color:#69CCF0;
 }
 .Monk{
-    color:#558A84;
+    background-color:#558A84;
 }
 .Paladin{
-    color:#F58CBA;
+    background-color:#F58CBA;
 }
 .Priest{
-    color:#FFFFFF;
+    background-color:#FFFFFF;
 }
 .Rogue{
-    color:#FFF569;
+    background-color:#FFF569;
 }
 .Shaman{
-    color:#0070DE;
+    background-color:#0070DE;
 }
 .Warlock{
-    color:#9482C9;
+    background-color:#9482C9;
 }
 .Warrior{
-    color:#C79C6E;
+    background-color:#C79C6E;
 }
