@@ -32,6 +32,8 @@ def roster(request):
                 alts.append(alt)
         player['alts'] = alts
         players.append(player)
+    players = sorted(players, key=lambda x: x['ilvl'])
+    players.reverse()
     return dict(players=players)
 
 def attending(request):
