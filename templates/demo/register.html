@@ -28,6 +28,12 @@
         </div>
         </br>        
         <div class="fieldWrapper">
+            {{ new_user_form.secret_word.errors }}
+            <label for="id_subject">Secret Word (ask an officer):</label>
+            {{ new_user_form.secret_word }}
+        </div>
+        </br>        
+        <div class="fieldWrapper">
             {{ new_user_form.character.errors }}
             <label for="id_subject">Main Character:</label>
             {{ new_user_form.character }}

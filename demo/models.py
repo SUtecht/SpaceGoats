@@ -28,6 +28,7 @@ class NewUserForm(forms.Form):
     username = forms.CharField(max_length=100)
     password = forms.CharField(max_length=100, widget=forms.PasswordInput)
     email = forms.CharField(max_length=100)
+    secret_word = forms.CharField(max_length=100)
     character = forms.CharField(max_length=100)
     server = forms.CharField(max_length=100, initial='Auchindoun')
     
