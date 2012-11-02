@@ -132,11 +132,21 @@ thead th {
 
 
 .toggle span {
+    display: inline-block;
+
     border: 1px solid black;
-    padding: 2px;
+    /* padding: 2px; */
     margin-left: 5px;
+    /* the negative pixels here corrects for the extra width 
+     * from the border
+     */
+    margin-top: -1px;
+    margin-bottom: -1px;
     background-color: lightgrey;
     cursor: pointer;
+    width: 10px;
+    text-align: center;
+
 }
 
 .Death {
