@@ -149,9 +149,11 @@
                             <td>
                                 <a href="http://us.battle.net/wow/en/character/{{p.server}}/{{p.name}}/advanced"><span class="{{p.class}}">{{p.name}}</span></a></td>
                             <td>{{p.ilvl}}</td>
+                            {% if p.alts %}
                             <td class="{{p.name}} toggle">
                                <span>+</span>
                             </td>
+                            {% endif %}
                         </tr>
                         {% for a in p.alts %}
                             <tr class="{{p.name}} alt">
