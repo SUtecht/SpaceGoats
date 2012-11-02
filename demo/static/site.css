@@ -128,8 +128,13 @@ thead th {
 
 #roster .main span {
     font-weight: bold;
-}
 
+}
+.gclass {
+    display: inline-block;
+    width: 115px;
+    padding-left: 5px;
+}
 
 .toggle span {
     display: inline-block;
