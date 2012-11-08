@@ -30,6 +30,8 @@ def roster(request):
                 alt['class'] = a.class_name
                 alt['ilvl'] = a.ilvl
                 alts.append(alt)
+        alts = sorted(alts, key=lambda x: x['ilvl'])
+        alts.reverse()
         player['alts'] = alts
         players.append(player)
     players = sorted(players, key=lambda x: x['ilvl'])
