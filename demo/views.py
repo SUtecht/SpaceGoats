@@ -130,7 +130,7 @@ def save_article(request):
             text = article_form.cleaned_data['text']
             img = article_form.cleaned_data['img']
             new_article = Article(title=title, text=text, img=img, 
-                                  author= request.user, approved=False)
+                                  author= request.user, creation_date = datetime.date.today(), approved=False)
             new_article.save()
 
             return redirect('home')
@@ -154,7 +154,7 @@ def save_g_o_w(request):
             name = g_o_w_form.cleaned_data['name']
             img = g_o_w_form.cleaned_data['img']
             desc = g_o_w_form.cleaned_data['desc']
-            new_goat_of_week = Goat_of_the_Week(name=name,  img=img, 
+            new_goat_of_week = Goat_of_the_Week(name=name,  creation_date = datetime.date.today(),  img=img, 
                                   desc = desc)
             new_goat_of_week .save()
 
