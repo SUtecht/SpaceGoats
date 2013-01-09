@@ -39,13 +39,4 @@ def roster(request):
     return dict(players=players)
 
 def attending(request):
-    if request.user.is_authenticated():
-        my_chars = Character.objects.filter(player=request.user)
-        print my_chars
-        im_attending = list()
-        for char in my_chars:
-            atts =  Event_Attendee.objects.filter(character = char)
-            for e in atts:
-                im_attending.append(e.event.id)
-        return dict(im_attending=im_attending)
-    return dict(im_attending=None)
+    return dict(im_attending=Event_Attendee.objects.order_by('event').distinct('event'))
