@@ -84,6 +84,7 @@ class Article(models.Model):
                                sizes=((128,128), (200,200)))
     author = models.ForeignKey(User)
     approved = models.BooleanField(default=False)
+    creation_date = models.DateField()
     def __unicode__(self):
         return "{} by {}  {} ".format( self.title , self.author , self.approved )
 
@@ -94,6 +95,7 @@ class ArticleForm(forms.Form):
     
 class Goat_of_the_Week(models.Model):
     name =  models.ForeignKey('Character')
+    creation_date = models.DateField()
     img = ImageWithThumbsField(upload_to = "uploads", 
                                sizes=((128,128), (200,200)))
     desc = models.TextField()
