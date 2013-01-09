@@ -96,9 +96,9 @@
                         
                         {% if user.is_authenticated %}
                             {%if upcoming_events.0.id in im_attending%}
-                                <a href='{% url events upcoming_events.0.id %}'>You are attending</a>
+                                <a href='{% url events upcoming_events.0.id %}'>You are not attending</a>
                             {%else%}
-                                <a href='{% url events upcoming_events.0.id %}'>Sign up for {{upcoming_events.0.name}}</a>
+                                <a href='{% url events upcoming_events.0.id %}'>Sign up to miss {{upcoming_events.0.name}}</a>
                             {%endif%}
                         {%else%}
                             <a href='{% url events upcoming_events.0.id %}'>View {{upcoming_events.0.name}}</a>
@@ -112,8 +112,8 @@
                         <tr><td id="upcoming_table_event_name"><a href='{% url events e.id %}'>{{e.name}}</a></td>
                             <td>
                             {% if user.is_authenticated %}
-                                {%if e.id in im_attending%}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
-                                {%else%}<img src="{{STATIC_URL}}not_attending.png" alt="not attending"/>
+                                {%if e.id in im_attending%}<img src="{{STATIC_URL}}not_attending.png" alt="not attending"/>
+                                {%else%}<img src="{{STATIC_URL}}attending.png" alt="attending"/>
                                 {%endif%}
                             {%endif%}
                             </td>

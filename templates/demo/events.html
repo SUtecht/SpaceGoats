@@ -12,9 +12,9 @@
 
     <p>
         {%if not attendees%}
-            This event has no one attending.
+            This event has no one missing.
         {%else%}
-            The following characters are attending this event:
+            The following characters are missing this event:
             <ul id="event_signup">
             {%for char in attendees%}
                 <li><img src="{{char.role.img.url}}"/><a href="http://us.battle.net/wow/en/character/{{char.character.server}}/{{char.character.name}}/simple"><span class="{{char.character.class_name}} gclass"><b>{{char.character}}</b></span></a>
@@ -39,9 +39,9 @@
  
    <p>
         {% if user.is_authenticated %}
-            <input type="button" value="+ Sign up for this event" onClick="showPos(event,'signUpForm')" />
+            <input type="button" value="+ Miss this event" onClick="showPos(event,'signUpForm')" />
         {%else%}
-            Log in to sign up for this event!
+            Log in to sign up to miss for this event!
         {%endif%}
     </p>
     </div>
@@ -59,7 +59,7 @@
 
     {% if user.is_authenticated %}
         <div  id="signUpForm" style='display: none; position: absolute; left: 300px; top: 50px; z-index:10;'; class= 'pop_up'>
-        <h1>Join Event<h1>
+        <h1>Miss Event<h1>
             <form action="" method="post">{% csrf_token %}
             {{at_form.as_p}}
             <p><input type="submit" value="Submit" />
