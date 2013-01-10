@@ -4,12 +4,12 @@
     <div class="article">
 
         <a href= "{% url gow my_gow.id %}">
-            <center><h2>This week's Goat of the Week is {{my_gow.name}}</h2></center>
+            <center><h2>Our Current Glorious Goat Leader is {{my_gow.name}}</h2></center>
         </a>
         <img style="max-width:600px" src="{{my_gow.img.url}}"/>
         <p>{{my_gow.creation_date}}</p>
         <p>{{my_gow.desc|safe}}</p>
-        <a href = "/archive/#gows"> View previous Goats of the Week</a>
+        <a href = "/archive/#gows"> View previous Disposed Despots</a>
     </div> <!-- article -->
 
     <div class = "comments">
