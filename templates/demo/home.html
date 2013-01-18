@@ -4,7 +4,7 @@
     {% for article in articles %}
     <div class="article">
         <a class="article_image_link" href="{% url article article.id %}">
-            <div style="background-image:url('{{article.img.url_640x320}}');width:640px;height:320px;">
+            <div style="background-image:url('{{article.img.url_640x360}}');width:640px;height:360px;">
                 <h1 class="article_title">{{article.title}}</h1>
             </div>
         </a>
