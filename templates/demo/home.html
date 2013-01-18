@@ -3,10 +3,11 @@
 {% block articles %}
     {% for article in articles %}
     <div class="article">
-        <a href= "{% url article article.id %}">
-            <center><h2>{{article.title}}</h2></center>
+        <a class="article_image_link" href="{% url article article.id %}">
+            <div style="background-image:url('{{article.img.url}}');width:100%;height:300px">
+                <h1 class="article_title">{{article.title}}</h1>
+            </div>
         </a>
-        <img src="{{article.img.url_128x128}}"/>
         <p>{{article.text|article_cut|safe}}</p>
         <p><a href="{% url article article.id %}">Read Full Article</a></p>        
     </div> <!-- article -->

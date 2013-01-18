@@ -1,16 +1,23 @@
-/* #container { */
-/*     border: 1px solid black; */
-/* } */
 
-.grid_1, .grid_2, .grid_3, .grid_4, .grid_5,
-.grid_6, .grid_7, .grid_8, .grid_9, .grid_10,
-.grid_11, .grid_12 {
-    background-color: F5F0EB;
+body {
+
+} 
+
+p{
+    color:#000024;
 }
 
+h2, a:link, a:visited{
+    color:#000024;
+}
 
-/******************* real stuff ********************/
+h2{
+    font-size:1.5em;
+}
 
+thead th {
+    font-weight: bold;
+}
 ul {
     list-style: none;
 }
@@ -18,12 +25,26 @@ li {
     margin: 0;
 }
 
+#container {
+    background-color:#F5F0EB;
+}
 
+#nav ul {
+    margin-top:30px;
+}
 
-#nav, #logo {
-    height: 100px;
-    /*background-color: #cfe2f3;*/
+#nav li {
+    display: inline;
+}
 
+#nav a:hover {
+    background-color:white;
+}
+
+#nav a {
+    font-size: 1.5em;
+    padding: 20px;
+    text-decoration:none;
 }
 
 #articles {
@@ -54,29 +75,29 @@ li {
 {
     padding-left:10px;
     border-width:3px;
-    border-color:#000024;
-    border-left-style:dotted;
 }
 #nav, #logo, #events, #goat_of_the_week
 {
     border-width:3px;
-    border-color:#000024;
-    border-bottom-style:dotted;
 }
 
 .article {
     min-height: 200px;
     border-width:3px;
-    border-color:#000024;
-    border-bottom-style:dotted;
     /*background-color: #F5F0EB;*/
-   
+}
+
+.article_image_link {
+    text-decoration: none;
+}
+
+.article_title {
+    color:white;
+    font-size:5em;
 }
 
 .pop_up {
     border-style:dotted;
-    border-width:3px;
-    border-color:#000024;
     background-color:#F5F0EB;
     padding:10px;
 }
@@ -93,25 +114,7 @@ li {
     padding-right:10px;
 }
 
-body {
-    background-color:#F5F0EB;
-} 
-p{
-    color:#000024;
-}
 
-h2, a:link, a:visited{
-
-    color:#000024;
-}
-
-h2{
-    font-size:1.5em;
-}
-
-thead th {
-    font-weight: bold;
-}
 
 /*------ Class Colors ---------*/
 #roster a{
