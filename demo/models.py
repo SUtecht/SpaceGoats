@@ -81,7 +81,7 @@ class Article(models.Model):
     text  = models.TextField()
     # img = models.ImageField(upload_to = "uploads")
     img = ImageWithThumbsField(upload_to = "uploads", 
-                               sizes=((128,128), (200,200)))
+                               sizes=((640,320), (200, 200)))
     author = models.ForeignKey(User)
     approved = models.BooleanField(default=False)
     creation_date = models.DateField()

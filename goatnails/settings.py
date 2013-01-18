@@ -14,4 +14,4 @@ THUMBS_GENERATE_MISSING_THUMBNAILS = getattr(settings, "THUMBS_GENERATE_MISSING_
 
 # Generate the thumbnail even if it's not in the configured `sizes` argument.
 # Default: False
-THUMBS_GENERATE_ANY_SIZE = getattr(settings, "THUMBS_GENERATE_ANY_SIZE", False)
+THUMBS_GENERATE_ANY_SIZE = getattr(settings, "THUMBS_GENERATE_ANY_SIZE", True)
