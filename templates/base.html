@@ -57,6 +57,7 @@
         <div id="nav" class="grid_12">
             <ul>
                 <li><a href="{% url about %}">About</a></li>
+                <li><a href="{% url chat %}">Chat</a></li>
                 {% if user.is_authenticated %}
                 <li><a href='{% url logout %}'>Logout</a></li>
                 <li><a href="{% url profile %}">{{user}}</a></li>
