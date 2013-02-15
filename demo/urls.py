@@ -23,6 +23,7 @@ urlpatterns = patterns('demo.views',
     url(r'^ajax/events.json', 'eventsJson', name='eventsjson'),
     url(r'^event/(?P<event_id>\d+)', 'event', name='events'),
     url(r'^about/', 'about', name='about'),
+    url(r'^chat/', 'chat', name='chat'),
     url(r'^archive/', 'archive', name='archive'),
     url(r'^article/(?P<article_id>\d+)', 'article', name='article'),
 

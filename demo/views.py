@@ -77,6 +77,9 @@ def about(request):
     return render_to_response('demo/about.html', {'guild':guild},
                                                 context_instance=RequestContext(request))
                                                 
+def chat(request):
+    return render_to_response('demo/chat.html',
+                                                context_instance=RequestContext(request))
 def archive(request):
     approved_articles = Article.objects.all().filter(approved = 'Y')
     articles = approved_articles.order_by('-id')
