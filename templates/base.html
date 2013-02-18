@@ -1,3 +1,4 @@
+{% load random_tag %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
 </head>
 
 <body>
-    <div id="banner" style="background-image:url('{{STATIC_URL}}header.jpg');width:100%;height:250px;"></div>
+    <div id="banner" style="background-image:url('{{STATIC_URL}}headers/header{{"1 9"|random_header}}.jpg');width:100%;height:250px;"></div>
     <div id="container" class="container_16">
         <div id="logo" class="grid_4">
             <a href="{% url home %}">
@@ -56,6 +57,7 @@
         <div id="nav" class="grid_12">
             <ul>
                 <li><a href="{% url about %}">About</a></li>
+                <li><a href="{% url chat %}">Chat</a></li>
                 {% if user.is_authenticated %}
                 <li><a href='{% url logout %}'>Logout</a></li>
                 <li><a href="{% url profile %}">{{user}}</a></li>
