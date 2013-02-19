@@ -2,6 +2,5 @@
 {% load dict %}
    
 {% block articles %}<!-- make block body out for old site-->
-<a href="http://widget00.mibbit.com/?settings=a0bda123dee6d7f87fd2101cc66afcd9&server=irc.freenode.net&channel=%23SpaceGoatsChat">Chat in full screen</a>
-<iframe width="640" height="600" scrolling="no" src="http://widget.mibbit.com/?settings=a0bda123dee6d7f87fd2101cc66afcd9&server=irc.freenode.net&channel=%23SpaceGoatsChat"></iframe>
+<iframe src="http://webchat.freenode.net?nick={% if user.is_authenticated %}{{user}}{% endif %}&channels=SpaceGoatsChat&uio=d4" width="640" height="600" scrolling="no"></iframe>
 {% endblock %}
