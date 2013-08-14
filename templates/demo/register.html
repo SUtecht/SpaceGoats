@@ -4,7 +4,7 @@
 {% block articles %}
 <div class= 'article' >
 <center><h2>Create a New User</h2></center>
-<form action="{% url register_view %}" method="post">{% csrf_token %}
+<form action="{% url "register_view" %}" method="post">{% csrf_token %}
         {{ new_user_form.non_field_errors }}
         {% if error_message %}
             <p class="error">{{ error_message }}</p>

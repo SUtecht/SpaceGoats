@@ -3,7 +3,7 @@
 {% block articles %}
     <div class="article">
 
-        <a href= "{% url gow my_gow.id %}">
+        <a href= "{% url "gow" my_gow.id %}">
             <center><h2>Our Current Glorious Goat Leader is {{my_gow.name}}</h2></center>
         </a>
         <img style="max-width:600px" src="{{my_gow.img.url}}"/>

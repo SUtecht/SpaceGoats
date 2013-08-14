@@ -58,16 +58,25 @@ li {
 }
 
 #events {
-    height: 350px;
+    padding-bottom: 50px;
     /*background-color: #bfe7c4;*/
     
+}
+#raid_progress {
+    padding-bottom: 50px;
+}
+#raid_progress a{
+    text-decoration: none;
+}
+#raid_progress .dead {
+    background: rgba(0,0,0, 0.45);  
 }
 #goat_of_the_week {
     height: 250px;
     /*background-color: #f9bfef;*/
 }
 #roster {
-    height: 500px;
+    padding-bottom: 50px;
     /*background-color: #cfe2f3;*/
 
 }

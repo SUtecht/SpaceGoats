@@ -11,7 +11,7 @@
 </ul>
 
 <h2>Register New Character</h2>
-<form action="{% url profile %}" method="post">{% csrf_token %}
+<form action="{% url "profile" %}" method="post">{% csrf_token %}
     <p>{{error_message}}</p>
     <div class="fieldWrapper">
         {{new_character_form.name.errors}}
