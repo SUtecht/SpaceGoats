@@ -4,6 +4,10 @@ import os
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = ['www.spacegoatsc2c.com', 'spacegoatsc2c.com']
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
