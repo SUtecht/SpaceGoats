@@ -7,7 +7,7 @@
     <b>Articles</b>
     {%for i in articles %}
         <ul>
-            <li><a href= "{% url article i.id %}">{{i.title}}</a></li>
+            <li><a href= "{% url "article" i.id %}">{{i.title}}</a></li>
     
         </ul>
     {%endfor%}
@@ -16,7 +16,7 @@
         <b id="gows">Hall of Deposed Despots</b>
     {% for i in gows %}
         <ul>
-            <li><a href= "{% url gow i.id %}">{{i.name}}</a></li>
+            <li><a href= "{% url "gow" i.id %}">{{i.name}}</a></li>
     
         </ul>
     {%endfor%}

@@ -7,7 +7,7 @@
 {% block articles %}
     <div class="article">
 
-        <a href= "{% url article article.id %}">
+        <a href= "{% url "article" article.id %}">
             <center><h2>{{article.title}}</h2></center>
         </a>
         <a href="{{ article.img.url }}" class="article_image">

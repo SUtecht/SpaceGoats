@@ -7,6 +7,23 @@ def events(request):
     soon_events = all_upcoming_events.order_by('begin')[:10]
     return dict(upcoming_events=soon_events)
 
+def raid(request):
+    raids = Raid.objects.all().filter(current = True)
+    if len(raids) > 0:
+        raid = raids[0]
+        return dict(raid=raid)
+    else:
+        return {}
+
+def bosses(request):
+    raids = Raid.objects.all().filter(current = True)
+    if len(raids) > 0:
+        raid = raids[0]
+        bosses = Boss.objects.all().filter(raid = raid).order_by('order')
+        return dict(bosses=bosses)
+    else:
+        return {}
+
 def gow(request):
     all_gows = Goat_of_the_Week.objects.all().order_by('-id')
     if all_gows:

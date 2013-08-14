@@ -30,11 +30,11 @@ class NewUserForm(forms.Form):
     email = forms.CharField(max_length=100)
     secret_word = forms.CharField(max_length=100)
     character = forms.CharField(max_length=100)
-    server = forms.CharField(max_length=100, initial='Auchindoun')
+    server = forms.CharField(max_length=100, initial='Whisperwind')
     
 class NewCharacterForm(forms.Form):
     name = forms.CharField(max_length=100)
-    server = forms.CharField(max_length=100, initial='Auchindoun')
+    server = forms.CharField(max_length=100, initial='Whisperwind')
 
 class AttendForm(forms.Form):
     char = forms.ModelChoiceField(Character.objects.all())
@@ -105,3 +105,24 @@ class Goat_of_the_Week_Form(forms.Form):
     img = forms.ImageField()
     desc  = forms.CharField(widget=forms.Textarea)
 
+class Raid(models.Model):
+    name = models.CharField(max_length=50)
+    current = models.BooleanField()
+    def __unicode__(self):
+        return self.name
+
+class Boss(models.Model):
+    name = models.CharField(max_length=50)
+    picture = ImageWithThumbsField(upload_to = "uploads", blank=True,
+                                sizes=((128,128)))
+    order = models.IntegerField()
+    killed = models.BooleanField()
+    article = models.ForeignKey('Article', blank=True, null=True)
+    raid = models.ForeignKey('Raid')
+    def d_class(self):
+        if(self.killed):
+            return "dead"
+        else:
+            return ""
+    def __unicode__(self):
+        return self.name

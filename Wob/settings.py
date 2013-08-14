@@ -141,6 +141,8 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     "demo.context_processors.gow",
     "demo.context_processors.roster",
     "demo.context_processors.attending",
+    "demo.context_processors.bosses",
+    "demo.context_processors.raid"
 )
 
 # A sample logging configuration. The only tangible logging

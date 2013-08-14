@@ -21,7 +21,7 @@
                     {{char.character.bnet.get_class_name}}
                     {% if user.is_authenticated and  char.character.player = user %}
                         <li>
-                        &nbsp  &nbsp &nbsp &nbsp  <a href="{% url remove_attendance char.id %}">Remove</a>
+                        &nbsp  &nbsp &nbsp &nbsp  <a href="{% url "remove_attendance" char.id %}">Remove</a>
                         </li>
                     {%endif%}
                 </li>
