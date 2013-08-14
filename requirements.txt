@@ -1,6 +1,7 @@
-DateUtils==0.5.2
-Django==1.4.1
+DateUtils
+Django==1.5
 PIL==1.1.7
 battlenet==0.2.6
 python-dateutil==2.1
 django-extensions==0.9
+south
