@@ -69,7 +69,14 @@ li {
     text-decoration: none;
 }
 #raid_progress .dead {
-    background: rgba(2,83,5, 0.69);  
+    -webkit-filter: contrast(0);
+    -moz-filter: contrast(0);
+    filter: contrast(0);
+}
+#raid_progress .dead:hover {
+    -webkit-filter: contrast(1);
+    -moz-filter: contrast(1);
+    filter: contrast(1);
 }
 #goat_of_the_week {
     height: 250px;
