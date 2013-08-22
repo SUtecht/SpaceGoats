@@ -142,9 +142,17 @@ INSTALLED_APPS = (
 )
 
 # append a custom context processor
-#from django.conf import global_settings
-#template_context_processors = global_settings.template_context_processors + (
-#)
+from django.conf import global_settings
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    "demo.context_processors.events",
+    "demo.context_processors.gow",
+    "demo.context_processors.roster",
+    "demo.context_processors.attending",
+    "demo.context_processors.bosses",
+    "demo.context_processors.raid",
+    "ffxiv.context_processors.characters"
+
+)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -1,12 +1,6 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
-# Moving wow specific context processors here
-from django.conf import global_settings, settings
-settings.TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    "ffxiv.context_processors.characters",
-)
-
- 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -36,3 +30,9 @@ urlpatterns = patterns('ffxiv.views',
     url(r'^login/', 'login_view', name='login'),
 )	
 
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )

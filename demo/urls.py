@@ -1,16 +1,5 @@
 from django.conf.urls import patterns, include, url
-
-# Moving wow specific context processors here
-from django.conf import global_settings, settings
-settings.TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    "demo.context_processors.events",
-    "demo.context_processors.gow",
-    "demo.context_processors.roster",
-    "demo.context_processors.attending",
-    "demo.context_processors.bosses",
-    "demo.context_processors.raid"
-)
-
+from django.conf import settings
  
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -53,3 +42,9 @@ urlpatterns = patterns('demo.views',
     url(r'register_view/', 'register_view', name='register_view'),
 )	
 
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )
