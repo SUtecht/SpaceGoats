@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load dict %}
+{% block articles %}
+        <div class="article">
+            <form enctype="multipart/form-data" action="{% url "save_article" %}" method="post">{% csrf_token %}
+                {{ article_form.non_field_errors }}
+                <div class="fieldWrapper">
+                    {{ article_form.title.errors }}
+                    <label for="id_subject">Title:</label>
+                    {{ article_form.title }}
+                </div>
+                </br>
+                <p>To put a page break in use &lt;!--break--&gt;</p>
+                <div class="fieldWrapper">
+                    {{ article_form.text.errors }}
+                    <label for="id_subject">Body:</label>
+                    {{ article_form.text }}
+                </div>
+                </br>
+                <div class="fieldWrapper">
+                    {{ article_form.img.errors }}
+                    <label for="id_subject">Image:</label>
+                    {{ article_form.img }}
+                </div>
+                </br>
+                <input type="submit" value="Submit" />
+            </form>
+    </div>
+{% endblock %}

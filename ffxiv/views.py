@@ -5,6 +5,7 @@ from ffxiv.models import *
 import datetime
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
 def index(request):
     # Find last 6 articles
@@ -76,3 +77,32 @@ def save_screenshot(request):
 
             return redirect('home')
     return new_screenshot_page(request)
+
+def login_view(request):
+    error_message = None
+
+    if request.method == 'POST':
+        #create new user
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            # return an error message
+            error_message = "Login or password was invalid!"
+
+
+    #display page for logging in
+    login_form = LoginForm()
+   
+    return render_to_response('ffxiv/login.html',
+            dict(login_form=login_form, 
+                 error_message=error_message),
+            context_instance=RequestContext(request))
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+

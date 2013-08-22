@@ -32,7 +32,7 @@ class Article(models.Model):
     text = models.TextField()
     creation_date = models.DateField(auto_now=True)
     def __unicode__(self):
-        return title
+        return self.title
 
 class ArticleForm(forms.Form):
     title = forms.CharField(max_length=50)
@@ -49,3 +49,8 @@ class Screenshot(models.Model):
 class ScreenshotForm(forms.Form):
     caption = forms.CharField(max_length=500)
     img = forms.ImageField()
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput)
+

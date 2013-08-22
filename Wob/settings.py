@@ -101,11 +101,17 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'subdomains.middleware.SubdomainURLRoutingMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'Wob.urls'
+
+SUBDOMAIN_URLCONFS = {
+    None: 'demo.urls',
+    'ffxiv': 'ffxiv.urls',
+}
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'Wob.wsgi.application'
@@ -136,15 +142,9 @@ INSTALLED_APPS = (
 )
 
 # append a custom context processor
-from django.conf import global_settings
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    "demo.context_processors.events",
-    "demo.context_processors.gow",
-    "demo.context_processors.roster",
-    "demo.context_processors.attending",
-    "demo.context_processors.bosses",
-    "demo.context_processors.raid"
-)
+#from django.conf import global_settings
+#template_context_processors = global_settings.template_context_processors + (
+#)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

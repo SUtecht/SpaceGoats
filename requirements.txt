@@ -1,5 +1,6 @@
 DateUtils
 Django==1.5
+django-subdomains=2.0
 PIL==1.1.7
 battlenet==0.2.6
 python-dateutil==2.1
