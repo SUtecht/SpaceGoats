@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'goatnails',
     'demo',
+    'ffxiv',
     'south',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
