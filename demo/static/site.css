@@ -25,6 +25,12 @@ li {
     margin: 0;
 }
 
+#banner {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: grey;
+}
+
 #container {
     background-color:#F5F0EB;
 }
@@ -69,7 +75,14 @@ li {
     text-decoration: none;
 }
 #raid_progress .dead {
-    background: rgba(2,83,5, 0.69);  
+    -webkit-filter: contrast(0);
+    -moz-filter: contrast(0);
+    filter: contrast(0);
+}
+#raid_progress .dead:hover {
+    -webkit-filter: contrast(1);
+    -moz-filter: contrast(1);
+    filter: contrast(1);
 }
 #goat_of_the_week {
     height: 250px;
@@ -200,4 +213,55 @@ li {
 }
 .Warrior{
     background-color:#C79C6E;
+}
+
+#slides {
+  display: none;
+  margin-bottom:50px;
+}
+
+.slidesjs-navigation {
+  margin-top:3px;
+  text-decoration: none;
+}
+
+.slidesjs-previous {
+  margin-right: 5px;
+  float: left;
+}
+
+.slidesjs-next {
+  margin-right: 5px;
+  float: left;
+}
+
+.slidesjs-pagination {
+  margin: 6px 0 0;
+  float: right;
+  list-style: none;
+}
+
+.slidesjs-pagination li {
+  float: left;
+  margin: 0 1px;
+}
+
+.slidesjs-pagination li a {
+  display: block;
+  width: 13px;
+  height: 0;
+  padding-top: 13px;
+  background-image: url(img/pagination.png);
+  background-position: 0 0;
+  float: left;
+  overflow: hidden;
+}
+
+.slidesjs-pagination li a.active,
+.slidesjs-pagination li a:hover.active {
+  background-position: 0 -13px
+}
+
+.slidesjs-pagination li a:hover {
+  background-position: 0 -26px
 }
