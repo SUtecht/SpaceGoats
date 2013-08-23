@@ -25,6 +25,12 @@ li {
     margin: 0;
 }
 
+#banner {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: grey;
+}
+
 #container {
     background-color:#F5F0EB;
 }
