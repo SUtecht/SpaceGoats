@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
 def index(request):
-    # Find last 6 articles
-    articles = Article.objects.all().order_by('-creation_date')[:6]
+    # Find last 3 articles
+    articles = Article.objects.all().order_by('-creation_date')[:3]
     # Last 5 screenshots
     screenshots = Screenshot.objects.all().order_by('-creation_date')[:5]
     return render_to_response('ffxiv/home.html',
@@ -71,7 +71,7 @@ def save_screenshot(request):
             # print 'it is valid!'
             caption = screenshot_form.cleaned_data['caption']
             img = screenshot_form.cleaned_data['img']
-            new_screenshot = Screenshot(caption=caption, author= request.user,
+            new_screenshot = Screenshot(caption=caption, user= request.user,
                                   image = img, creation_date = datetime.date.today())
             new_screenshot.save()
 

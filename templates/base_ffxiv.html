@@ -16,6 +16,32 @@
     <script type='text/javascript' src='{{STATIC_URL}}jquery.js'></script>
     <!-- <script type='text/javascript' src='{{STATIC_URL}}fullcalendar.js'></script> -->
     <script type='text/javascript' src='{{STATIC_URL}}jquery-ui-1.8.22.custom/js/jquery-ui-1.8.22.custom.min.js'></script>
+    <script type='text/javascript' src='{{STATIC_URL}}jquery.slides.min.js'></script>
+    <script>
+        $(function(){
+            $("#slides").slidesjs({
+                width: 940,
+                height: 528,
+                play: {
+                active: true,
+                    // [boolean] Generate the play and stop buttons.
+                    // You cannot use your own buttons. Sorry.
+                effect: "slide",
+                    // [string] Can be either "slide" or "fade".
+                interval: 10000,
+                    // [number] Time spent on each slide in milliseconds.
+                auto: true,
+                    // [boolean] Start playing the slideshow on load.
+                swap: true,
+                    // [boolean] show/hide stop and play buttons
+                pauseOnHover: true,
+                    // [boolean] pause a playing slideshow on hover
+                restartDelay: 2500
+                    // [number] restart delay on inactive slideshow
+                }
+            });
+        });
+    </script>
     
 </head>
 
@@ -30,8 +56,10 @@
         </div>
         <div id="nav" class="grid_12">
             <ul>
+                <li><a href="{% url "archive" %}">Archive</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url "new_article" %}">Submit Article</a></li>
+                <li><a href="{% url "new_screenshot" %}">Submit Screenshot</a></li>
                 <li><a href='{% url "logout" %}'>Logout</a></li>
                 {% else %}
                 <li><a href='{% url "login" %}'>Login</a></li>
@@ -42,11 +70,11 @@
         </div>
         <div class="clear"></div>
 
-        <div id="articles" class="grid_11">
+        <div id="ffxiv_articles" class="grid_11">
             {% block articles%}{%endblock%}
             
         </div>
-        <div id="sidebar" class="grid_5">
+        <div id="ffxiv_sidebar" class="grid_5">
             <div id="players">
                 <h2>Players</h2>
                 <table>
@@ -66,12 +94,17 @@
             </div>
         </div>
 
-        <div class="screenshots">
+        {% if screenshots %}
+        <div id="slides" class="grid_16">
             {% for s in screenshots %}
-                <img src="{{s.image.url}}">
-                <p>{{s.caption}}</p>
+                <div>
+                    <a href="{{s.image.url}}"><img src="{{s.image.url_940x528}}"></a>
+                    <br/>
+                    <span>{{s.caption}}</span>
+                </div>
             {% endfor %}
         </div>
+        {% endif %}
 
 
         <div class="clear"></div>

@@ -1,16 +1,25 @@
-{% extends "base_ffxiv.html" %}
+{% extends "base.html" %}
 {% load dict %}
 {% block articles %}
     <div class="article">
-    <center><h2>Space Goats Archive</h2></center>
+    <center><h2>Space Goats CoastToCoast Archive</h2></center>
     
     <b>Articles</b>
     {%for i in articles %}
         <ul>
-            <li>{{i.title}}</li>
-            <li><p>{{i.text}}</p></li> 
+            <li><a href= "{% url "article" i.id %}">{{i.title}}</a></li>
+    
         </ul>
     {%endfor%}
     
+    </br>
+        <b id="gows">Hall of Deposed Despots</b>
+    {% for i in gows %}
+        <ul>
+            <li><a href= "{% url "gow" i.id %}">{{i.name}}</a></li>
+    
+        </ul>
+    {%endfor%}
+ 
     </div>
 {% endblock %}
