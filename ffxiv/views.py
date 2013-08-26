@@ -5,7 +5,7 @@ from ffxiv.models import *
 import datetime
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
+from django.contrib.auth import login, logout, authenticate
 
 def index(request):
     # Find last 3 articles
