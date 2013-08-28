@@ -9,6 +9,7 @@ class Character(models.Model):
     server = models.CharField(max_length=100)
     levels = models.ManyToManyField('Job', through='Level')
     picture = ImageWithThumbsField(upload_to = "uploads", blank=True)
+    lodestone_id = models.IntegerField(blank=True)
     def __unicode__(self):
         return self.name
 
@@ -22,7 +23,7 @@ class Job(models.Model):
 class Level(models.Model):
     character = models.ForeignKey(Character)
     job = models.ForeignKey(Job)
-    level = models.IntegerField()
+    level = models.CharField(max_length=2)
     def __unicode__(self):
         return "{} {} {}".format(self.character, self.job, self.level)
 
