@@ -1,6 +1,18 @@
+from django_extensions.management.jobs import HourlyJob
+
 import requests
 import re
+
 from ffxiv.models import *
+
+class Job(HourlyJob):
+    help = "Update ffxiv character info, from Lodestone."
+
+    def execute(self):
+        # executing empty sample job
+        print "Updating ffxiv character info."
+
+        update_all()
 
 def update_character(c):
     r = requests.get('http://na.finalfantasyxiv.com/lodestone/character/{}/'.format(c.lodestone_id))
@@ -22,3 +34,5 @@ def update_all():
     characters = Character.objects.all()
     for c in characters:
         update_character(c)
+
+
