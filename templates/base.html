@@ -177,12 +177,16 @@
 
             <div id="goat_of_the_week">
                 <h2>Glorious Goat Leader</h2>
+                {% if gow %}
                 <b><a href = "{% url "gow" gow.id %}"> {{gow.name}}</a></b>
                 <br/>
                 <img src="{{gow.img.url_128x128}}"/>
                 <p>
                 <a href = "{% url "gow" gow.id %}"> View Full </a>
                 </p>
+                {% else %}
+                <b>OH GOD THE GOAT LEADER IS DEAD</b>
+                {% endif %}
             </div>
         </div>
 
