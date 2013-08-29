@@ -3,7 +3,7 @@ from django_extensions.management.jobs import HourlyJob
 import requests
 import re
 
-from ffxiv.models import *
+from ffxiv.models import Character, Level, Job as ZivarJob
 
 class Job(HourlyJob):
     help = "Update ffxiv character info, from Lodestone."
@@ -15,14 +15,18 @@ class Job(HourlyJob):
         update_all()
 
 def update_character(c):
-    r = requests.get('http://na.finalfantasyxiv.com/lodestone/character/{}/'.format(c.lodestone_id))
+    headers = {
+        # Pretend we're someone else!
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.62 Safari/537.36',
+    }
+    r = requests.get('http://na.finalfantasyxiv.com/lodestone/character/{}/'.format(c.lodestone_id), headers=headers)
     m = re.search('player_name_brown">(.*)</a>', r.text)
     if m:
         print("Updating {}".format(m.group(1)))
     else:
         print("Character not found {} {}".format(c.name, c.lodestone_id))
         return
-    for job in Job.objects.all():
+    for job in ZivarJob.objects.all():
         m = re.search('{}</td>\s*<td>(.*)</td>'.format(job.name.lower()), r.text)
         if m:
             print("{} {}".format(job.name, m.group(1)))
