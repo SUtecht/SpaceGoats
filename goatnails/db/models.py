@@ -9,7 +9,9 @@ something reasonable (ie, no cropping of thumbnails)
 django-thumbs on-the-fly
 https://github.com/madmw/django-thumbs
 
-A fork of django-thumbs [http://code.google.com/p/django-thumbs/] by Antonio Melé [http://django.es].
+A fork of django-thumbs 
+[http://code.google.com/p/django-thumbs/] 
+by Antonio Melé [http://django.es].
 
 """
 import cStringIO
@@ -17,18 +19,10 @@ from django.db.models import ImageField
 from django.db.models.fields.files import ImageFieldFile
 from django.core.files.base import ContentFile
 from django.conf import settings
-from goatnails.settings import THUMBS_GENERATE_ANY_SIZE, THUMBS_GENERATE_MISSING_THUMBNAILS, THUMBS_GENERATE_THUMBNAILS
-
-try:
-    from PIL import Image, ImageOps
-except:
-    # Mac OSX
-    import Image, ImageOps
-
-# register with South. TODO: wrap this in a try/except
-from south.modelsinspector import add_introspection_rules
-add_introspection_rules([], ["^goatnails\.db\.models\.ImageWithThumbsField"])
-
+from goatnails.settings import (THUMBS_GENERATE_ANY_SIZE, 
+                                THUMBS_GENERATE_MISSING_THUMBNAILS, 
+                                THUMBS_GENERATE_THUMBNAILS)
+from PIL import Image
 
 def generate_thumb(original, size, format='JPEG'):
     """
@@ -37,17 +31,15 @@ def generate_thumb(original, size, format='JPEG'):
     Arguments:
     original -- The image being resized as `File`.
     size     -- Desired thumbnail size as `tuple`. Example: (70, 100)
-    format   -- Format of the original image ('JPEG', 'PNG', ...) The thumbnail will be generated using this same format.
+    format   -- Format of the original image ('JPEG', 'PNG', ...) 
+                The thumbnail will be generated using this same format.
 
     """
-    original.seek(0)  # see http://code.djangoproject.com/ticket/8222 for details
+    original.seek(0)  # see http://code.djangoproject.com/ticket/8222
     image = Image.open(original)
     if image.mode not in ('L', 'RGB', 'RGBA'):
         image = image.convert('RGB')
 
-    # thumbnail = ImageOps.fit(image, size, Image.ANTIALIAS)
-
-    # avoiding using ImageOps.fit() to avoid cropping the image
     thumbnail = image.copy()
     thumbnail.thumbnail(size, Image.ANTIALIAS)
 
@@ -59,8 +51,9 @@ def generate_thumb(original, size, format='JPEG'):
 
 
 class ImageWithThumbsFieldFile(ImageFieldFile):
-    """Django `ImageField` replacement with automatic generation of thumbnail images.
-       See `ImageWithThumbsField` for usage example.
+    """
+    Django `ImageField` replacement with automatic generation of thumbnail images.
+    See `ImageWithThumbsField` for usage example.
 
     """
 
