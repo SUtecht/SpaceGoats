@@ -1,10 +1,10 @@
 import logging
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import base64
 import hmac
 import hashlib
 import time
-import urlparse
+import urllib.parse
 from .things import Character, Realm, Guild, Reward, Perk
 from .exceptions import APIError, CharacterNotFound, GuildNotFound, RealmNotFound
 from .utils import quote
@@ -80,10 +80,10 @@ class Connection(object):
             'path': path,
             'params': '&'.join('='.join(
                 (k, ','.join(v) if isinstance(v, (set, list)) else v))
-                for k, v in params.items() if v)
+                for k, v in list(params.items()) if v)
         }
 
-        uri = urlparse.urlparse(url)
+        uri = urllib.parse.urlparse(url)
 
         if self.public_key:
             signature = self.sign_request('GET', date, uri.path, self.private_key)
@@ -92,12 +92,12 @@ class Connection(object):
         logger.debug('Battle.net => ' + url)
 
         try:
-            request = urllib2.Request(url, None, headers)
+            request = urllib.request.Request(url, None, headers)
             if self.eventlet and eventlet_urllib2:
                 response = eventlet_urllib2.urlopen(request)
             else:
-                response = urllib2.urlopen(request)
-        except urllib2.URLError, e:
+                response = urllib.request.urlopen(request)
+        except urllib.error.URLError as e:
             raise APIError(str(e))
 
         try:

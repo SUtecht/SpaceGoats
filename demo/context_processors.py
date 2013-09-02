@@ -56,4 +56,4 @@ def roster(request):
     return dict(players=players)
 
 def attending(request):
-    return dict(im_attending=set(map(lambda x: x.event.id, Event_Attendee.objects.only('event'))))
+    return dict(im_attending=set([x.event.id for x in Event_Attendee.objects.only('event')]))

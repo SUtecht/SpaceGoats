@@ -10,7 +10,7 @@ class Job(HourlyJob):
 
     def execute(self):
         # executing empty sample job
-        print "Updating ffxiv character info."
+        print("Updating ffxiv character info.")
 
         update_all()
 

@@ -3,7 +3,7 @@ from battlenet import Character as BnetChar
 
 
 def update_character(char):
-    print "Getting info for: {}".format(char.name)
+    print("Getting info for: {}".format(char.name))
     try:
         character = BnetChar(battlenet.UNITED_STATES, 
                              char.server,
@@ -16,4 +16,4 @@ def update_character(char):
 
         char.save()
     except:
-        print "There was an error getting!"
+        print("There was an error getting!")

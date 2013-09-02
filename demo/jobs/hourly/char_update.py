@@ -8,7 +8,7 @@ class Job(HourlyJob):
 
     def execute(self):
         # executing empty sample job
-        print "Updating character info now."
+        print("Updating character info now.")
 
         for char in Character.objects.all():
             update_character(char)

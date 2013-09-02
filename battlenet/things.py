@@ -186,7 +186,7 @@ class Character(LazyThing):
                 'secondary': []
             }
 
-            for type_ in professions.keys():
+            for type_ in list(professions.keys()):
                 professions[type_] = [Profession(self, profession)
                     for profession in self._data[Character.PROFESSIONS][type_]]
 
@@ -498,7 +498,7 @@ class Build(Thing):
         }
 
         if 'glyphs' in data:
-            for type_ in self.glyphs.keys():
+            for type_ in list(self.glyphs.keys()):
                 self.glyphs[type_] = [Glyph(self, glyph) for glyph in data['glyphs'][type_]]
 
         Tree = collections.namedtuple('Tree', ('points', 'total',))
@@ -810,7 +810,7 @@ class Item(Thing):
 
         self.gems = collections.defaultdict(lambda: None)
 
-        for key, value in data['tooltipParams'].items():
+        for key, value in list(data['tooltipParams'].items()):
             if key.startswith('gem'):
                 self.gems[int(key[3:])] = value
 
