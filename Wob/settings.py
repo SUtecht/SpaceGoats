@@ -112,7 +112,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'Wob.urls'
 
 SUBDOMAIN_URLCONFS = {
-    None: 'demo.urls',
+    None: 'wow.urls',
     'ffxiv': 'ffxiv.urls',
 }
 
@@ -133,25 +133,22 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
     'django_extensions',
     'goatnails',
-    'demo',
+    'wow',
     'ffxiv',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
 
 # append a custom context processor
 from django.conf import global_settings
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    "demo.context_processors.events",
-    "demo.context_processors.gow",
-    "demo.context_processors.roster",
-    "demo.context_processors.attending",
-    "demo.context_processors.bosses",
-    "demo.context_processors.raid",
+    "wow.context_processors.events",
+    "wow.context_processors.gow",
+    "wow.context_processors.roster",
+    "wow.context_processors.attending",
+    "wow.context_processors.bosses",
+    "wow.context_processors.raid",
     "ffxiv.context_processors.characters"
 )
 

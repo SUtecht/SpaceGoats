@@ -1,5 +1,5 @@
 import datetime
-from demo.models import *
+from wow.models import *
 
 
 def events(request):

@@ -1,4 +1,4 @@
-from demo.models import *
+from wow.models import *
 from django.contrib import admin
 
 

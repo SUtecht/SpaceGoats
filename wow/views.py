@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-from demo.models import *
+from wow.models import *
 from django.http import Http404
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
@@ -18,19 +18,12 @@ from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 
-from demo.utils import update_character
-
-# old imports not being used anymore, probably need to be deleted
-# import glob
-# import Image
-# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-# from django.core.urlresolvers import reverse
-
+from wow.utils import update_character
 
 def index(request):
     approved_articles = Article.objects.all().filter(approved = 'Y')
     latest_articles = approved_articles.order_by('-id')[:4]
-    return render_to_response('demo/home.html', {'articles': latest_articles }, context_instance=RequestContext(request))
+    return render_to_response('wow/home.html', {'articles': latest_articles }, context_instance=RequestContext(request))
 
 def eventsJson(request):
     month_start = datetime.datetime(timezone.now().year, timezone.now().month, 1, 0)
@@ -65,7 +58,7 @@ def event(request, event_id):
         print(c.bnet)
     if len(attendees) > 0:
         print(attendees[0].bnet)'''
-    return render_to_response('demo/events.html', {'event':event,
+    return render_to_response('wow/events.html', {'event':event,
                                                 'at_form':at_form,
                                                 'attendees':attendees,
                                                 'timeszone':timezone,
@@ -73,24 +66,24 @@ def event(request, event_id):
                                                 context_instance=RequestContext(request))
 
 def about(request):
-    guild = Guild(battlenet.UNITED_STATES, 'Auchindoun', 'Space Goats CoastToCoast')
-    return render_to_response('demo/about.html', {'guild':guild},
+    guild = Guild(battlenet.UNITED_STATES, 'Whisperwind', 'Space Goats CoastToCoast')
+    return render_to_response('wow/about.html', {'guild':guild},
                                                 context_instance=RequestContext(request))
                                                 
 def chat(request):
-    return render_to_response('demo/chat.html',
+    return render_to_response('wow/chat.html',
                                                 context_instance=RequestContext(request))
 def archive(request):
     approved_articles = Article.objects.all().filter(approved = 'Y')
     articles = approved_articles.order_by('-id')
     gows =  Goat_of_the_Week.objects.all().order_by('-id')
-    return render_to_response('demo/archive.html', {'articles':articles,
+    return render_to_response('wow/archive.html', {'articles':articles,
                                                     'gows':gows},
                                                 context_instance=RequestContext(request))
 
 def article(request,article_id):
     article = Article.objects.get(pk=article_id)
-    return render_to_response('demo/article.html', {'article':article},
+    return render_to_response('wow/article.html', {'article':article},
                                                 context_instance=RequestContext(request))
 @login_required
 def profile(request):
@@ -111,7 +104,7 @@ def profile(request):
                     error_message = "This character does not exist on this server."
         else:
             new_character_form = char_form
-    return render_to_response('demo/profile.html', {'error_message': error_message, 'characters':characters, 'new_character_form':new_character_form}, context_instance=RequestContext(request))
+    return render_to_response('wow/profile.html', {'error_message': error_message, 'characters':characters, 'new_character_form':new_character_form}, context_instance=RequestContext(request))
 
 @login_required  
 def new_article_page(request):
@@ -119,7 +112,7 @@ def new_article_page(request):
         article_form = ArticleForm(request.POST)
     else:
         article_form = ArticleForm()
-    return render_to_response('demo/new_article.html', {'article_form':article_form},
+    return render_to_response('wow/new_article.html', {'article_form':article_form},
                                                 context_instance=RequestContext(request))
 
 @login_required                                             
@@ -145,7 +138,7 @@ def new_g_o_w(request):
         g_o_w_form = Goat_of_the_Week_Form(request.POST)
     else:
         g_o_w_form = Goat_of_the_Week_Form()
-    return render_to_response('demo/g_of_week_new.html', {'g_o_w_form':g_o_w_form},
+    return render_to_response('wow/g_of_week_new.html', {'g_o_w_form':g_o_w_form},
                                                 context_instance=RequestContext(request))
     
 def save_g_o_w(request):
@@ -166,18 +159,18 @@ def save_g_o_w(request):
 
 def gow(request,gow_id):
     my_gow = Goat_of_the_Week.objects.get(pk=gow_id)
-    return render_to_response('demo/gow.html', {'my_gow':my_gow},
+    return render_to_response('wow/gow.html', {'my_gow':my_gow},
                                                 context_instance=RequestContext(request))
 
 def register_failed(request, error_message):
         if request.method == 'POST':
             new_user_form = NewUserForm(request.POST)
-        return render_to_response('demo/register.html',{'new_user_form':new_user_form, 'error_message':error_message } ,
+        return render_to_response('wow/register.html',{'new_user_form':new_user_form, 'error_message':error_message } ,
                                                 context_instance=RequestContext(request))
                                                 
 def register(request ):                                               
         new_user_form = NewUserForm()
-        return render_to_response('demo/register.html',{'new_user_form':new_user_form } ,
+        return render_to_response('wow/register.html',{'new_user_form':new_user_form } ,
                                                 context_instance=RequestContext(request)) 
                                                 
 def register_view(request):
@@ -241,7 +234,7 @@ def login_view(request):
     #display page for logging in
     login_form = LoginForm()
    
-    return render_to_response('demo/login.html',
+    return render_to_response('wow/login.html',
             dict(login_form=login_form, 
                  error_message=error_message),
             context_instance=RequestContext(request))

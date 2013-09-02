@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('demo.views',
+urlpatterns = patterns('wow.views',
     # Examples:
     # url(r'^$', 'newmjidemo.views.home', name='home'),
     # url(r'^newmjidemo/', include('newmjidemo.foo.urls')),

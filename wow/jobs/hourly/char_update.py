@@ -1,7 +1,7 @@
 from django_extensions.management.jobs import HourlyJob
 
-from demo.models import Character
-from demo.utils import update_character
+from wow.models import Character
+from wow.utils import update_character
 
 class Job(HourlyJob):
     help = "Update character info."
