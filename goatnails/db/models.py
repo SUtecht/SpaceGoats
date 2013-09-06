@@ -97,7 +97,11 @@ class ImageWithThumbsFieldFile(ImageFieldFile):
 
         """
         sizeStr = name.replace("url_", "")
-        width, height = sizeStr.split("x")
+        # fix for change in hasattr() behavior between py2 and py3.
+        try:
+            width, height = sizeStr.split("x")
+        except:
+            raise AttributeError("nope")
         requestedSize = (int(width), int(height))
         acceptedSize = None
         if THUMBS_GENERATE_ANY_SIZE:
