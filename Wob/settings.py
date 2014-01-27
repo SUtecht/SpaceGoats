@@ -153,7 +153,8 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     "demo.context_processors.attending",
     "demo.context_processors.bosses",
     "demo.context_processors.raid",
-    "ffxiv.context_processors.characters"
+    "ffxiv.context_processors.characters",
+    "ffxiv.context_processors.levels"
 
 )
 

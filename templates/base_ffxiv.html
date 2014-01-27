@@ -40,6 +40,7 @@
                     // [number] restart delay on inactive slideshow
                 }
             });
+  
         });
     </script>
     
@@ -86,7 +87,13 @@
                     <tbody>
                     {% for c in characters %}
                         <tr>
-                            <td><span>{{c.name}}</span></td>
+                            <td><span id ="ffxiv_roster"><a href="http://na.finalfantasyxiv.com/lodestone/character/{{c.lodestone_id}}">{{c.name}}</a>
+                            {% for l in levels %}
+                                {%if l.character == c %}
+                                    <img src="{{l.job.icon.url}}">
+                                {% endif %}
+                            {% endfor %}
+                            </span></td> 
                         </tr>
                     {% endfor %}
                 </tbody>
