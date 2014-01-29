@@ -40,8 +40,20 @@
                     // [number] restart delay on inactive slideshow
                 }
             });
+            $(".ffxiv_roster").hover(function(event){
+                    var first_name = $(this).text().substring(0,$(this).text().indexOf(' '));
+                    var my_tip = $(".tip:contains('" + first_name + "')");
+                    
+                    my_tip.css({"display":"block", "left":event.pageX+ 40,"top":event.pageY+40, "background-color":"#F5F0EB", "border":"2px solid black", "height":100, "width":335, "position":"absolute", "z-index":10});
+                    console.log("Where is ",$("#tip:contains('" +  + "')") );
+                }, function(event){
+                    var first_name = $(this).text().substring(0,$(this).text().indexOf(' '));
+                    var my_tip = $(".tip:contains('" + first_name + "')");
+                    my_tip.css("display", "none");
+                });
         });
     </script>
+
     
 </head>
 
@@ -86,14 +98,33 @@
                     <tbody>
                     {% for c in characters %}
                         <tr>
-                            <td><span>{{c.name}}</span></td>
+                            <td><span  class="ffxiv_roster" id =""><a href="http://na.finalfantasyxiv.com/lodestone/character/{{c.lodestone_id}}">{{c.name}}</a>
+                            {% for l in max_levels %}
+                                {%if l.character == c %}
+                                    <img src="{{l.job.icon.url}}">
+                                {% endif %}
+                            {% endfor %}
+                            </span></td> 
                         </tr>
                     {% endfor %}
+                    
                 </tbody>
                 </table>
             </div>
         </div>
 
+        
+        {% for c in characters %}
+            <div class= "tip" style="display:none;  ">
+                <center><b>{{c.name}}</b></center>
+                {% for l in levels %}
+                    {%if l.character == c %}
+                        <img src="{{l.job.icon.url}}"> {{l.level}} 
+                    {% endif %}
+                {% endfor %}
+            </div>                
+        {% endfor %}
+        
         {% if screenshots %}
         <div id="slides" class="grid_16">
             {% for s in screenshots %}
