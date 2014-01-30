@@ -11,13 +11,13 @@ class Character(models.Model):
     class_name = models.CharField(max_length=15)
     ilvl = models.IntegerField()
     level = models.IntegerField()
-    def __unicode__(self):
+    def __str__(self):
         return "{} ".format(self.name)
 
 class Player(models.Model):
     user = models.OneToOneField(User)
     main = models.ForeignKey('Character', related_name='main_character')
-    def __unicode__(self):
+    def __str__(self):
         return "{} ".format(self.user.username)
 
 class LoginForm(forms.Form):
@@ -42,7 +42,7 @@ class AttendForm(forms.Form):
 class Event(models.Model):
     name = models.CharField(max_length=100)
     begin = models.DateTimeField()
-    def __unicode__(self):
+    def __str__(self):
         return "{} {}".format( self.name, self.begin)
 
 class Event_Attendee(models.Model):
@@ -60,7 +60,7 @@ class EventForm(forms.Form):
 class Role(models.Model):
     name = models.CharField(max_length=10)
     img = models.ImageField(upload_to = "uploads")
-    def __unicode__(self):
+    def __str__(self):
         return "{} ".format(self.name)
   
 class AttendForm(forms.Form):
@@ -73,7 +73,7 @@ class AttendForm(forms.Form):
 class Rank(models.Model):
     name = models.CharField(max_length=100)
     level = models.IntegerField()
-    def __unicode__(self):
+    def __str__(self):
         return "{} ".format( self.name)
 
 class Article(models.Model):
@@ -85,7 +85,7 @@ class Article(models.Model):
     author = models.ForeignKey(User)
     approved = models.BooleanField(default=False)
     creation_date = models.DateField()
-    def __unicode__(self):
+    def __str__(self):
         return "{} by {}  {} ".format( self.title , self.author , self.approved )
 
 class ArticleForm(forms.Form):
@@ -108,7 +108,7 @@ class Goat_of_the_Week_Form(forms.Form):
 class Raid(models.Model):
     name = models.CharField(max_length=50)
     current = models.BooleanField()
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Boss(models.Model):
@@ -124,5 +124,5 @@ class Boss(models.Model):
             return "dead"
         else:
             return ""
-    def __unicode__(self):
+    def __str__(self):
         return self.name

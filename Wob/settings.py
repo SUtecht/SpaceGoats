@@ -7,7 +7,7 @@ TEMPLATE_DEBUG = DEBUG
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 #ALLOWED_HOSTS = ['www.spacegoatsc2c.com', 'spacegoatsc2c.com', 'ffxiv.spacegoatsc2c.com']
-ALLOWED_HOSTS = ['elodin.otg2.com', 'www.elodin.otg2.com', 'ffxiv.elodin.otg2.com']
+ALLOWED_HOSTS = ['www.new.spacegoatsc2c.com', 'new.spacegoatsc2c.com', 'ffxiv.new.spacegoatsc2c.com']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),

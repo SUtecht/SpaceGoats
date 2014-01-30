@@ -1,6 +1,6 @@
 requests
 pillow
-battlenet==0.2.6
+#battlenet==0.2.6
 #Django==1.5
 git+https://github.com/django/django
 python-dateutil==2.1
