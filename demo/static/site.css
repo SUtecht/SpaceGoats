@@ -265,3 +265,16 @@ li {
 .slidesjs-pagination li a:hover {
   background-position: 0 -26px
 }
+
+.ffxiv_article {
+    margin-bottom: 10px;
+    background: snow;
+    border: 1px solid #CCC;
+    padding: 5px;
+}
+.ffxiv_roster img {
+    float: right;
+}
+.ffxiv_players td {
+    width: 250px;
+}
