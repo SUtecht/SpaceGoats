@@ -278,3 +278,8 @@ li {
 .ffxiv_players td {
     width: 250px;
 }
+#players {
+    background: snow;
+    border: 1px solid #CCC;
+    padding: 5px;
+}
