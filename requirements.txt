@@ -1,8 +1,9 @@
 requests
 pillow
 battlenet==0.2.6
-#Django==1.5
 git+https://github.com/django/django
 python-dateutil==2.1
 django-extensions==1.1.1
 django-subdomains==2.0
+MySQL-python==1.2.4b3
+gunicorn==0.14.6
