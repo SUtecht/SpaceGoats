@@ -4,7 +4,7 @@ from django.template import RequestContext
 from demo.models import *
 from django.http import Http404
 from django.utils import timezone
-from dateutils import relativedelta
+from dateutil.relativedelta import relativedelta
 import datetime
 from django.core import serializers
 import battlenet

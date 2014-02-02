@@ -1,9 +1,8 @@
-DateUtils
-Django==1.5
-django-subdomains=2.0
-PIL==1.1.7
-battlenet==0.2.6
-python-dateutil==2.1
-django-extensions==0.9
-south
 requests
+pillow
+battlenet==0.2.6
+#Django==1.5
+git+https://github.com/django/django
+python-dateutil==2.1
+django-extensions==1.1.1
+django-subdomains==2.0
