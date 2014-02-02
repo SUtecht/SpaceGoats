@@ -7,7 +7,7 @@
     {%for i in articles %}
         <ul>
             <li><h2>{{i.title}}</h2></li>
-            <li><p>{{i.text}}</p></li> 
+            <li><p>{{i.text|safe}}</p></li> 
         </ul>
     {%endfor%}
     
