@@ -5,9 +5,9 @@
     <center><h2>Space Goats Archive</h2></center>
     
     {%for i in articles %}
-        <ul>
+        <ul class="ffxiv_article">
             <li><h2>{{i.title}}</h2></li>
-            <li><div class="ffxiv_article">{{i.text|safe}}</div></li> 
+            <li>{{i.text|safe}}</li> 
         </ul>
     {%endfor%}
     
