@@ -7,7 +7,7 @@
     {%for i in articles %}
         <ul>
             <li><h2>{{i.title}}</h2></li>
-            <li><p>{{i.text|safe}}</p></li> 
+            <li><div class="ffxiv_article">{{i.text|safe}}</div></li> 
         </ul>
     {%endfor%}
     
