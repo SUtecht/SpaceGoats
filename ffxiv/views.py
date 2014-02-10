@@ -17,13 +17,13 @@ def index(request):
             context_instance=RequestContext(request))
 
 def archive(request):
-    articles = Article.objects.all().order_by('-creation_date')
+    articles = Article.objects.all().order_by('-id')
     return render_to_response('ffxiv/archive.html',
             {'articles':articles},
             context_instance=RequestContext(request))
 
 def gallery(requst):
-    screenshots = Screenshot.objects.all().order_by('-creation_date')
+    screenshots = Screenshot.objects.all().order_by('-id')
     return render_to_response('ffxiv/gallery.html',
             {'screenshots':screenshots},
             context_instance=RequestContext(request))
