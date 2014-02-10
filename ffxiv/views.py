@@ -9,9 +9,9 @@ from django.contrib.auth import login, logout, authenticate
 
 def index(request):
     # Find last 3 articles
-    articles = Article.objects.all().order_by('-creation_date')[:3]
+    articles = Article.objects.all().order_by('-id')[:3]
     # Last 5 screenshots
-    screenshots = Screenshot.objects.all().order_by('-creation_date')[:5]
+    screenshots = Screenshot.objects.all().order_by('-id')[:5]
     return render_to_response('ffxiv/home.html',
             {'articles':articles, 'screenshots':screenshots},
             context_instance=RequestContext(request))
