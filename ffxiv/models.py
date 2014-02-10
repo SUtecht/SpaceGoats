@@ -44,7 +44,7 @@ class Screenshot(models.Model):
     caption = models.CharField(max_length=500, blank=True)
     creation_date = models.DateField(auto_now=True)
     image = ImageWithThumbsField(upload_to = "uploads", blank=True,
-                                    sizes=((940,528)))
+                                    sizes=((940,528),(200,200)))
     def __unicode__(self):
         return self.caption
 

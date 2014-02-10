@@ -22,10 +22,10 @@ def archive(request):
             {'articles':articles},
             context_instance=RequestContext(request))
 
-def gallery(requst):
-    screenshots = Screenshot.objects.all().order_by('-id')
+def gallery(request):
+    screenshots_all = Screenshot.objects.all().order_by('-id')
     return render_to_response('ffxiv/gallery.html',
-            {'screenshots':screenshots},
+            {'screenshots_all':screenshots_all},
             context_instance=RequestContext(request))
 
 @login_required  

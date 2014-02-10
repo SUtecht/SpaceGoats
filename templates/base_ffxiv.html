@@ -129,11 +129,11 @@
         <div id="slides" class="grid_16">
             {% for s in screenshots %}
                 <div>
-                    <a href="{{s.image.url}}"><img src="{{s.image.url_940x528}}"></a>
+                    <a href="{{s.image.url}}"><img src="{{s.image.url_940x528}}" title ="{{s.caption}}"></a>
                     <br/>
                     <span>{{s.caption}}</span>
                 </div>
-            {% endfor %}
+            {% endfor %}     
         </div>
         {% endif %}
 
