@@ -10,5 +10,6 @@ def max_levels(request):
     return dict(max_levels=max_levels)
     
 def levels(request):
-    levels = Level.objects.all().order_by('-level')
+    levels = Level.objects.extra(select={'level_num': 'CAST(level AS INTEGER)'},
+                      order_by=['-level_num'])
     return dict(levels=levels)
