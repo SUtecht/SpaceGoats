@@ -44,7 +44,7 @@
                     var first_name = $(this).text().substring(0,$(this).text().indexOf(' '));
                     var my_tip = $(".tip:contains('" + first_name + "')");
                     
-                    my_tip.css({"display":"block", "left":event.pageX+ 40,"top":event.pageY+40, "background-color":"#F5F0EB", "border":"2px solid black", "height":100, "width":335, "position":"absolute", "z-index":10});
+                    my_tip.css({"display":"block", "left":event.pageX- 20,"top":event.pageY+30, "background-color":"#F5F0EB", "border":"2px solid black", "height":100, "width":335, "position":"absolute", "z-index":10});
                     console.log("Where is ",$("#tip:contains('" +  + "')") );
                 }, function(event){
                     var first_name = $(this).text().substring(0,$(this).text().indexOf(' '));
