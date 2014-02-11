@@ -3,6 +3,8 @@
 {% block articles %}
     <div class="ffxiv_article">
         <h1>Screenshot Gallery</h1>
+        <a href="{% url "new_screenshot" %}">Submit Screenshot</a>
+        
         {% if screenshots_all %}
             <div >
                 {% for s in screenshots_all %}
