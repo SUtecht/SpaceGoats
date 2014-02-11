@@ -1,0 +1,15 @@
+{% extends "base_ffxiv.html" %}
+{% load dict %}
+{% block articles %}
+    <div class="ffxiv_article">
+        <h1>Screenshot Gallery</h1>
+        {% if screenshots_all %}
+            <div >
+                {% for s in screenshots_all %}
+                    <a href="{{s.image.url}}" title ="{{s.caption}}" ><img src="{{s.image.url_200x200}}"></a>  
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+    </div>
+{% endblock %}
