@@ -3,7 +3,9 @@
 {% block articles %}
     <div class="ffxiv_article">
         <h1>Screenshot Gallery</h1>
+        {% if user.is_authenticated %}
         <a href="{% url "new_screenshot" %}">Submit Screenshot</a>
+        {% endif %}
         
         {% if screenshots_all %}
             <div >
