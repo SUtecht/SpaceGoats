@@ -51,6 +51,10 @@ def update_character(c):
     ar = ar - 30 # remove the job stone
     ar = round(ar/(i-1)) #average
     print int(ar) #yay ilvl!
+    # need to convert job names into class names and then feed this in
+    level = Level.objects.get(character = c, job=job)
+    level.ilvl = int(ar)
+    level.save()
 
 def update_all():
     characters = Character.objects.all()
