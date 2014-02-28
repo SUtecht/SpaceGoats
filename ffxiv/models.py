@@ -10,6 +10,7 @@ class Character(models.Model):
     levels = models.ManyToManyField('Job', through='Level')
     picture = ImageWithThumbsField(upload_to = "uploads", blank=True)
     lodestone_id = models.IntegerField(blank=True)
+    ilvl = models.IntegerField(blank=True)
     def __unicode__(self):
         return self.name
 
@@ -24,7 +25,6 @@ class Level(models.Model):
     character = models.ForeignKey(Character)
     job = models.ForeignKey(Job)
     level = models.CharField(max_length=2)
-    ilvl = models.IntegerField(blank=True)
     def __unicode__(self):
         return "{} {} {}".format(self.character, self.job, self.level)
 

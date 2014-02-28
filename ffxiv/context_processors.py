@@ -2,7 +2,7 @@ import datetime
 from ffxiv.models import *
 
 def characters(request):
-    characters = Character.objects.all()
+    characters = Character.objects.all().order_by('-ilvl')
     return dict(characters=characters)
 
 def max_levels(request):
