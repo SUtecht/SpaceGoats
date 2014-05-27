@@ -13,7 +13,7 @@
                 <div class="fieldWrapper">
                     {{ article_form.text.errors }}
                     <label for="id_subject">Body:</label>
-                    {{ article_form.text }}
+                    {{ article_form.text|safe }}
                 </div>
                 </br>
                 <input type="submit" value="Submit" />

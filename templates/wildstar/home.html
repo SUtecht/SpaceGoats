@@ -3,7 +3,7 @@
     {% for article in articles %}
     <div class="ffxiv_article">
         <h2>{{article.title}}</h2>        
-        <p>{{article.text}}</h2>
+        <p>{{article.text|safe}}</h2>
     </div> <!-- article -->
     {% endfor %}
 {% endblock %}
