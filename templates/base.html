@@ -56,7 +56,7 @@
         </div>
         <div id="nav" class="grid_12">
             <ul>
-                <li><a href="{% url "about" %}">About</a></li>
+                
                 <li><a href="{% url "chat" %}">Chat</a></li>
                 {% if user.is_authenticated %}
                 <li><a href='{% url "logout" %}'>Logout</a></li>
@@ -67,6 +67,7 @@
                 <li><a href='{% url "register" %}'>Register</a></li>
                 {% endif %}
                 <li><a href='http://ffxiv.spacegoatsc2c.com'>FFXIV</a></li>
+                <li><a href='http://wildstar.spacegoatsc2c.com'>WildStar</a></li>
                 
             </ul>
         </div>

@@ -1,0 +1,9 @@
+{% extends "base_wildstar.html" %}
+{% block articles %}
+    {% for article in articles %}
+    <div class="ffxiv_article">
+        <h2>{{article.title}}</h2>        
+        <p>{{article.text}}</h2>
+    </div> <!-- article -->
+    {% endfor %}
+{% endblock %}

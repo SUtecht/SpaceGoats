@@ -1,0 +1,16 @@
+{% extends "base_wildstar.html" %}
+{% load dict %}
+   
+{% block articles %}<!-- make block body out for old site-->
+<div class= 'article' ><!-- take out for old site-->
+    <center><h2>Login</h2></center>
+    {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+    <form action="{% url "login" %}" method="post">{% csrf_token %}
+        {{ login_form.as_table }}
+        <input type="submit" value="Login" />
+    </form>
+    
+</div><!-- take out for old site-->
+{% endblock %}

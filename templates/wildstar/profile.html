@@ -1,0 +1,32 @@
+{% extends "base_wildstar.html" %}
+{% load dict %}
+   
+{% block articles %}
+<h2>Your characters</h2>
+<p>Please contact a site administrator if there is an error</p>
+<ul>
+{% for c in characters %}
+<li>{{c}}</li>
+{% endfor %}
+</ul>
+
+<h2>Register New Character</h2>
+<form action="{% url "profile" %}" method="post">{% csrf_token %}
+    <p>{{error_message}}</p>
+    <div class="fieldWrapper">
+        {{new_character_form.name.errors}}
+        <label for='id_subject'>Name:</label>
+        {{new_character_form.name}}
+    </div>
+    <br/>
+    
+    <div class="fieldWrapper">
+        {{ new_character_form.server.errors }}
+        <label for="id_subject">Server:</label>
+        {{ new_character_form.server }}
+    </div>
+    </br>        
+    <input type="submit" value="Add Character" />
+</form>
+
+{% endblock %}

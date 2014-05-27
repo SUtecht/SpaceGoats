@@ -1,0 +1,22 @@
+{% extends "base_wildstar.html" %}
+{% load dict %}
+{% block articles %}
+        <div class="article">
+            <form enctype="multipart/form-data" action="{% url "save_screenshot" %}" method="post">{% csrf_token %}
+                {{ screenshot_form.non_field_errors }}
+                <div class="fieldWrapper">
+                    {{ screenshot_form.caption.errors }}
+                    <label for="id_subject">Caption:</label>
+                    {{ screenshot_form.caption }}
+                </div>
+                </br>
+                <div class="fieldWrapper">
+                    {{ screenshot_form.img.errors }}
+                    <label for="id_subject">Image:</label>
+                    {{ screenshot_form.img }}
+                </div>
+                </br>
+                <input type="submit" value="Submit" />
+            </form>
+    </div>
+{% endblock %}
