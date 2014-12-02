@@ -164,8 +164,8 @@
                                <span class="{{p.name}} toggleplus">+</span>
                                <span class="{{p.name}} toggleminus">-</span>
                             </td>
-                            <td><a href="{% url "simc" p.id %}">SIMC</a></td>
                             {% endif %}
+                            <td><a href="{% url "simc" p.id %}">SIMC</a></td>
                         </tr>
                         {% for a in p.alts %}
                             <tr class="{{p.name}} alt">
