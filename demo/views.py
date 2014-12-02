@@ -20,6 +20,10 @@ from django.contrib.auth.decorators import login_required
 
 from demo.utils import update_character
 
+import redis
+
+redis_server = redis.StrictRedis(host='localhost', port=6379, db=0)
+
 # old imports not being used anymore, probably need to be deleted
 # import glob
 # import Image
@@ -94,9 +98,11 @@ def article(request,article_id):
                                                 context_instance=RequestContext(request))
 @login_required
 def simc(request, character_id):
-    if request.method == 'POST':
-        print('SIMC %'.format(character_id))
-
+    c = Character.objects.get(pk = character_id)
+    char_string = 'US.{}.{}'.format(c.server, c.name)
+    print('SIMC {}'.format(char_string))
+    redis_server.set('on-demand-sim', char_string)
+    return redirect('home')
 
 
 @login_required
