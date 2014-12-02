@@ -129,15 +129,17 @@
                 {% endif%}
             </div>
             <div id="raid_progress">
-                <h2>{{raid.name}} Progress</h2>
-                {% for b in bosses %}
-                {% if b.killed %}
-                <a href="{% url "article" b.article.id %}">
-                    <img src="{{b.picture.url_128x128}}" class="{{b.d_class}}" Title="{{b.name}}">
-                </a>
-                {% else %}
-                    <img src="{{b.picture.url_128x128}}" Title="{{b.name}}">
-                {% endif %}
+                {% for raid in raids %}
+                    <h2>{{raid.name}} Progress</h2>
+                    {% for b in bosses %}
+                    {% if b.killed %}
+                    <a href="{% url "article" b.article.id %}">
+                        <img src="{{b.picture.url_128x128}}" class="{{b.d_class}}" Title="{{b.name}}">
+                    </a>
+                    {% else %}
+                        <img src="{{b.picture.url_128x128}}" Title="{{b.name}}">
+                    {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </div>
 

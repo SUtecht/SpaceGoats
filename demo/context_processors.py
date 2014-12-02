@@ -9,11 +9,7 @@ def events(request):
 
 def raid(request):
     raids = Raid.objects.all().filter(current = True)
-    if len(raids) > 0:
-        raid = raids[0]
-        return dict(raid=raid)
-    else:
-        return {}
+    return dict(raids=raids)
 
 def bosses(request):
     raids = Raid.objects.all().filter(current = True)
