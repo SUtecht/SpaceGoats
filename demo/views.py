@@ -99,8 +99,8 @@ def article(request,article_id):
 @login_required
 def simc(request, character_id):
     c = Character.objects.get(pk = character_id)
-    char_string = 'US.{}.{}'.format(c.server, c.name)
-    print('SIMC {}'.format(char_string))
+    char_string = 'US,{},{}'.format(c.server, c.name)
+    #print('SIMC {}'.format(char_string))
     redis_server.set('on-demand-sim', char_string)
     return redirect('home')
 
