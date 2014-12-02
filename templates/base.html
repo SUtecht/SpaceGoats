@@ -165,14 +165,16 @@
                                <span class="{{p.name}} toggleminus">-</span>
                             </td>
                             {% endif %}
-                            <td><a href="{% url "simc" p.id %}">SIMC</a></td>
+                            <td><a href="http://spacegoatsc2c.com/simc/{{p.name}}.html">[SIMC]</a></td>
+                            <td><a href="{% url "simc" p.id %}">[Update]</a></td>
                         </tr>
                         {% for a in p.alts %}
                             <tr class="{{p.name}} alt">
                                 <td>
                                     <a href="http://us.battle.net/wow/en/character/{{a.server}}/{{a.name}}/advanced"><span class="{{a.class}} gclass">&nbsp;&nbsp;{{a.name}}</span></a></td>
                                 <td>{{a.ilvl}}</td>
-                                <td><a href="{% url "simc" a.id %}">[SIMC]</a></td>
+                                <td><a href="http://spacegoatsc2c.com/simc/{{a.name}}.html">[SIMC]</a></td>
+                                <td><a href="{% url "simc" a.id %}">[Update]</a></td>
                             </tr>
                         {% endfor %}
                     {% endfor %}
