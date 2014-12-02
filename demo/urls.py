@@ -40,6 +40,7 @@ urlpatterns = patterns('demo.views',
     url(r'^login/', 'login_view', name='login'),
     url(r'^register/', 'register', name='register'),
     url(r'register_view/', 'register_view', name='register_view'),
+    url(r'simcr/(?P<character_id>\d+)', 'simc', name='simc')
 )	
 
 if settings.DEBUG:

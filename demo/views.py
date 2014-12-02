@@ -93,6 +93,13 @@ def article(request,article_id):
     return render_to_response('demo/article.html', {'article':article},
                                                 context_instance=RequestContext(request))
 @login_required
+def simc(request, character_id):
+    if request.method == 'POST':
+        print('SIMC %'.format(character_id))
+
+
+
+@login_required
 def profile(request):
     characters = Character.objects.filter(player=request.user)
     new_character_form = NewCharacterForm()

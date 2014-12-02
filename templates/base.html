@@ -159,6 +159,7 @@
                             <td>
                                 <a href="http://us.battle.net/wow/en/character/{{p.server}}/{{p.name}}/advanced"><span class="{{p.class}} gclass">{{p.name}}</span></a></td>
                             <td>{{p.ilvl}}</td>
+                            <td><a href="{% url "simc" p.id %}">SIMC</a></td>
                             {% if p.alts %}
                             <td class="{{p.name}} toggle">
                                <span class="{{p.name}} toggleplus">+</span>
@@ -171,6 +172,7 @@
                                 <td>
                                     <a href="http://us.battle.net/wow/en/character/{{a.server}}/{{a.name}}/advanced"><span class="{{a.class}} gclass">&nbsp;&nbsp;{{a.name}}</span></a></td>
                                 <td>{{a.ilvl}}</td>
+                                <td><a href="{% url "simc" a.id %}">SIMC</a></td>
                             </tr>
                         {% endfor %}
                     {% endfor %}
