@@ -101,7 +101,7 @@ def simc(request, character_id):
     c = Character.objects.get(pk = character_id)
     char_string = 'US,{},{}'.format(c.server, c.name)
     #print('SIMC {}'.format(char_string))
-    redis_server.set('on-demand-sim', char_string)
+    redis_server.publish('on-demand-sim', char_string)
     return redirect('home')
 
 
