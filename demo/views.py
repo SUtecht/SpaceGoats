@@ -99,9 +99,12 @@ def article(request,article_id):
 @login_required
 def simc(request, character_id):
     c = Character.objects.get(pk = character_id)
-    char_string = 'US,{},{}'.format(c.server, c.name)
-    #print('SIMC {}'.format(char_string))
-    redis_server.publish('on-demand-sim', char_string)
+    if c.last_refresh_request <= c.last_refresh:
+        c.last_refresh_request = datetime.datetime.now()
+        c.save()
+        char_string = 'US,{},{}'.format(c.server, c.name)
+        #print('SIMC {}'.format(char_string))
+        redis_server.publish('on-demand-sim', char_string)
     return redirect('home')
 
 
@@ -117,7 +120,7 @@ def profile(request):
             server = char_form.cleaned_data['server']
             try:
                 c = battlenet.Character(battlenet.UNITED_STATES, server, name)
-                character = Character(name=name, server=server, player=request.user, level=0, ilvl=0)
+                character = Character(name=name, server=server, player=request.user, level=0, ilvl=0, last_refresh = datetime.datetime.now(), last_refresh_request = datetime.datetime.now())
                 character.save()
                 update_character(character)
             except Exception as e:

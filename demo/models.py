@@ -11,6 +11,8 @@ class Character(models.Model):
     class_name = models.CharField(max_length=15)
     ilvl = models.IntegerField()
     level = models.IntegerField()
+    last_refresh_request = models.DateTimeField()
+    last_refresh = models.DateTimeField()
     def __unicode__(self):
         return "{} ".format(self.name)
 

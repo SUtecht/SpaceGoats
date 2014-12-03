@@ -26,6 +26,16 @@ def gow(request):
         return dict(gow = all_gows[0])
     return dict(gow = None)
     
+def refresh_color(character):
+    update = 'green'
+    if character.last_refresh > character.last_refresh_request:
+        update = 'blue'
+    elif character.last_refresh < datetime.datetime.now() - datetime.timedelta(days=1): 
+        update = 'yellow'
+    elif character.last_refresh == character.last_refresh_request:
+        update = 'red'
+    return update
+
 def roster(request):
     players = []
     for p in Player.objects.all():
@@ -35,6 +45,7 @@ def roster(request):
         player['class'] = p.main.class_name
         player['server'] = p.main.server.lower()
         player['ilvl'] = p.main.ilvl
+        player['update'] = refresh_color(p.main)
         alts = []
         for a in Character.objects.filter(player=p.user):
             if a.name != p.main.name:
@@ -44,6 +55,7 @@ def roster(request):
                 alt['server'] = a.server.lower()
                 alt['class'] = a.class_name
                 alt['ilvl'] = a.ilvl
+                alt['update'] = refresh_color(a)
                 alts.append(alt)
         alts = sorted(alts, key=lambda x: x['ilvl'])
         alts.reverse()
