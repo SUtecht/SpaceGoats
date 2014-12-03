@@ -28,7 +28,7 @@ def gow(request):
     
 def refresh_color(character):
     update = 'green'
-    if character.last_refresh > character.last_refresh_request:
+    if character.last_refresh < character.last_refresh_request:
         update = 'blue'
     elif character.last_refresh < datetime.datetime.now() - datetime.timedelta(days=1): 
         update = 'yellow'
