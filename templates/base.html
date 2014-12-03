@@ -145,6 +145,7 @@
 
             <div id="roster">
                 <h2>Roster</h2>
+                <span><a href='http://spacegoatsc2c.com/simc/Patchwerk.html'>Current Raid Sim</a></span>
                 <table>
                     <thead>
                     <tr>
@@ -168,7 +169,7 @@
                             <td></td>
                             {% endif %}
                             <td><a href="http://spacegoatsc2c.com/simc/{{p.name}}.html"><img src="{{STATIC_URL}}/simc_icons/{{p.update}}.png"/></a></td>
-                            <td><a href="{% url "simc" p.id %}">[Update]</a></td>
+                            <td><a href="{% url "simc" p.id %}"><img src="{{STATIC_URL}}/simc_icons/refresh.png"/></a></td>
                         </tr>
                         {% for a in p.alts %}
                             <tr class="{{p.name}} alt">
@@ -177,7 +178,7 @@
                                 <td>{{a.ilvl}}</td>
                                 <td></td>
                                 <td><a href="http://spacegoatsc2c.com/simc/{{a.name}}.html"><img src="{{STATIC_URL}}/simc_icons/{{a.update}}.png"/></a></td>
-                                <td><a href="{% url "simc" a.id %}">[Update]</a></td>
+                                <td><a href="{% url "simc" a.id %}"><img src="{{STATIC_URL}}/simc_icons/refresh.png"/></a></td>
                             </tr>
                         {% endfor %}
                     {% endfor %}
