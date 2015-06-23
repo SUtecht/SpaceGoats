@@ -6,7 +6,7 @@ def characters(request):
     return dict(characters=characters)
 
 def max_levels(request):
-    max_levels = Level.objects.filter(level__exact='50')
+    max_levels = Level.objects.filter(level__exact='60')
     return dict(max_levels=max_levels)
     
 def levels(request):
