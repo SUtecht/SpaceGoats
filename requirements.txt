@@ -7,3 +7,4 @@ Django==1.7
 python-dateutil==2.1
 django-extensions==1.1.1
 django-subdomains==2.0
+beautifulsoup4
