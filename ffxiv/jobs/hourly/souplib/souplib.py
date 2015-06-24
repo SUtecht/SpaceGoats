@@ -61,9 +61,10 @@ def calculate_ilvl(gear):
     """
 
     # the item ending with text "Arm" is the MH weapon
+    mh_weapon_ilvl = 0
     for i in gear:
         slot, ilvl = gear[i]
-        if slot.endswith("Arm"):
+        if slot.endswith("Arm") or slot.endswith("Tool"):
             mh_weapon_ilvl = ilvl
             break
 
