@@ -114,7 +114,7 @@ ROOT_URLCONF = 'Wob.urls'
 SUBDOMAIN_URLCONFS = {
     None: 'demo.urls',
     'ffxiv': 'ffxiv.urls',
-    'wildstar':'wildstar.urls'
+    'other':'wildstar.urls'
 }
 
 # Python dotted path to the WSGI application used by Django's runserver.
