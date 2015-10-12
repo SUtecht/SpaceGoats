@@ -21,7 +21,7 @@ DATABASES = {
     }
 }
 
-SESSION_COOKIE_DOMAIN=".spacegoatsc2c.com"
+SESSION_COOKIE_DOMAIN=".goats.space"
 
 
 # Local time zone for this installation. Choices can be found here:
