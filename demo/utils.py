@@ -1,18 +1,15 @@
-import battlenet, battlenet.enums
-from battlenet import Character as BnetChar
+import requests
 
 
 def update_character(char):
     print "Getting info for: {}".format(char.name)
     try:
-        character = BnetChar(battlenet.UNITED_STATES, 
-                             char.server,
-                             char.name, 
-                             fields=[BnetChar.GUILD])
+        r = requests.get('https://us.api.battle.net/wow/character/{}/{}?fields=items&locale=en_US&apikey=zpwrz24xqd8yhmhk2uv8b4qr5gv6ecef'
+                         .format(char.server, char.name))
+        character = r.json()
 
-        char.class_name = battlenet.enums.CLASS[character.class_]
-        char.level = character.level
-        char.ilvl = character.equipment.average_item_level
+        char.level = character['level']
+        char.ilvl = character['items']['averageItemLevelEquipped']
 
         char.save()
     except:
