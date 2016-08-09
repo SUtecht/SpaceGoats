@@ -4,7 +4,7 @@ import requests
 def update_character(char):
     print "Getting info for: {}".format(char.name)
     try:
-        r = requests.get('https://us.api.battle.net/wow/data/character/classes?locale=en_US&apikey=pyzc93kv2jdvpbswygb5h2cqvrjy6uhw')
+        r = requests.get('https://us.api.battle.net/wow/data/character/classes?locale=en_US&apikey=APIKEY')
         classes = r.json()['classes']
 
         r = requests.get('https://us.api.battle.net/wow/character/{}/{}?fields=items&locale=en_US&apikey=APIKEY'
