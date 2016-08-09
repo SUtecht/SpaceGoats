@@ -119,6 +119,7 @@ def profile(request):
             name = char_form.cleaned_data['name']
             server = char_form.cleaned_data['server']
             try:
+                character = Character(name=name, server=server, player=request.user, level=0, ilvl=0, last_refresh = datetime.datetime.now(), last_refresh_request = datetime.datetime.now())
                 update_character(character)
             except Exception as e:
                 error_message = "This character does not exist on this server."
