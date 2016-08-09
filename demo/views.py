@@ -119,12 +119,9 @@ def profile(request):
             name = char_form.cleaned_data['name']
             server = char_form.cleaned_data['server']
             try:
-                c = battlenet.Character(battlenet.UNITED_STATES, server, name)
-                character = Character(name=name, server=server, player=request.user, level=0, ilvl=0, last_refresh = datetime.datetime.now(), last_refresh_request = datetime.datetime.now())
-                character.save()
                 update_character(character)
             except Exception as e:
-                    error_message = "This character does not exist on this server."
+                error_message = "This character does not exist on this server."
         else:
             new_character_form = char_form
     return render_to_response('demo/profile.html', {'error_message': error_message, 'characters':characters, 'new_character_form':new_character_form}, context_instance=RequestContext(request))
