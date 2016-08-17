@@ -212,19 +212,17 @@ def register_view(request):
             character = request.POST['character']
             server = request.POST['server']
             try:
-                c = battlenet.Character(battlenet.UNITED_STATES, server, character)
+                user = User(username=username, password=password, email=email)
+                player = Player(user=user, main=character)
+                character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
+                update_character(character)
+                user.save()
+                player.save()
             except Exception as e:
-                    error_message = "This character does not exist on this server."
-                    return register_failed(request, error_message)
-            user = User(username=username, password=password, email=email)
-            user.save()
+                error_message = "This character does not exist on this server."
+                return register_failed(request, error_message)
             login_user = authenticate(username=username, password=request.POST['password'])
             login(request, login_user)
-            character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
-            character.save()
-            update_character(character)
-            player = Player(user=user, main=character)
-            player.save()
             return redirect('home')
         else:
             error_message = "There was a problem with your application."
