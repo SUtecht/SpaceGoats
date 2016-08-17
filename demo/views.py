@@ -18,7 +18,7 @@ from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 
-from demo.utils import update_character
+from demo.utils import update_character, character_exists
 
 import redis
 
@@ -211,19 +211,20 @@ def register_view(request):
             email = request.POST['email']
             character = request.POST['character']
             server = request.POST['server']
-            user = User(username=username, password=password, email=email)
-            character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
-            player = Player(user=user, main=character)
-            try:
+            if(character_exists(character, server)):
+                user = User(username=username, password=password, email=email)
+                user.save()
+                character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
                 update_character(character)
-            except Exception as e:
-                error_message = "This character does not exist on this server. - {}".format(e)
+                character.save()
+                player = Player(user=user, main=character)
+                player.save()
+                login_user = authenticate(username=username, password=request.POST['password'])
+                login(request, login_user)
+                return redirect('home')
+            else:
+                error_message = "This character does not exist on this server."
                 return register_failed(request, error_message)
-            user.save()
-            player.save()
-            login_user = authenticate(username=username, password=request.POST['password'])
-            login(request, login_user)
-            return redirect('home')
         else:
             error_message = "There was a problem with your application."
             return register_failed(request, error_message)
