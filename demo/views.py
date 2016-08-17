@@ -213,8 +213,8 @@ def register_view(request):
             server = request.POST['server']
             try:
                 user = User(username=username, password=password, email=email)
-                player = Player(user=user, main=character)
                 character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
+                player = Player(user=user, main=character)
                 update_character(character)
                 user.save()
                 player.save()
