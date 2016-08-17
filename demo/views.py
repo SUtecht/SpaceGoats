@@ -211,16 +211,16 @@ def register_view(request):
             email = request.POST['email']
             character = request.POST['character']
             server = request.POST['server']
+            user = User(username=username, password=password, email=email)
+            character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
             try:
-                user = User(username=username, password=password, email=email)
-                character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
                 player = Player(user=user, main=character)
                 update_character(character)
-                user.save()
-                player.save()
             except Exception as e:
-                error_message = "This character does not exist on this server."
+                error_message = "This character does not exist on this server. - {}".format(e)
                 return register_failed(request, error_message)
+            user.save()
+            player.save()
             login_user = authenticate(username=username, password=request.POST['password'])
             login(request, login_user)
             return redirect('home')
