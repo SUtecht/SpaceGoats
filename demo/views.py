@@ -214,7 +214,7 @@ def register_view(request):
             if(character_exists(character, server)):
                 user = User(username=username, password=password, email=email)
                 user.save()
-                character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0)
+                character = Character(name=character, server=server, player=user, class_name='', level=0, ilvl=0, last_refresh = datetime.datetime.now(), last_refresh_request = datetime.datetime.now())
                 update_character(character)
                 character.save()
                 player = Player(user=user, main=character)
