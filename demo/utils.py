@@ -2,7 +2,7 @@ import requests
 
 def character_exists(name, server):
     r = requests.get('https://us.api.battle.net/wow/character/{}/{}?fields=items&locale=en_US&apikey=APIKEY'.format(server, name))
-    return r.success
+    return r.ok
 
 
 def update_character(char):
