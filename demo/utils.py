@@ -1,14 +1,8 @@
 import requests
 
 def character_exists(name, server):
-    print "Getting info for: {}".format(char.name)
-    try:
-        r = requests.get('https://us.api.battle.net/wow/data/character/classes?locale=en_US&apikey=APIKEY')
-        classes = r.json()['classes']
-
-        r = requests.get('https://us.api.battle.net/wow/character/{}/{}?fields=items&locale=en_US&apikey=APIKEY'
-                         .format(char.server, char.name))
-        return r.success
+    r = requests.get('https://us.api.battle.net/wow/character/{}/{}?fields=items&locale=en_US&apikey=APIKEY'.format(server, name))
+    return r.success
 
 
 def update_character(char):
